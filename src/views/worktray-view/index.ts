@@ -1,1 +1,1 @@
-export * from "./worktray-view"
+export * from "./worktray-view";

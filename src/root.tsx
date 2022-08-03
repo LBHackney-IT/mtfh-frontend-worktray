@@ -4,10 +4,12 @@ import { ConfirmationRouter } from "@mtfh/common/lib/components";
 
 import App from "./app";
 
-export default function Root() {
+const Root = (): JSX.Element => {
   return (
     <ConfirmationRouter>
       <App />
     </ConfirmationRouter>
   );
-}
+};
+
+export default Root;

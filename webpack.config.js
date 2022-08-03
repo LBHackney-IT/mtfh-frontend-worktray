@@ -1,13 +1,11 @@
-const { merge } = require('webpack-merge');
-const singleSpaDefaults = require('webpack-config-single-spa-react-ts');
-const {
-  ImportMapWebpackPlugin,
-} = require('@hackney/webpack-import-map-plugin');
+const { merge } = require("webpack-merge");
+const singleSpaDefaults = require("webpack-config-single-spa-react-ts");
+const { ImportMapWebpackPlugin } = require("@hackney/webpack-import-map-plugin");
 
 module.exports = (webpackConfigEnv, argv) => {
   const defaultConfig = singleSpaDefaults({
-    orgName: 'mtfh',
-    projectName: 'worktray',
+    orgName: "mtfh",
+    projectName: "worktray",
     webpackConfigEnv,
     argv,
   });
@@ -17,21 +15,21 @@ module.exports = (webpackConfigEnv, argv) => {
       worktray: defaultConfig.entry,
     },
     output: {
-      filename: '[name].[contenthash].js',
+      filename: "[name].[contenthash].js",
     },
     module: {
       rules: [
         {
           test: /\.scss$/i,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
+          use: ["style-loader", "css-loader", "sass-loader"],
         },
       ],
     },
-    externals: ['react-router-dom', 'formik', 'yup'],
+    externals: ["react-router-dom", "formik", "yup"],
     plugins: [
       new ImportMapWebpackPlugin({
-        namespace: '@mtfh',
-        basePath: process.env.APP_CDN || 'http://localhost:8100',
+        namespace: "@mtfh",
+        basePath: process.env.APP_CDN || "http://localhost:8100",
       }),
     ],
   });

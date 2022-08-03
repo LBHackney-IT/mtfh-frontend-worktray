@@ -7,7 +7,7 @@ import App from "./app";
 
 describe("<App />", () => {
   test("it renders correctly", () => {
-    render(<App />, { url: "/worktray" });
+    render(<App />, { url: "/" });
     expect(screen.getAllByText("@mtfh/worktray"));
   });
 });

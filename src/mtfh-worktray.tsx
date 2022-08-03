@@ -11,7 +11,11 @@ const lifecycles = singleSpaReact({
   React,
   ReactDOM,
   rootComponent: Root,
-  errorBoundary(err, info, props) {
+  errorBoundary(error, info, props) {
+    console.error(error);
+    console.error(info);
+    console.error(props);
+
     return (
       <ErrorSummary
         id="mtfh-worktray"

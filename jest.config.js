@@ -1,10 +1,11 @@
 module.exports = {
+  testURL: "http://localhost",
   rootDir: "src",
   testEnvironment: "jsdom",
   transform: {
     "^.+\\.(j|t)sx?$": "babel-jest",
   },
-  //   transformIgnorePatterns: ["/node_modules/(?!lbh-frontend|@mtfh)"],
+  transformIgnorePatterns: ["/node_modules/(?!lbh-frontend|@mtfh)"],
   moduleNameMapper: {
     "\\.(css|scss)$": "identity-obj-proxy",
   },
