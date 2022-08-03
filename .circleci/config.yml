@@ -25,7 +25,7 @@ parameters:
     type: boolean
 
 references:
-  workspace_root: &workspace_root '~'
+  workspace_root: &workspace_root "~"
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
@@ -36,7 +36,7 @@ executors:
       - image: circleci/node:14.15.4-browsers
   docker-terraform:
     docker:
-      - image: 'hashicorp/terraform:light'
+      - image: "hashicorp/terraform:light"
   docker-python:
     docker:
       - image: circleci/python:3.7
@@ -46,7 +46,7 @@ executors:
 
 commands:
   assume-role-and-persist-workspace:
-    description: 'Assume deployment role and persist credentials across jobs'
+    description: "Assume deployment role and persist credentials across jobs"
     parameters:
       aws-account:
         type: string
@@ -55,14 +55,14 @@ commands:
       - aws_assume_role/assume_role:
           account: <<parameters.aws-account>>
           profile_name: default
-          role: 'LBH_Circle_CI_Deployment_Role'
+          role: "LBH_Circle_CI_Deployment_Role"
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - .aws
 
   terraform-init-then-apply:
-    description: 'Initialize and apply the terraform configuration'
+    description: "Initialize and apply the terraform configuration"
     parameters:
       environment:
         type: string
@@ -198,42 +198,42 @@ jobs:
     executor: docker-terraform
     steps:
       - terraform-init-then-apply:
-          environment: 'development'
+          environment: "development"
 
   terraform-init-and-apply-to-staging:
     executor: docker-terraform
     steps:
       - terraform-init-then-apply:
-          environment: 'staging'
+          environment: "staging"
 
   terraform-init-and-apply-to-production:
     executor: docker-terraform
     steps:
       - terraform-init-then-apply:
-          environment: 'production'
+          environment: "production"
 
   trigger-e2e-pipeline:
-        executor: cimg-base
-        resource_class: small
-        parameters:
-            stage:
-                type: string
-        steps:
-        - run: |
-                export DEPLOYMENT_ENVIRONMENT='<<parameters.stage>>_environment'
-                curl --location --request POST 'https://circleci.com/api/v2/project/gh/LBHackney-IT/mtfh-tl-e2e-tests/pipeline' \
-                --header 'Circle-Token: '"$CIRCLE_TOKEN"'' \
-                --header 'Content-Type: application/json' \
-                --data '{"branch": "master", "parameters": {"run_workflow_ci": false, "external_trigger": true, "upstream_pipeline_name": "<< pipeline.project.git_url >>", '\""$DEPLOYMENT_ENVIRONMENT"\"': true}}'
+    executor: cimg-base
+    resource_class: small
+    parameters:
+      stage:
+        type: string
+    steps:
+      - run: |
+          export DEPLOYMENT_ENVIRONMENT='<<parameters.stage>>_environment'
+          curl --location --request POST 'https://circleci.com/api/v2/project/gh/LBHackney-IT/mtfh-tl-e2e-tests/pipeline' \
+          --header 'Circle-Token: '"$CIRCLE_TOKEN"'' \
+          --header 'Content-Type: application/json' \
+          --data '{"branch": "master", "parameters": {"run_workflow_ci": false, "external_trigger": true, "upstream_pipeline_name": "<< pipeline.project.git_url >>", '\""$DEPLOYMENT_ENVIRONMENT"\"': true}}'
 
     failure-downstream:
-        executor: cimg-base
-        resource_class: small
-        steps:
+      executor: cimg-base
+      resource_class: small
+      steps:
         - run: |
-                echo downstream e2e tests have failed! Please check the e2e pipeline: ;
-                echo -e 'https://circleci.com/api/v2/project/gh/LBHackney-IT/mtfh-tl-e2e-tests/pipeline' ;
-                exit 1
+            echo downstream e2e tests have failed! Please check the e2e pipeline: ;
+            echo -e 'https://circleci.com/api/v2/project/gh/LBHackney-IT/mtfh-tl-e2e-tests/pipeline' ;
+            exit 1
 workflows:
   version: 2
   continuous-delivery-development:
@@ -257,7 +257,7 @@ workflows:
             branches:
               only: main
       - build-deploy-development:
-          stage: 'development'
+          stage: "development"
           requires:
             - terraform-init-and-apply-to-development
           filters:
@@ -300,7 +300,7 @@ workflows:
             branches:
               only: main
       - build-deploy-staging:
-          stage: 'staging'
+          stage: "staging"
           requires:
             - terraform-init-and-apply-to-staging
           filters:
@@ -343,7 +343,7 @@ workflows:
             branches:
               only: main
       - build-deploy-production:
-          stage: 'production'
+          stage: "production"
           requires:
             - terraform-init-and-apply-to-production
           filters:
