@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filter-box-component it renders FilterBox correctly 1`] = `
+<div>
+  <div
+    class="filter-box"
+  >
+    <div
+      class="filter-header"
+    >
+      <p
+        class="lbh-body-m"
+      >
+        Processes
+      </p>
+      <button
+        class="select-all lbh-link lbh-link--no-visited-state"
+      >
+        Select All
+      </button>
+    </div>
+    <div
+      class="filter-box-options"
+    >
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="process-1"
+          name="Process 1"
+          type="checkbox"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="process-1"
+        >
+          Process 1
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="process-2"
+          name="Process 2"
+          type="checkbox"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="process-2"
+        >
+          Process 2
+        </label>
+      </div>
+      <div
+        class="govuk-checkboxes__item"
+      >
+        <input
+          class="govuk-checkboxes__input"
+          id="process-3"
+          name="Process 3"
+          type="checkbox"
+        />
+        <label
+          class="govuk-label govuk-checkboxes__label"
+          for="process-3"
+        >
+          Process 3
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
