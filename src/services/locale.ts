@@ -18,6 +18,16 @@ const locale = {
       clearFilters: "Clear filters",
       selectAll: "Select All",
     },
+    pagination: {
+      previous: "Previous",
+      next: "Next",
+      assistiveNavigation: (page: number): string => `Page ${page}`,
+      searchResultsCounter: (page: number, pageSize: number, total: number): string =>
+        `Showing ${page * pageSize - pageSize + 1}—${Math.min(
+          page * pageSize,
+          total,
+        )} of ${total} results`,
+    },
   },
 };
 
