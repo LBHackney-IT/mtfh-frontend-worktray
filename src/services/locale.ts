@@ -1,7 +1,9 @@
 const locale = {
   title: "Your tasks",
   views: {
-    worktray: {},
+    worktray: {
+      noWorktrayResults: "No worktray results",
+    },
   },
   errors: {
     unableToFetchRecord: "There was a problem retrieving the record",

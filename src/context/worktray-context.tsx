@@ -28,7 +28,6 @@ interface WorktrayResults {
 }
 
 export type WorktrayState = {
-  searchText: string;
   page: number;
   pageSize: LimitOptions;
   sort: ProcessSortOptions;
@@ -42,10 +41,6 @@ export type WorktrayActions =
   | {
       type: "PAGE";
       payload: number;
-    }
-  | {
-      type: "SEARCH";
-      payload: string;
     }
   | {
       type: "LIMIT";
@@ -69,7 +64,6 @@ const getInitialState = (
 ): WorktrayState => {
   return {
     page: options.page || 1,
-    searchText: options.searchText || "",
     pageSize: options.pageSize || LimitOptions.SMALL,
     sort: options.sort || ProcessSortOptions.STATUS, // TODO ??
     order: options.order || OrderByOptions.ASC,
@@ -87,12 +81,6 @@ export const WorktrayContext = createContext<{
 export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial }) => {
   const reducer: Reducer<WorktrayState, WorktrayActions> = (state, action) => {
     switch (action.type) {
-      case "SEARCH": {
-        return {
-          ...state,
-          searchText: action.payload,
-        };
-      }
       case "PAGE": {
         return {
           ...state,
@@ -132,15 +120,13 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
     }
   };
 
-  const inititalState = getInitialState(initial);
-
-  const [state, dispatch] = useReducer(reducer, inititalState);
+  const initialState = getInitialState(initial);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { ...query } = state;
 
   const { data, error } = useAxiosSWR<WorktrayResults>(
     `${config.worktrayApiUrl}?${stringify(
       {
-        searchText: query.searchText,
         page: query.page,
         pageSize: query.pageSize,
         sortBy: query.sort,
@@ -181,7 +167,11 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
   return <WorktrayContext.Provider value={value}>{children}</WorktrayContext.Provider>;
 };
 
-export const PersistWorktrayContextURL = (): null => {
+export const PersistWorktrayContextURL = ({
+  sessionKey,
+}: {
+  sessionKey?: string;
+}): null => {
   const {
     state: { page, pageSize, order, sort },
   } = useContext(WorktrayContext);
@@ -207,12 +197,19 @@ export const PersistWorktrayContextURL = (): null => {
 
     const path = `?${query.toString()}`;
     push(path);
-  }, [page, pageSize, order, sort, push]);
+
+    if (sessionKey) {
+      window.sessionStorage.setItem(sessionKey, path);
+    }
+  }, [page, pageSize, order, sort, sessionKey, push]);
 
   return null;
 };
 
-export const WorktrayURLProvider: FC = ({ children }): JSX.Element => {
+export const WorktrayURLProvider: FC<{ sessionKey: string }> = ({
+  children,
+  sessionKey,
+}): JSX.Element => {
   const { search } = useLocation();
   const query = new URLSearchParams(search);
   const page = Number(query.get("p") || 1);
@@ -244,7 +241,7 @@ export const WorktrayURLProvider: FC = ({ children }): JSX.Element => {
       }}
     >
       {children}
-      <PersistWorktrayContextURL />
+      <PersistWorktrayContextURL sessionKey={sessionKey} />
     </WorktrayProvider>
   );
 };
