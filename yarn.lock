@@ -1452,7 +1452,7 @@
 
 "@mtfh/processes@https://github.com/LBHackney-IT/mtfh-frontend-processes.git":
   version "1.0.0"
-  resolved "https://github.com/LBHackney-IT/mtfh-frontend-processes.git#b5edace34cf92c18534d64ad66fb7a5c4fbfc44d"
+  resolved "https://github.com/LBHackney-IT/mtfh-frontend-processes.git#c40fc45a36dedb93efa33530054de423616ec6d8"
   dependencies:
     "@hackney/mtfh-test-utils" "^1.8.9"
     "@mtfh/common" "https://github.com/LBHackney-IT/mtfh-frontend-common.git"
