@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 
 import {
   Center,
@@ -26,6 +26,20 @@ export const WorktrayList = (): JSX.Element => {
     dispatch,
   } = useContext(WorktrayContext);
 
+  const dispatchSort = useCallback(
+    (sortOption) => {
+      dispatch({ type: "SORT", payload: sortOption });
+      dispatch({
+        type: "ORDER",
+        payload:
+          sort === sortOption && order === OrderByOptions.ASC
+            ? OrderByOptions.DESC
+            : OrderByOptions.ASC,
+      });
+    },
+    [dispatch, sort, order],
+  );
+
   const processRecordComponents = {
     tenure: TenureProcessRecord,
   };
@@ -51,17 +65,6 @@ export const WorktrayList = (): JSX.Element => {
   if (results?.length === 0) {
     return <Text>{locale.views.worktray.noWorktrayResults}</Text>;
   }
-
-  const dispatchSort = (sortOption) => {
-    dispatch({ type: "SORT", payload: sortOption });
-    dispatch({
-      type: "ORDER",
-      payload:
-        sort === sortOption && order === OrderByOptions.ASC
-          ? OrderByOptions.DESC
-          : OrderByOptions.ASC,
-    });
-  };
 
   return (
     <div>

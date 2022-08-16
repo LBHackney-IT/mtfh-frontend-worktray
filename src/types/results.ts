@@ -41,7 +41,17 @@ export enum OrderByOptions {
 }
 
 export enum LimitOptions {
-  SMALL = 12,
-  MEDIUM = 20,
-  LARGE = 40,
+  SMALL = 10,
+  MEDIUM = 25,
+  LARGE = 50,
+  EXTRA_LARGE = 100,
+}
+
+export enum TimePeriodOptions {
+  DAYS_30 = "30",
+  DAYS_60 = "60",
+  MONTHS_3 = "3",
+  MONTHS_6 = "6",
+  MONTHS_12 = "12",
+  ALL = "",
 }

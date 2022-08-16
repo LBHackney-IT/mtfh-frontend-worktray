@@ -19,6 +19,7 @@ import {
   LimitOptions,
   OrderByOptions,
   ProcessSortOptions,
+  TimePeriodOptions,
   WorktrayResult,
 } from "../types";
 
@@ -30,6 +31,7 @@ interface WorktrayResults {
 export type WorktrayState = {
   page: number;
   pageSize: LimitOptions;
+  timePeriod: TimePeriodOptions;
   sort: ProcessSortOptions;
   order: OrderByOptions;
   results?: WorktrayResult[];
@@ -45,6 +47,10 @@ export type WorktrayActions =
   | {
       type: "LIMIT";
       payload: LimitOptions;
+    }
+  | {
+      type: "TIME_PERIOD";
+      payload: TimePeriodOptions;
     }
   | {
       type: "SORT";
@@ -65,6 +71,7 @@ const getInitialState = (
   return {
     page: options.page || 1,
     pageSize: options.pageSize || LimitOptions.SMALL,
+    timePeriod: options.timePeriod || TimePeriodOptions.DAYS_30,
     sort: options.sort || ProcessSortOptions.STATUS, // TODO ??
     order: options.order || OrderByOptions.ASC,
   };
@@ -75,7 +82,7 @@ export const WorktrayContext = createContext<{
   dispatch: Dispatch<WorktrayActions>;
 }>({
   state: getInitialState(),
-  dispatch: /* istanbul ignore next */ () => {},
+  dispatch: () => {},
 });
 
 export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial }) => {
@@ -92,6 +99,15 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
           return {
             ...state,
             pageSize: action.payload,
+          };
+        }
+        return state;
+      }
+      case "TIME_PERIOD": {
+        if (Object.values(TimePeriodOptions).includes(action.payload)) {
+          return {
+            ...state,
+            timePeriod: action.payload,
           };
         }
         return state;
@@ -129,6 +145,7 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
       {
         page: query.page,
         pageSize: query.pageSize,
+        timePeriod: query.timePeriod,
         sortBy: query.sort,
         isDesc: query.order === "asc",
       },
@@ -173,7 +190,7 @@ export const PersistWorktrayContextURL = ({
   sessionKey?: string;
 }): null => {
   const {
-    state: { page, pageSize, order, sort },
+    state: { page, pageSize, order, sort, timePeriod },
   } = useContext(WorktrayContext);
   const { push } = useHistory();
 
@@ -185,6 +202,10 @@ export const PersistWorktrayContextURL = ({
 
     if (pageSize !== LimitOptions.SMALL) {
       query.set("l", String(pageSize));
+    }
+
+    if (timePeriod !== "") {
+      query.set("t", String(timePeriod));
     }
 
     if (order && order !== OrderByOptions.ASC) {
@@ -201,7 +222,7 @@ export const PersistWorktrayContextURL = ({
     if (sessionKey) {
       window.sessionStorage.setItem(sessionKey, path);
     }
-  }, [page, pageSize, order, sort, sessionKey, push]);
+  }, [page, pageSize, order, sort, sessionKey, push, timePeriod]);
 
   return null;
 };
@@ -214,6 +235,7 @@ export const WorktrayURLProvider: FC<{ sessionKey: string }> = ({
   const query = new URLSearchParams(search);
   const page = Number(query.get("p") || 1);
   const pageSize = Number(query.get("l") || 12);
+  const timePeriod = String(query.get("t") || "") as TimePeriodOptions;
   const sortBy = query.get("sort");
   const orderBy = query.get("o");
 
@@ -238,6 +260,7 @@ export const WorktrayURLProvider: FC<{ sessionKey: string }> = ({
         sort,
         order,
         pageSize,
+        timePeriod,
       }}
     >
       {children}
