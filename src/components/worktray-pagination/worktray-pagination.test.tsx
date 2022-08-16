@@ -65,7 +65,7 @@ describe("worktray-pagination", () => {
   });
 
   test("Pagination displays range from end if range exceeds end", async () => {
-    server.use(getMockWorktrayResults({ total: 80 }));
+    server.use(getMockWorktrayResults({ total: 70 }));
     render(
       <WorktrayProvider initial={{ page: 7 }}>
         <WorktrayPagination />

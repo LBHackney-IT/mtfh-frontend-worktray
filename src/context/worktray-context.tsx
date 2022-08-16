@@ -20,6 +20,7 @@ import {
   OrderByOptions,
   ProcessSortOptions,
   TimePeriodOptions,
+  WorktrayFilterOptions,
   WorktrayResult,
 } from "../types";
 
@@ -34,6 +35,9 @@ export type WorktrayState = {
   timePeriod: TimePeriodOptions;
   sort: ProcessSortOptions;
   order: OrderByOptions;
+  patch?: string;
+  process?: string;
+  status?: string;
   results?: WorktrayResult[];
   total?: number;
   error?: AxiosSWRError;
@@ -55,6 +59,13 @@ export type WorktrayActions =
   | {
       type: "SORT";
       payload: ProcessSortOptions;
+    }
+  | {
+      type: "FILTER";
+      payload: {
+        type: WorktrayFilterOptions;
+        payload: string;
+      };
     }
   | {
       type: "ORDER";
@@ -130,6 +141,12 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
         }
         return state;
       }
+      case "FILTER": {
+        return {
+          ...state,
+          [action.payload.type]: action.payload.payload,
+        };
+      }
       default: {
         return state;
       }
@@ -146,6 +163,9 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
         page: query.page,
         pageSize: query.pageSize,
         timePeriod: query.timePeriod,
+        patch: query.patch,
+        process: query.process,
+        status: query.status,
         sortBy: query.sort,
         isDesc: query.order === "asc",
       },
@@ -190,7 +210,7 @@ export const PersistWorktrayContextURL = ({
   sessionKey?: string;
 }): null => {
   const {
-    state: { page, pageSize, order, sort, timePeriod },
+    state: { page, pageSize, order, sort, timePeriod, patch, process, status },
   } = useContext(WorktrayContext);
   const { push } = useHistory();
 
@@ -216,13 +236,25 @@ export const PersistWorktrayContextURL = ({
       query.set("sort", sort);
     }
 
+    if (patch) {
+      query.set("patch", patch);
+    }
+
+    if (process) {
+      query.set("process", process);
+    }
+
+    if (status) {
+      query.set("status", status);
+    }
+
     const path = `?${query.toString()}`;
     push(path);
 
     if (sessionKey) {
       window.sessionStorage.setItem(sessionKey, path);
     }
-  }, [page, pageSize, order, sort, sessionKey, push, timePeriod]);
+  }, [page, pageSize, order, sort, sessionKey, push, timePeriod, patch, process, status]);
 
   return null;
 };
@@ -236,6 +268,9 @@ export const WorktrayURLProvider: FC<{ sessionKey: string }> = ({
   const page = Number(query.get("p") || 1);
   const pageSize = Number(query.get("l") || 12);
   const timePeriod = String(query.get("t") || "") as TimePeriodOptions;
+  const patch = String(query.get("patch") || "");
+  const process = String(query.get("process") || "");
+  const status = String(query.get("status") || "");
   const sortBy = query.get("sort");
   const orderBy = query.get("o");
 
@@ -261,6 +296,9 @@ export const WorktrayURLProvider: FC<{ sessionKey: string }> = ({
         order,
         pageSize,
         timePeriod,
+        patch,
+        process,
+        status,
       }}
     >
       {children}

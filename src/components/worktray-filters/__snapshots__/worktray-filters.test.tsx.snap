@@ -173,12 +173,11 @@ exports[`worktray-filters it renders WorktrayFilters correctly 1`] = `
         >
           Apply filters
         </button>
-        <a
-          class="govuk-link lbh-link lbh-link--no-visited-state worktray-filters__clear-filters"
-          href="/"
+        <button
+          class="worktray-filters__clear-filters select-all lbh-link lbh-link--no-visited-state"
         >
           Clear filters
-        </a>
+        </button>
       </div>
     </div>
   </details>

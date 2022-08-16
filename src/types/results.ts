@@ -9,22 +9,6 @@ export interface WorktrayResult {
   relatedEntities: Record<string, string>[];
 }
 
-export enum ProcessSortOrderOptions {
-  STATUS = "status",
-  TIME_LEFT_ASC = "time-left-asc",
-  TIME_LEFT_DESC = "time-left-desc",
-  STATE_ASC = "state-asc",
-  STATE_DESC = "state-desc",
-  PATCH_ASC = "patch-asc",
-  PATCH_DESC = "patch-desc",
-  PROCESS_ASC = "process-asc",
-  PROCESS_DESC = "process-desc",
-  NAME_ASC = "name-asc",
-  NAME_DESC = "name-desc",
-  ADDRESS_ASC = "address-asc",
-  ADDRESS_DESC = "address-desc",
-}
-
 export enum ProcessSortOptions {
   STATUS = "status",
   TIME_LEFT = "time_left",
@@ -54,4 +38,10 @@ export enum TimePeriodOptions {
   MONTHS_6 = "6",
   MONTHS_12 = "12",
   ALL = "",
+}
+
+export enum WorktrayFilterOptions {
+  PROCESS = "process",
+  PATCH = "patch",
+  STATUS = "status",
 }

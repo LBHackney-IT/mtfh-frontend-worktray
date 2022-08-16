@@ -15,8 +15,8 @@ export const WorktrayView = (): JSX.Element => {
       <hr className="divider" />
       <Layout>
         <Heading as="h1">{locale.title}</Heading>
-        <WorktrayFilters />
         <WorktrayURLProvider sessionKey="worktray">
+          <WorktrayFilters />
           <WorktrayControls />
           <WorktrayList />
         </WorktrayURLProvider>
