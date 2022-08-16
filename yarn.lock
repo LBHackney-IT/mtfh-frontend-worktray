@@ -1452,7 +1452,7 @@
 
 "@mtfh/processes@https://github.com/LBHackney-IT/mtfh-frontend-processes.git":
   version "1.0.0"
-  resolved "https://github.com/LBHackney-IT/mtfh-frontend-processes.git#c40fc45a36dedb93efa33530054de423616ec6d8"
+  resolved "https://github.com/LBHackney-IT/mtfh-frontend-processes.git#209d22500c82d3980a00487cd84c64d4728e7234"
   dependencies:
     "@hackney/mtfh-test-utils" "^1.8.9"
     "@mtfh/common" "https://github.com/LBHackney-IT/mtfh-frontend-common.git"
@@ -1797,9 +1797,9 @@
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
 "@types/node@*":
-  version "18.6.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.3.tgz#4e4a95b6fe44014563ceb514b2598b3e623d1c98"
-  integrity sha512-6qKpDtoaYLM+5+AFChLhHermMQxc3TOEFIDzrZLPRGHPrLEwqFkkT5Kx3ju05g6X7uDPazz3jHbKPX0KzCjntg==
+  version "18.7.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.5.tgz#f1c1d4b7d8231c0278962347163656f9c36f3e83"
+  integrity sha512-NcKK6Ts+9LqdHJaW6HQmgr7dT/i3GOHG+pt6BiWv++5SnjtRd4NXeiuN2kA153SjhXPR/AhHIPHPbrsbpUVOww==
 
 "@types/node@^16.7.1":
   version "16.11.45"
