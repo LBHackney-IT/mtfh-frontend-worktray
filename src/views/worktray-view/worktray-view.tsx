@@ -15,7 +15,7 @@ export const WorktrayView = (): JSX.Element => {
       <Layout>
         <Heading as="h1">{locale.title}</Heading>
         <WorktrayFilters />
-        <WorktrayURLProvider>
+        <WorktrayURLProvider sessionKey="worktray">
           <WorktrayList />
         </WorktrayURLProvider>
       </Layout>

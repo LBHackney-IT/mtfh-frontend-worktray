@@ -26,11 +26,11 @@ export enum ProcessSortOrderOptions {
 }
 
 export enum ProcessSortOptions {
-  STATUS = "",
-  TIME_LEFT = "",
-  STATE = "",
-  PATCH = "",
-  PROCESS = "",
+  STATUS = "status",
+  TIME_LEFT = "time_left",
+  STATE = "state",
+  PATCH = "patch",
+  PROCESS = "process",
   NAME = "name",
   ADDRESS = "address",
 }
