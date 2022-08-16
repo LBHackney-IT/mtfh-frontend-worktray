@@ -1,7 +1,9 @@
 const locale = {
   title: "Your tasks",
   views: {
-    worktray: {},
+    worktray: {
+      noWorktrayResults: "No worktray results",
+    },
   },
   errors: {
     unableToFetchRecord: "There was a problem retrieving the record",
@@ -17,6 +19,16 @@ const locale = {
       applyFilters: "Apply filters",
       clearFilters: "Clear filters",
       selectAll: "Select All",
+    },
+    pagination: {
+      previous: "Previous",
+      next: "Next",
+      assistiveNavigation: (page: number): string => `Page ${page}`,
+      searchResultsCounter: (page: number, pageSize: number, total: number): string =>
+        `Showing ${page * pageSize - pageSize + 1}—${Math.min(
+          page * pageSize,
+          total,
+        )} of ${total} results`,
     },
   },
 };
