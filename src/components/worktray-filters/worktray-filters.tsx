@@ -11,7 +11,10 @@ import { FilterBox } from "./filter-box";
 const { components } = locale;
 
 export const WorktrayFilters = (): JSX.Element => {
-  const { dispatch } = useContext(WorktrayContext);
+  const {
+    dispatch,
+    state: { patch, process, status },
+  } = useContext(WorktrayContext);
 
   // TODO: replace with real data
   const filters: { type: string; title: string; options: string[] }[] = [
@@ -27,9 +30,13 @@ export const WorktrayFilters = (): JSX.Element => {
     },
   ];
 
-  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>(
-    Object.fromEntries(filters.map((filter) => [filter.type, []])),
-  );
+  const [selectedFilters, setSelectedFilters] = useState<
+    Record<WorktrayFilterOptions, string[]>
+  >({
+    patch: patch?.split(",") || [],
+    process: process?.split(",") || [],
+    status: status?.split(",") || [],
+  });
 
   const handleCheckboxFilters = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -70,12 +77,11 @@ export const WorktrayFilters = (): JSX.Element => {
   );
 
   const clearFilters = () => {
-    const clearedFilters = {};
     Object.keys(selectedFilters).forEach((filterType) => {
-      clearedFilters[filterType] = [];
+      selectedFilters[filterType] = [];
     });
-    setSelectedFilters(clearedFilters);
-    applyFilters(clearedFilters);
+    setSelectedFilters(selectedFilters);
+    applyFilters(selectedFilters);
   };
 
   return (

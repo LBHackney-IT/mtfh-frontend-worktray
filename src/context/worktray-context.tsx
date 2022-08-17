@@ -83,8 +83,11 @@ const getInitialState = (
     page: options.page || 1,
     pageSize: options.pageSize || LimitOptions.SMALL,
     timePeriod: options.timePeriod || TimePeriodOptions.DAYS_30,
-    sort: options.sort || ProcessSortOptions.STATUS, // TODO ??
+    sort: options.sort || ProcessSortOptions.NAME, // TODO ??
     order: options.order || OrderByOptions.ASC,
+    process: options.process || "",
+    patch: options.patch || "",
+    status: options.status || "",
   };
 };
 
@@ -224,17 +227,13 @@ export const PersistWorktrayContextURL = ({
       query.set("l", String(pageSize));
     }
 
-    if (timePeriod !== "") {
-      query.set("t", String(timePeriod));
-    }
+    query.set("t", String(timePeriod));
 
     if (order && order !== OrderByOptions.ASC) {
       query.set("o", order);
     }
 
-    if (sort) {
-      query.set("sort", sort);
-    }
+    query.set("sort", String(sort));
 
     if (patch) {
       query.set("patch", patch);
@@ -259,18 +258,18 @@ export const PersistWorktrayContextURL = ({
   return null;
 };
 
-export const WorktrayURLProvider: FC<{ sessionKey: string }> = ({
+export const WorktrayURLProvider: FC<{ sessionKey?: string }> = ({
   children,
   sessionKey,
 }): JSX.Element => {
   const { search } = useLocation();
   const query = new URLSearchParams(search);
   const page = Number(query.get("p") || 1);
-  const pageSize = Number(query.get("l") || 12);
-  const timePeriod = String(query.get("t") || "") as TimePeriodOptions;
-  const patch = String(query.get("patch") || "");
-  const process = String(query.get("process") || "");
-  const status = String(query.get("status") || "");
+  const pageSize = Number(query.get("l") || 10);
+  const timePeriod = (query.get("t") || "") as TimePeriodOptions;
+  const patch = query.get("patch") || "";
+  const process = query.get("process") || "";
+  const status = query.get("status") || "";
   const sortBy = query.get("sort");
   const orderBy = query.get("o");
 

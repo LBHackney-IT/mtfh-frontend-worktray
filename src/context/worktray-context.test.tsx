@@ -4,7 +4,13 @@ import { render, server } from "@hackney/mtfh-test-utils";
 import { screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 
-import { LimitOptions, OrderByOptions, ProcessSortOptions } from "../types";
+import {
+  LimitOptions,
+  OrderByOptions,
+  ProcessSortOptions,
+  TimePeriodOptions,
+  WorktrayFilterOptions,
+} from "../types";
 import {
   WorktrayActions,
   WorktrayContext,
@@ -134,6 +140,45 @@ test("WorktrayProvider dispatches page", () => {
   expect(screen.getByText("[2]")).toBeInTheDocument();
 });
 
+test("WorktrayProvider dispatches time period", () => {
+  worktrayRender(
+    <Dispatcher action={{ type: "TIME_PERIOD", payload: 30 }} param="timePeriod" />,
+    {
+      initial: {},
+    },
+  );
+  expect(screen.getByText("[30]")).toBeInTheDocument();
+});
+
+test("WorktrayProvider wont dispatch time period for unknown timePeriod", () => {
+  worktrayRender(
+    <Dispatcher
+      action={{ type: "TIME_PERIOD", payload: 100 as TimePeriodOptions }}
+      param="timePeriod"
+    />,
+    {
+      initial: {},
+    },
+  );
+  expect(screen.getByText(`[30]`)).toBeInTheDocument();
+});
+
+test("WorktrayProvider dispatches filter", () => {
+  worktrayRender(
+    <Dispatcher
+      action={{
+        type: "FILTER",
+        payload: { type: WorktrayFilterOptions.PATCH, payload: "CP1,CP2" },
+      }}
+      param="patch"
+    />,
+    {
+      initial: {},
+    },
+  );
+  expect(screen.getByText("[CP1,CP2]")).toBeInTheDocument();
+});
+
 test("WorktrayProvider will reset page to the maximum when over extended", async () => {
   server.use(
     rest.get("/api/worktray", (req, res, ctx) => {
@@ -172,6 +217,23 @@ test("WorktrayURLProvider hydrates from url", () => {
     <WorktrayURLProvider sessionKey="test">
       <ContextSelector param="page" />
       <ContextSelector param="pageSize" />
+      <ContextSelector param="timePeriod" />
+    </WorktrayURLProvider>,
+    {
+      url: "/?p=3&l=40&t=30",
+      path: "/",
+    },
+  );
+
+  expect(screen.getByText("[3]")).toBeInTheDocument();
+  expect(screen.getByText("[40]")).toBeInTheDocument();
+});
+
+test("WorktrayURLProvider hydrates from url 2", () => {
+  render(
+    <WorktrayURLProvider>
+      <ContextSelector param="page" />
+      <ContextSelector param="pageSize" />
     </WorktrayURLProvider>,
     {
       url: "/?p=3&l=40",
@@ -189,10 +251,12 @@ test("WorktrayURLProvider persists to sessionStorage", () => {
       <Dispatcher action={{ type: "PAGE", payload: 3 }} param="page" />
     </WorktrayURLProvider>,
     {
-      url: "/?p=3&l=40&t=30&o=desc&sort=name",
+      url: "/?p=3&l=40&t=30&o=desc&sort=name&patch=x&process=y&status=z",
       path: "/",
     },
   );
 
-  expect(window.sessionStorage.getItem("test")).toBe("?p=3&l=40&t=30&o=desc&sort=name");
+  expect(window.sessionStorage.getItem("test")).toBe(
+    "?p=3&l=40&t=30&o=desc&sort=name&patch=x&process=y&status=z",
+  );
 });

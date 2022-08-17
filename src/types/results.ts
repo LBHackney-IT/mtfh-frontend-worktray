@@ -32,11 +32,11 @@ export enum LimitOptions {
 }
 
 export enum TimePeriodOptions {
-  DAYS_30 = "30",
-  DAYS_60 = "60",
-  MONTHS_3 = "3",
-  MONTHS_6 = "6",
-  MONTHS_12 = "12",
+  DAYS_30 = 30,
+  DAYS_60 = 60,
+  MONTHS_3 = 3,
+  MONTHS_6 = 6,
+  MONTHS_12 = 12,
   ALL = "",
 }
 
