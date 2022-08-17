@@ -3,6 +3,7 @@ import React from "react";
 import { render } from "@hackney/mtfh-test-utils";
 import { fireEvent, screen } from "@testing-library/react";
 
+import { WorktrayURLProvider } from "../../context/worktray-context";
 import { locale } from "../../services";
 import { WorktrayFilters } from "./worktray-filters";
 
@@ -32,12 +33,24 @@ describe("worktray-filters", () => {
   });
 
   test("it selects and unselects filter options", async () => {
-    render(<WorktrayFilters />);
+    render(
+      <WorktrayURLProvider sessionKey="test">
+        <WorktrayFilters />
+      </WorktrayURLProvider>,
+      {
+        url: "/?t=30&sort=status&process=%2CProcess+2&patch=%2CCP1",
+        path: "/",
+      },
+    );
     await expect(
       screen.findByLabelText(filters[0].options[0]),
     ).resolves.not.toBeChecked();
     fireEvent.click(screen.getByLabelText(filters[0].options[0]));
     await expect(screen.findByLabelText(filters[0].options[0])).resolves.toBeChecked();
+    fireEvent.click(screen.getByText(locale.components.filters.applyFilters));
+    expect(window.sessionStorage.getItem("test")).toBe(
+      "?t=30&sort=status&patch=%2CCP1&process=%2CProcess+2%2CProcess+1",
+    );
     fireEvent.click(screen.getByLabelText(filters[0].options[0]));
     await expect(
       screen.findByLabelText(filters[0].options[0]),
@@ -45,7 +58,11 @@ describe("worktray-filters", () => {
   });
 
   test("it selects all options and clears filters correctly", async () => {
-    render(<WorktrayFilters />);
+    render(
+      <WorktrayURLProvider sessionKey="test">
+        <WorktrayFilters />
+      </WorktrayURLProvider>,
+    );
 
     await expect(
       screen.findByLabelText(filters[0].options[0]),

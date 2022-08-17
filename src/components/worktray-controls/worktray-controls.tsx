@@ -33,21 +33,25 @@ export const WorktrayControls = (): JSX.Element | null => {
   return (
     <div className="mtfh-worktray-controls">
       <div className="mtfh-worktray-controls__controls">
-        <FormGroup id="sortBy" label="Show:">
+        <FormGroup id="time-period" label="Show:">
           <Select
+            data-testid="mtfh-worktray-time-period"
             onChange={(e) => handleTimePeriod(e.currentTarget.value as TimePeriodOptions)}
             value={timePeriod}
           >
-            {Object.values(TimePeriodOptions).map((value) => (
-              <option key={value} value={value}>
-                {timePeriodOptions[value] || `All of ${new Date().getFullYear()}`}
-              </option>
-            ))}
+            {Object.values(TimePeriodOptions)
+              .filter((value) => typeof value === "number" || value === "")
+              .map((value) => (
+                <option key={value} value={value}>
+                  {timePeriodOptions[value] || `All of ${new Date().getFullYear()}`}
+                </option>
+              ))}
           </Select>
         </FormGroup>
 
         <FormGroup id="limit" label="">
           <Select
+            data-testid="mtfh-worktray-limit"
             onChange={(e) => handleLimit(Number(e.currentTarget.value))}
             value={pageSize}
           >

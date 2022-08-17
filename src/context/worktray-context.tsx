@@ -83,11 +83,11 @@ const getInitialState = (
     page: options.page || 1,
     pageSize: options.pageSize || LimitOptions.SMALL,
     timePeriod: options.timePeriod || TimePeriodOptions.DAYS_30,
-    sort: options.sort || ProcessSortOptions.NAME, // TODO ??
+    sort: options.sort || ProcessSortOptions.STATUS,
     order: options.order || OrderByOptions.ASC,
-    process: options.process || "",
-    patch: options.patch || "",
-    status: options.status || "",
+    process: options.process || undefined,
+    patch: options.patch || undefined,
+    status: options.status || undefined,
   };
 };
 
@@ -118,7 +118,7 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
         return state;
       }
       case "TIME_PERIOD": {
-        if (Object.values(TimePeriodOptions).includes(action.payload)) {
+        if (Object.values(TimePeriodOptions).includes(Number(action.payload))) {
           return {
             ...state,
             timePeriod: action.payload,

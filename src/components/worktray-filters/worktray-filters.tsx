@@ -80,7 +80,6 @@ export const WorktrayFilters = (): JSX.Element => {
     Object.keys(selectedFilters).forEach((filterType) => {
       selectedFilters[filterType] = [];
     });
-    setSelectedFilters(selectedFilters);
     applyFilters(selectedFilters);
   };
 
