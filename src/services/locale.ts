@@ -30,6 +30,16 @@ const locale = {
           total,
         )} of ${total} results`,
     },
+    controls: {
+      timePeriodOptions: {
+        "30": "Last 30 days",
+        "60": "Last 60 days",
+        "3": "Last 3 months",
+        "6": "Last 6 months",
+        "12": "Last 12 months",
+      },
+      limitOption: (value: number): string => `${value} items`,
+    },
   },
 };
 

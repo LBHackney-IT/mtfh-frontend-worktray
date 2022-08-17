@@ -30,3 +30,14 @@
     }
   }
 }
+
+.worktray-list {
+  th,
+  th > button {
+    font-size: initial;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    vertical-align: middle;
+  }
+}
