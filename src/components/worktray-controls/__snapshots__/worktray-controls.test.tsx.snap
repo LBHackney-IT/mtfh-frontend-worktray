@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`worktray-controls-component WorktrayControls renders correctly 1`] = `
+<div>
+  <div
+    class="mtfh-worktray-controls"
+  >
+    <div
+      class="mtfh-worktray-controls__controls"
+    >
+      <div
+        class="govuk-form-group lbh-form-group"
+        id="time-period"
+      >
+        <label
+          class="govuk-label lbh-label"
+          for="time-period-field"
+        >
+          Show:
+          
+        </label>
+        <select
+          class="govuk-select lbh-select"
+          data-testid="mtfh-worktray-time-period"
+          id="time-period-field"
+        >
+          <option
+            value="30"
+          >
+            Last 30 days
+          </option>
+          <option
+            value="60"
+          >
+            Last 60 days
+          </option>
+          <option
+            value="3"
+          >
+            Last 3 months
+          </option>
+          <option
+            value="6"
+          >
+            Last 6 months
+          </option>
+          <option
+            value="12"
+          >
+            Last 12 months
+          </option>
+          <option
+            value=""
+          >
+            All of 2022
+          </option>
+        </select>
+      </div>
+      <div
+        class="govuk-form-group lbh-form-group"
+        id="limit"
+      >
+        <label
+          class="govuk-label lbh-label"
+          for="limit-field"
+        >
+          
+          
+        </label>
+        <select
+          class="govuk-select lbh-select"
+          data-testid="mtfh-worktray-limit"
+          id="limit-field"
+        >
+          <option
+            value="10"
+          >
+            10 items
+          </option>
+          <option
+            value="25"
+          >
+            25 items
+          </option>
+          <option
+            value="50"
+          >
+            50 items
+          </option>
+          <option
+            value="100"
+          >
+            100 items
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;

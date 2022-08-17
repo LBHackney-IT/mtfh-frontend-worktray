@@ -1,0 +1,78 @@
+
+@import "~lbh-frontend/lbh/base";
+
+.worktray-filters {
+  & > .govuk-details__text {
+    border-left: unset;
+    padding: 15px 0;
+  }
+
+  &__boxes {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1.5em;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    & > .filter-box {
+      margin: 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  &__actions > &__apply-button {
+    margin-right: 1.5em;
+  }
+
+  &__clear-filters {
+    display: flex;
+    align-items: center;
+    color: lbh-colour("lbh-link");
+    text-decoration: underline;
+  }
+}
+
+.filter-box {
+  border: 2px solid lbh-colour("lbh-grey-2");
+  flex: 1 0 280px;
+  max-width: 380px;
+  height: 100%;
+}
+
+.filter-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25em 0.5em;
+  background: lbh-colour("lbh-grey-2");
+
+  p, * {
+    margin: 0
+  }
+
+  .select-all {
+    text-decoration: underline;
+    color: lbh-colour("lbh-link");
+    cursor: pointer;
+  }
+}
+
+.filter-box-options {
+  height: 280px;
+  padding: 0 0 0 1em;
+  margin: 0;
+  overflow: auto;
+
+  :last-child {
+    margin-bottom: 1.5em;
+  }
+
+  .govuk-checkboxes__label {
+    overflow-wrap: break-word;
+  }
+}

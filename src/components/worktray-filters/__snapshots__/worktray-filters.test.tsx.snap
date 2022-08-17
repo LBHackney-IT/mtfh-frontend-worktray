@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`worktray-filters it renders WorktrayFilters correctly 1`] = `
+<div>
+  <details
+    class="govuk-details lbh-details worktray-filters"
+    data-module="govuk-details"
+    data-testid="mtfh-details"
+    id="mtfh-details"
+  >
+    <summary
+      class="govuk-details__summary"
+    >
+      <span
+        class="govuk-details__summary-text"
+      >
+        Filter by
+      </span>
+    </summary>
+    <div
+      class="govuk-details__text"
+    >
+      <div
+        class="worktray-filters__boxes"
+      >
+        <div
+          class="filter-box"
+        >
+          <div
+            class="filter-header"
+          >
+            <p
+              class="lbh-body-m"
+            >
+              Processes
+            </p>
+            <button
+              class="select-all lbh-link lbh-link--no-visited-state"
+            >
+              Select All
+            </button>
+          </div>
+          <div
+            class="filter-box-options"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="process-1"
+                name="Process 1"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="process-1"
+              >
+                Process 1
+              </label>
+            </div>
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="process-2"
+                name="Process 2"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="process-2"
+              >
+                Process 2
+              </label>
+            </div>
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="process-3"
+                name="Process 3"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="process-3"
+              >
+                Process 3
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          class="filter-box"
+        >
+          <div
+            class="filter-header"
+          >
+            <p
+              class="lbh-body-m"
+            >
+              Patches
+            </p>
+            <button
+              class="select-all lbh-link lbh-link--no-visited-state"
+            >
+              Select All
+            </button>
+          </div>
+          <div
+            class="filter-box-options"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="cp1"
+                name="CP1"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="cp1"
+              >
+                CP1
+              </label>
+            </div>
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="cp2"
+                name="CP2"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="cp2"
+              >
+                CP2
+              </label>
+            </div>
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                id="cp3"
+                name="CP3"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="cp3"
+              >
+                CP3
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="worktray-filters__actions"
+      >
+        <button
+          class="govuk-button lbh-button worktray-filters__apply-button"
+          type="button"
+        >
+          Apply filters
+        </button>
+        <button
+          class="worktray-filters__clear-filters select-all lbh-link lbh-link--no-visited-state"
+        >
+          Clear filters
+        </button>
+      </div>
+    </div>
+  </details>
+</div>
+`;

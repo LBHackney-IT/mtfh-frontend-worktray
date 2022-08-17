@@ -1,0 +1,23 @@
+.mtfh-worktray-controls {
+  &__controls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .lbh-form-group {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+
+    .lbh-label {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
+
+    & + .lbh-form-group {
+      margin-left: 1rem;
+    }
+  }
+}

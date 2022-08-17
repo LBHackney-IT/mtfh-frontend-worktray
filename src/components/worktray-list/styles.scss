@@ -1,0 +1,43 @@
+@import "~lbh-frontend/lbh/base";
+@import "~lbh-frontend/lbh/settings/colour-palette";
+
+.process-record {
+  &__item > .title {
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+  &__item > .createdAt {
+    margin-top: 0;
+  }
+
+  &__item {
+    width: 200px;
+    margin-top: 0;
+    &.--processName {
+      flex-grow: 1;
+    }
+    .lbh-tag {
+      text-align: center;
+      border-radius: 5px;
+      width: 100%;
+    }
+    & > .--address {
+      font-size: 16px;
+      margin-top: 0;
+      display: block;
+      line-height: 22px;
+    }
+  }
+}
+
+.worktray-list {
+  th,
+  th > button {
+    font-size: initial;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    vertical-align: middle;
+  }
+}

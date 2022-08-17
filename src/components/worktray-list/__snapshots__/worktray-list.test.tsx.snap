@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`worktray-list-component it renders correctly 1`] = `
+<div>
+  <div>
+    <div
+      class="worktray-list"
+    >
+      <table
+        class="govuk-table lbh-table"
+      >
+        <thead
+          class="govuk-table__head"
+        >
+          <tr
+            class="govuk-table__row"
+          >
+            <th
+              class="govuk-table__cell govuk-table__header"
+            >
+              <button
+                class="select-all lbh-link lbh-link--no-visited-state"
+              >
+                Name / Address
+              </button>
+            </th>
+            <th
+              class="govuk-table__cell govuk-table__header"
+            >
+              <button
+                class="select-all lbh-link lbh-link--no-visited-state"
+              >
+                Process
+              </button>
+            </th>
+            <th
+              class="govuk-table__cell govuk-table__header"
+            >
+              <button
+                class="select-all lbh-link lbh-link--no-visited-state"
+              >
+                Patch
+              </button>
+            </th>
+            <th
+              class="govuk-table__cell govuk-table__header"
+            >
+              <button
+                class="select-all lbh-link lbh-link--no-visited-state"
+              >
+                State
+              </button>
+            </th>
+            <th
+              class="govuk-table__cell govuk-table__header"
+            >
+              <button
+                class="select-all lbh-link lbh-link--no-visited-state"
+              >
+                Time left
+                <br />
+                Full process
+              </button>
+            </th>
+            <th
+              class="govuk-table__cell govuk-table__header"
+            >
+              Process status
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="govuk-table__body"
+        >
+          <tr
+            class="govuk-table__row govuk-table__row process-record"
+          >
+            <td
+              class="govuk-table__cell process-record__item"
+            >
+              <a
+                class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+                href="/person/6fbe024f-2316-4265-a6e8-d65a837e308a"
+                target="_blank"
+              >
+                Haylee Macejkovic
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell process-record__item --processName"
+            >
+              <a
+                class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+                href="/processes/soletojoint/6fbe024f-2316-4265-a6e8-d65a837e308a"
+                target="_blank"
+              >
+                Sole to Joint
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell process-record__item"
+            >
+              <a
+                class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+                href="/"
+                target="_blank"
+              >
+                CP*
+              </a>
+            </td>
+            <td
+              class="govuk-table__cell process-record__item"
+            >
+              <p
+                class="lbh-body-m title"
+              >
+                Initiated
+              </p>
+              <p
+                class="lbh-body-m createdAt"
+              >
+                09/01/2022
+              </p>
+            </td>
+            <td
+              class="govuk-table__cell"
+            >
+              <p
+                class="lbh-body-m"
+              >
+                3 days left
+              </p>
+            </td>
+            <td
+              class="govuk-table__cell process-record__item --status"
+            >
+              <span
+                class="govuk-tag lbh-tag"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`worktray-list-component it renders correctly when no results 1`] = `
+<div>
+  <p
+    class="lbh-body-m"
+  >
+    No worktray results
+  </p>
+</div>
+`;

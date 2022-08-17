@@ -13,7 +13,6 @@
     "check-format": "prettier --check .",
     "test": "cross-env BABEL_ENV=test jest",
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
-    "prepare": "husky install",
     "coverage": "cross-env BABEL_ENV=test jest --coverage"
   },
   "devDependencies": {
@@ -30,6 +29,7 @@
     "@hackney/webpack-import-map-plugin": "^1.1.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jest": "26.0.16",
     "@types/react": "17.0.20",
     "@types/react-dom": "17.0.9",
@@ -76,7 +76,9 @@
   },
   "dependencies": {
     "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-common.git",
+    "@mtfh/processes": "https://github.com/LBHackney-IT/mtfh-frontend-processes.git",
     "lbh-frontend": "^3.6.1",
+    "query-string": "^7.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router-dom": "5.2.0",
