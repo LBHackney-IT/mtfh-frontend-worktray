@@ -119,24 +119,29 @@ exports[`worktray-list-component it renders correctly 1`] = `
               <p
                 class="lbh-body-m createdAt"
               >
-                09/01/2022
+                24/07/2022
               </p>
             </td>
             <td
-              class="govuk-table__cell"
+              class="govuk-table__cell process-record__item"
             >
               <p
                 class="lbh-body-m"
               >
-                3 days left
+                8 days left
               </p>
             </td>
             <td
               class="govuk-table__cell process-record__item --status"
             >
               <span
-                class="govuk-tag lbh-tag"
+                class="govuk-tag lbh-tag box aqua"
               />
+              <p
+                class="lbh-body-s"
+              >
+                8 days left
+              </p>
             </td>
           </tr>
         </tbody>

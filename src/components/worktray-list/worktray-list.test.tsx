@@ -2,6 +2,7 @@ import React from "react";
 
 import { mockPersonV1, mockProcessV1, render, server } from "@hackney/mtfh-test-utils";
 import { fireEvent, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { subDays } from "date-fns";
 import { rest } from "msw";
 
 import { WorktrayProvider, WorktrayURLProvider } from "../../context/worktray-context";
@@ -14,7 +15,7 @@ const mockWorktrayResults = [
     processName: "soletojoint",
     targetType: "tenure",
     currentState: {
-      createdAt: "2022-01-09T00:00:00.000Z",
+      createdAt: subDays(new Date(), 2).toISOString(),
     },
     relatedEntities: [
       {

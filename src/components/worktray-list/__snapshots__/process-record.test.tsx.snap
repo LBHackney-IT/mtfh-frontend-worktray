@@ -34,7 +34,7 @@ exports[`process-record-component it renders TenureProcessRecord correctly 1`] =
           href="/processes/ab/6fbe024f-2316-4265-a6e8-d65a837e308a"
           target="_blank"
         >
-          Test Title
+          Sole to Joint
         </a>
       </td>
       <td
@@ -59,26 +59,31 @@ exports[`process-record-component it renders TenureProcessRecord correctly 1`] =
         <p
           class="lbh-body-m createdAt"
         >
-          01/01/2022
+          24/07/2022
         </p>
       </td>
       <td
-        class="govuk-table__cell"
+        class="govuk-table__cell process-record__item"
       >
         <p
           class="lbh-body-m"
         >
-          3 days left
+          10 days left
         </p>
       </td>
       <td
         class="govuk-table__cell process-record__item --status"
       >
         <span
-          class="govuk-tag lbh-tag"
+          class="govuk-tag lbh-tag box grey"
         >
-          Status
+          Request supporting documents
         </span>
+        <p
+          class="lbh-body-s"
+        >
+          10 days left
+        </p>
       </td>
     </tr>
   </table>

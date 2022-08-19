@@ -11,8 +11,7 @@ import {
   Thead,
   Tr,
 } from "@mtfh/common/lib/components";
-import { formatDate } from "@mtfh/common/lib/utils";
-import { ProcessStateInfo, processes } from "@mtfh/processes";
+import { processes } from "@mtfh/processes";
 
 import { WorktrayContext } from "../../context/worktray-context";
 import { locale } from "../../services";
@@ -120,23 +119,12 @@ export const WorktrayList = (): JSX.Element => {
           <Tbody>
             {results.map((process) => {
               const processConfig = processes[process.processName];
-              const statesInfo: ProcessStateInfo[] = Object.values(processConfig.states);
-              const stateInfo = statesInfo.find(
-                (item) => item.state === process.currentState.state,
-              );
-
               const Result = processRecordComponents[process.targetType];
               return (
                 <Result
                   key={process.id}
-                  process={{
-                    ...process,
-                    relatedEntities: process.relatedEntities,
-                    title: processConfig?.name,
-                    status: stateInfo?.status,
-                    state: "Initiated",
-                    stateDate: formatDate(process.currentState.createdAt),
-                  }}
+                  process={process}
+                  processConfig={processConfig}
                 />
               );
             })}
