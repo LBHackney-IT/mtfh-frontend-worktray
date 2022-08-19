@@ -1,6 +1,13 @@
 @import "~lbh-frontend/lbh/base";
 @import "~lbh-frontend/lbh/settings/colour-palette";
 
+$grey: #dee0e2;
+$aqua: #009ca6;
+$green: #005f61;
+$amber: #f8e08e;
+$orange: #ff6a13;
+$red: #be3a34;
+
 .process-record {
   &__item > .title {
     font-weight: bold;
@@ -14,6 +21,7 @@
   &__item {
     width: 200px;
     margin-top: 0;
+    vertical-align: middle;
     &.--processName {
       flex-grow: 1;
     }
@@ -27,6 +35,41 @@
       margin-top: 0;
       display: block;
       line-height: 22px;
+    }
+
+    &.--status {
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        &.grey,
+        &.amber {
+          color: initial;
+        }
+        &.grey {
+          background: $grey;
+        }
+        &.aqua {
+          background: $aqua;
+        }
+        &.green {
+          background: $green;
+        }
+        &.amber {
+          background: $amber;
+        }
+        &.orange {
+          background: $orange;
+        }
+        &.red {
+          background: $red;
+        }
+      }
+      > p {
+        margin-top: 4px;
+        text-align: center;
+      }
     }
   }
 }

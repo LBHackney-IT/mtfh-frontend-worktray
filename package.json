@@ -77,6 +77,7 @@
   "dependencies": {
     "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-common.git",
     "@mtfh/processes": "https://github.com/LBHackney-IT/mtfh-frontend-processes.git",
+    "date-fns": "^2.29.1",
     "lbh-frontend": "^3.6.1",
     "query-string": "^7.1.1",
     "react": "17.0.2",

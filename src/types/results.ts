@@ -6,6 +6,7 @@ export interface WorktrayResult {
   targetType: string;
   targetId: string;
   currentState: ProcessState;
+  previousStates: ProcessState[];
   relatedEntities: Record<string, string>[];
 }
 
