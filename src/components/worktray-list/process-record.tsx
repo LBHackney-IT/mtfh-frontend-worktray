@@ -20,8 +20,14 @@ export interface ProcessRecordProps {
     address?: string;
   };
   process: Process;
-  processConfig: IProcess;
+  processConfig: IProcess | undefined;
   simple?: boolean;
+}
+
+enum ProcessStates {
+  PROCESS_CLOSED = "ProcessClosed",
+  PROCESS_CANCELLED = "ProcessCancelled",
+  PROCESS_COMPLETED = "ProcessCompleted",
 }
 
 export const ProcessRecord = ({
@@ -31,17 +37,17 @@ export const ProcessRecord = ({
   processConfig,
   simple = false,
 }: ProcessRecordProps): JSX.Element => {
-  const { processClosed, processCancelled, tenureUpdated } = processConfig.states;
-  const processName = processConfig?.name;
+  const processName = processConfig?.name || process.processName;
   const timeConstraint =
-    processConfig.states[
+    processConfig?.states[
       process.currentState.state.charAt(0).toLowerCase() +
         process.currentState.state.slice(1)
     ]?.timeConstraint;
-  const statesInfo: ProcessStateInfo[] = Object.values(processConfig.states);
-  const status = statesInfo.find(
-    (item) => item.state === process.currentState.state,
-  )?.status;
+  let status;
+  if (processConfig) {
+    const statesInfo: ProcessStateInfo[] = Object.values(processConfig?.states);
+    status = statesInfo.find((item) => item.state === process.currentState.state)?.status;
+  }
 
   let daysDiff = 0;
   let hoursLeft = 48;
@@ -58,18 +64,20 @@ export const ProcessRecord = ({
 
   const isClosed =
     status &&
-    [processClosed.status, processCancelled.status, tenureUpdated.status].includes(
-      status,
-    );
+    [
+      ProcessStates.PROCESS_CLOSED,
+      ProcessStates.PROCESS_CANCELLED,
+      ProcessStates.PROCESS_COMPLETED,
+    ].includes(status);
 
   const getState = () => {
-    if (process.currentState.state === "ProcessCancelled") {
+    if (process.currentState.state === ProcessStates.PROCESS_CANCELLED) {
       return { title: "Cancelled", date: formatDate(process.currentState.createdAt) };
     }
-    if (process.currentState.state === "ProcessClosed") {
+    if (process.currentState.state === ProcessStates.PROCESS_CLOSED) {
       return { title: "Closed", date: formatDate(process.currentState.createdAt) };
     }
-    if (process.currentState.state === "TenureUpdated") {
+    if (process.currentState.state === ProcessStates.PROCESS_COMPLETED) {
       return { title: "Completed", date: formatDate(process.currentState.createdAt) };
     }
     return {
@@ -85,10 +93,15 @@ export const ProcessRecord = ({
   const state = getState();
 
   const getStatusColor = () => {
-    if (status && [processClosed.status, processCancelled.status].includes(status)) {
+    if (
+      status &&
+      (
+        [ProcessStates.PROCESS_CLOSED, ProcessStates.PROCESS_CANCELLED] as string[]
+      ).includes(process.currentState.state)
+    ) {
       return "orange";
     }
-    if (status && status.includes(tenureUpdated.status)) {
+    if (status && process.currentState.state === ProcessStates.PROCESS_COMPLETED) {
       return "green";
     }
     if (daysDiff === timeConstraint) {
@@ -166,7 +179,9 @@ export const ProcessRecord = ({
         </Td>
       )}
       <Td className="process-record__item --status">
-        <span className={`govuk-tag lbh-tag box ${getStatusColor()}`}>{status}</span>
+        <span className={`govuk-tag lbh-tag box ${getStatusColor()}`}>
+          {status || ""}
+        </span>
         {!simple && (
           <Text size="sm">
             {!isClosed &&
