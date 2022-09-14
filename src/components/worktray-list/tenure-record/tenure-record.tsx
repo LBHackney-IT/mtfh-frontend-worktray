@@ -9,28 +9,25 @@ import { ProcessRecord } from "../process-record";
 interface TenureProcessRecordProps {
   process: Process;
   processConfig: IProcess;
+  simple?: boolean;
 }
 
-export const TenureProcessRecord = ({
-  process,
-  processConfig,
-}: TenureProcessRecordProps): JSX.Element => {
-  const { targetId, relatedEntities } = process;
+export const TenureProcessRecord = (props: TenureProcessRecordProps): JSX.Element => {
+  const { targetId, relatedEntities } = props.process;
   const relatedEntity = (relatedEntities as RelatedEntity[])?.[0];
   const { data: tenure } = useTenure(targetId);
 
   return (
     <ProcessRecord
       person={{
-        id: relatedEntity.id,
-        fullName: relatedEntity.description,
+        id: relatedEntity?.id,
+        fullName: relatedEntity?.description,
       }}
       property={{
         id: tenure?.tenuredAsset.id,
         address: tenure?.tenuredAsset.fullAddress,
       }}
-      process={process}
-      processConfig={processConfig}
+      {...props}
     />
   );
 };

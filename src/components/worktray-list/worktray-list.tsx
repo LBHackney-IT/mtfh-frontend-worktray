@@ -16,7 +16,7 @@ import { processes } from "@mtfh/processes";
 import { WorktrayContext } from "../../context/worktray-context";
 import { locale } from "../../services";
 import { OrderByOptions, ProcessSortOptions } from "../../types";
-import { WorktrayPagination } from "../worktray-pagination/worktray-pagination";
+import { WorktrayPagination } from "../worktray-pagination";
 import { TenureProcessRecord } from "./tenure-record";
 
 export const WorktrayList = (): JSX.Element => {

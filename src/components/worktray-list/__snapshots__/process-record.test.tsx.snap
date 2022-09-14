@@ -5,87 +5,91 @@ exports[`process-record-component it renders TenureProcessRecord correctly 1`] =
   <table
     class="govuk-table lbh-table"
   >
-    <tr
-      class="govuk-table__row govuk-table__row process-record"
+    <tbody
+      class="govuk-table__body"
     >
-      <td
-        class="govuk-table__cell process-record__item"
+      <tr
+        class="govuk-table__row govuk-table__row process-record"
       >
-        <a
-          class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
-          href="/person/6fbe024f-2316-4265-a6e8-d65a837e308a"
-          target="_blank"
+        <td
+          class="govuk-table__cell process-record__item"
         >
-          Haylee Macejkovic
-        </a>
-        <a
-          class="govuk-link lbh-link lbh-link--no-visited-state --address"
-          href="/property/f69ae994-4948-481f-a2d8-d52cfcb68321"
-          target="_blank"
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+            href="/person/6fbe024f-2316-4265-a6e8-d65a837e308a"
+            target="_blank"
+          >
+            Haylee Macejkovic
+          </a>
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state --address"
+            href="/property/f69ae994-4948-481f-a2d8-d52cfcb68321"
+            target="_blank"
+          >
+            72251 Champlin Trafficway, 99647
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item --processName"
         >
-          72251 Champlin Trafficway, 99647
-        </a>
-      </td>
-      <td
-        class="govuk-table__cell process-record__item --processName"
-      >
-        <a
-          class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
-          href="/processes/ab/6fbe024f-2316-4265-a6e8-d65a837e308a"
-          target="_blank"
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+            href="/processes/ab/6fbe024f-2316-4265-a6e8-d65a837e308a"
+            target="_blank"
+          >
+            Sole to Joint
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item"
         >
-          Sole to Joint
-        </a>
-      </td>
-      <td
-        class="govuk-table__cell process-record__item"
-      >
-        <a
-          class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
-          href="/"
-          target="_blank"
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+            href="/"
+            target="_blank"
+          >
+            CP*
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item"
         >
-          CP*
-        </a>
-      </td>
-      <td
-        class="govuk-table__cell process-record__item"
-      >
-        <p
-          class="lbh-body-m title"
+          <p
+            class="lbh-body-m title"
+          >
+            Initiated
+          </p>
+          <p
+            class="lbh-body-m createdAt"
+          >
+            20/08/2022
+          </p>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item"
         >
-          Initiated
-        </p>
-        <p
-          class="lbh-body-m createdAt"
+          <p
+            class="lbh-body-m"
+          >
+            10 days left
+          </p>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item --status"
         >
-          24/07/2022
-        </p>
-      </td>
-      <td
-        class="govuk-table__cell process-record__item"
-      >
-        <p
-          class="lbh-body-m"
-        >
-          10 days left
-        </p>
-      </td>
-      <td
-        class="govuk-table__cell process-record__item --status"
-      >
-        <span
-          class="govuk-tag lbh-tag box grey"
-        >
-          Request supporting documents
-        </span>
-        <p
-          class="lbh-body-s"
-        >
-          10 days left
-        </p>
-      </td>
-    </tr>
+          <span
+            class="govuk-tag lbh-tag box grey"
+          >
+            Request supporting documents
+          </span>
+          <p
+            class="lbh-body-s"
+          >
+            10 days left
+          </p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
 `;

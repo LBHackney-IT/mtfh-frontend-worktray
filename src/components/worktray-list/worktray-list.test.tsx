@@ -15,6 +15,8 @@ const mockWorktrayResults = [
     processName: "soletojoint",
     targetType: "tenure",
     currentState: {
+      ...mockProcessV1.currentState,
+      state: "BreachChecksPassed",
       createdAt: subDays(new Date(), 2).toISOString(),
     },
     relatedEntities: [

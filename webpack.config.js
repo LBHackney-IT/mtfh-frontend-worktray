@@ -27,7 +27,7 @@ module.exports = (webpackConfigEnv, argv) => {
         },
       ],
     },
-    externals: ["react-router-dom", "formik", "yup"],
+    externals: ["react-router-dom", "formik", "yup", "date-fns", /^@mtfh\/.+/],
     plugins: [
       new webpack.EnvironmentPlugin({
         WORKTRAY_API_URL: dotenv.WORKTRAY_API_URL || "",
