@@ -21,6 +21,7 @@ export interface ProcessRecordProps {
   };
   process: Process;
   processConfig: IProcess;
+  simple?: boolean;
 }
 
 export const ProcessRecord = ({
@@ -28,23 +29,32 @@ export const ProcessRecord = ({
   property,
   process,
   processConfig,
+  simple = false,
 }: ProcessRecordProps): JSX.Element => {
   const { processClosed, processCancelled, tenureUpdated } = processConfig.states;
   const processName = processConfig?.name;
-  const timeConstraint = 10; // TODO
+  const timeConstraint =
+    processConfig.states[
+      process.currentState.state.charAt(0).toLowerCase() +
+        process.currentState.state.slice(1)
+    ]?.timeConstraint;
   const statesInfo: ProcessStateInfo[] = Object.values(processConfig.states);
   const status = statesInfo.find(
     (item) => item.state === process.currentState.state,
   )?.status;
 
-  const daysDiff =
-    timeConstraint -
-    differenceInDays(new Date(), parseISO(process.currentState.createdAt));
-  const completionDate = addDays(
-    parseISO(process.currentState.createdAt),
-    timeConstraint,
-  );
-  const hoursLeft = differenceInHours(completionDate, new Date());
+  let daysDiff = 0;
+  let hoursLeft = 48;
+  if (timeConstraint) {
+    daysDiff =
+      timeConstraint -
+      differenceInDays(new Date(), parseISO(process.currentState.createdAt));
+    const completionDate = addDays(
+      parseISO(process.currentState.createdAt),
+      timeConstraint,
+    );
+    hoursLeft = differenceInHours(completionDate, new Date());
+  }
 
   const isClosed =
     status &&
@@ -62,7 +72,14 @@ export const ProcessRecord = ({
     if (process.currentState.state === "TenureUpdated") {
       return { title: "Completed", date: formatDate(process.currentState.createdAt) };
     }
-    return { title: "Initiated", date: formatDate(process.previousStates[0].createdAt) };
+    return {
+      title: "Initiated",
+      date: formatDate(
+        process.previousStates[0]
+          ? process.previousStates[0].createdAt
+          : process.currentState.createdAt,
+      ),
+    };
   };
 
   const state = getState();
@@ -77,7 +94,7 @@ export const ProcessRecord = ({
     if (daysDiff === timeConstraint) {
       return "grey";
     }
-    if (hoursLeft > 48) {
+    if (hoursLeft >= 48) {
       return "aqua";
     }
     if (hoursLeft > 0 && hoursLeft < 48) {
@@ -121,34 +138,42 @@ export const ProcessRecord = ({
           {processName}
         </Link>
       </Td>
-      <Td className="process-record__item">
-        {/*TODO*/}
-        <Link
-          as={RouterLink}
-          to=""
-          variant="link"
-          target="_blank"
-          className="lbh-heading-h4"
-        >
-          CP*
-        </Link>
-      </Td>
+      {!simple && (
+        <Td className="process-record__item">
+          {/*TODO*/}
+          <Link
+            as={RouterLink}
+            to=""
+            variant="link"
+            target="_blank"
+            className="lbh-heading-h4"
+          >
+            CP*
+          </Link>
+        </Td>
+      )}
       <Td className="process-record__item">
         <Text className="title">{state.title}</Text>
         <Text className="createdAt">{state.date}</Text>
       </Td>
-      <Td className="process-record__item">
-        <Text>
-          {isClosed
-            ? "-"
-            : `${Math.abs(daysDiff)} days ${daysDiff > 0 ? "left" : "overdue"}`}
-        </Text>
-      </Td>
+      {!simple && (
+        <Td className="process-record__item">
+          <Text>
+            {isClosed || !timeConstraint
+              ? "-"
+              : `${Math.abs(daysDiff)} days ${daysDiff > 0 ? "left" : "overdue"}`}
+          </Text>
+        </Td>
+      )}
       <Td className="process-record__item --status">
         <span className={`govuk-tag lbh-tag box ${getStatusColor()}`}>{status}</span>
-        <Text size="sm">
-          {!isClosed && `${Math.abs(daysDiff)} days ${daysDiff > 0 ? "left" : "overdue"}`}
-        </Text>
+        {!simple && (
+          <Text size="sm">
+            {!isClosed &&
+              timeConstraint &&
+              `${Math.abs(daysDiff)} days ${daysDiff > 0 ? "left" : "overdue"}`}
+          </Text>
+        )}
       </Td>
     </Tr>
   );

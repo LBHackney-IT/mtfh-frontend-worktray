@@ -119,7 +119,7 @@ exports[`worktray-list-component it renders correctly 1`] = `
               <p
                 class="lbh-body-m createdAt"
               >
-                24/07/2022
+                20/08/2022
               </p>
             </td>
             <td
@@ -136,7 +136,9 @@ exports[`worktray-list-component it renders correctly 1`] = `
             >
               <span
                 class="govuk-tag lbh-tag box aqua"
-              />
+              >
+                Request supporting documents
+              </span>
               <p
                 class="lbh-body-s"
               >

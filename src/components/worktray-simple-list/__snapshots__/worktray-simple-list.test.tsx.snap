@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WorktraySimpleList WorktraySimpleList renders correctly 1`] = `
+<div>
+  <div
+    class="worktray-simple-list"
+  >
+    <table
+      class="govuk-table lbh-table"
+    >
+      <tbody
+        class="govuk-table__body"
+      >
+        <tr
+          class="govuk-table__row govuk-table__row process-record"
+        >
+          <td
+            class="govuk-table__cell process-record__item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+              href="/person/103f3080-16d6-40fb-9273-f741ec73f7e40"
+              target="_blank"
+            >
+              Mr Ersan Kuneri
+            </a>
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state --address"
+              href="/property/f69ae994-4948-481f-a2d8-d52cfcb68321"
+              target="_blank"
+            >
+              72251 Champlin Trafficway, 99647
+            </a>
+          </td>
+          <td
+            class="govuk-table__cell process-record__item --processName"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+              href="/processes/soletojoint/6fbe024f-2316-4265-a6e8-d65a837e308a"
+              target="_blank"
+            >
+              Sole to Joint
+            </a>
+          </td>
+          <td
+            class="govuk-table__cell process-record__item"
+          >
+            <p
+              class="lbh-body-m title"
+            >
+              Initiated
+            </p>
+            <p
+              class="lbh-body-m createdAt"
+            >
+              20/08/2022
+            </p>
+          </td>
+          <td
+            class="govuk-table__cell process-record__item --status"
+          >
+            <span
+              class="govuk-tag lbh-tag box aqua"
+            >
+              Awaiting supporting documents appointment
+            </span>
+          </td>
+        </tr>
+        <tr
+          class="govuk-table__row govuk-table__row process-record"
+        >
+          <td
+            class="govuk-table__cell process-record__item"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+              href="/person/39273cf3-6a78-45e1-32d4-b9637e310527"
+              target="_blank"
+            >
+              Miss Perihan Abla
+            </a>
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state --address"
+              href="/property/f69ae994-4948-481f-a2d8-d52cfcb68321"
+              target="_blank"
+            >
+              72251 Champlin Trafficway, 99647
+            </a>
+          </td>
+          <td
+            class="govuk-table__cell process-record__item --processName"
+          >
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+              href="/processes/soletojoint/39273cf3-6a78-45e1-32d4-b9637e310527"
+              target="_blank"
+            >
+              Sole to Joint
+            </a>
+          </td>
+          <td
+            class="govuk-table__cell process-record__item"
+          >
+            <p
+              class="lbh-body-m title"
+            >
+              Initiated
+            </p>
+            <p
+              class="lbh-body-m createdAt"
+            >
+              20/08/2022
+            </p>
+          </td>
+          <td
+            class="govuk-table__cell process-record__item --status"
+          >
+            <span
+              class="govuk-tag lbh-tag box aqua"
+            >
+              Awaiting further eligibility checks
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <nav
+      class="lbh-simple-pagination"
+    >
+      <a
+        class="lbh-simple-pagination__link lbh-simple-pagination__link--next"
+        rel="next"
+      >
+        Next
+        <svg
+          fill="none"
+          height="19"
+          viewBox="0 0 11 19"
+          width="11"
+        >
+          <path
+            d="M1 18L9 9.5L1 1"
+            stroke-width="2"
+          />
+        </svg>
+      </a>
+    </nav>
+  </div>
+</div>
+`;

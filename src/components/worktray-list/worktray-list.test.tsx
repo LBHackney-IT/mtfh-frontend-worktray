@@ -9,12 +9,15 @@ import { WorktrayProvider, WorktrayURLProvider } from "../../context/worktray-co
 import { locale } from "../../services";
 import { WorktrayList } from "./worktray-list";
 
+mockProcessV1.previousStates[0].createdAt = "2022-08-20T07:49:07.7892599Z";
 const mockWorktrayResults = [
   {
     ...mockProcessV1,
     processName: "soletojoint",
     targetType: "tenure",
     currentState: {
+      ...mockProcessV1.currentState,
+      state: "BreachChecksPassed",
       createdAt: subDays(new Date(), 2).toISOString(),
     },
     relatedEntities: [

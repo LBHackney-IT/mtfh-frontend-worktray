@@ -7,6 +7,8 @@ import { ErrorSummary } from "@mtfh/common/lib/components";
 
 import Root from "./root";
 
+export { WorktraySimpleList } from "./components/worktray-simple-list";
+
 const lifecycles = singleSpaReact({
   React,
   ReactDOM,
