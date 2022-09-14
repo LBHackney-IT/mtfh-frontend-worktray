@@ -27,8 +27,9 @@ const processRecordComponents: Record<string, any> = {
   tenure: TenureProcessRecord,
 };
 
-export const WorktraySimpleList = (props: WorktraySimpleListProps): JSX.Element => {
-  const { targetId } = props;
+export const WorktraySimpleList = ({
+  targetId,
+}: WorktraySimpleListProps): JSX.Element => {
   const { data, size, setSize, error } = useProcesses(targetId);
   const response = useMemo<ProcessesResponse | null>(() => {
     if (!data) {
@@ -63,8 +64,6 @@ export const WorktraySimpleList = (props: WorktraySimpleListProps): JSX.Element 
   if (!processes.length) {
     return <NoProcesses />;
   }
-
-  console.log(size);
 
   return (
     <div className="worktray-simple-list">

@@ -24,6 +24,13 @@ exports[`WorktraySimpleList WorktraySimpleList renders correctly 1`] = `
             >
               Mr Ersan Kuneri
             </a>
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state --address"
+              href="/property/f69ae994-4948-481f-a2d8-d52cfcb68321"
+              target="_blank"
+            >
+              72251 Champlin Trafficway, 99647
+            </a>
           </td>
           <td
             class="govuk-table__cell process-record__item --processName"
@@ -72,6 +79,13 @@ exports[`WorktraySimpleList WorktraySimpleList renders correctly 1`] = `
               target="_blank"
             >
               Miss Perihan Abla
+            </a>
+            <a
+              class="govuk-link lbh-link lbh-link--no-visited-state --address"
+              href="/property/f69ae994-4948-481f-a2d8-d52cfcb68321"
+              target="_blank"
+            >
+              72251 Champlin Trafficway, 99647
             </a>
           </td>
           <td

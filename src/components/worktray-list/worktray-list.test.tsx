@@ -9,6 +9,7 @@ import { WorktrayProvider, WorktrayURLProvider } from "../../context/worktray-co
 import { locale } from "../../services";
 import { WorktrayList } from "./worktray-list";
 
+mockProcessV1.previousStates[0].createdAt = "2022-08-20T07:49:07.7892599Z";
 const mockWorktrayResults = [
   {
     ...mockProcessV1,

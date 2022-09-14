@@ -20,6 +20,8 @@ import { processes } from "@mtfh/processes";
 import { TenureProcessRecord } from "./tenure-record";
 
 const { states } = processes.soletojoint;
+
+mockProcessV1.previousStates[0].createdAt = "2022-08-20T07:49:07.7892599Z";
 const mockProcess = {
   ...mockProcessV1,
   relatedEntities: [

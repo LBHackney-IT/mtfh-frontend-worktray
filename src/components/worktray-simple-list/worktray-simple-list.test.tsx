@@ -22,6 +22,7 @@ const get = (path: string, data: unknown, code = 200): void => {
   );
 };
 
+mockProcessV1.previousStates[0].createdAt = "2022-08-20T07:49:07.7892599Z";
 const mockProcessesResponse = {
   results: [
     {
@@ -80,6 +81,11 @@ describe("WorktraySimpleList", () => {
 
     const { container } = render(<WorktraySimpleList targetId="123" />);
     await waitForElementToBeRemoved(screen.queryByText(/Loading/));
+    await waitFor(() =>
+      expect(screen.queryAllByText(mockActiveTenureV1.tenuredAsset.fullAddress)).not.toBe(
+        null,
+      ),
+    );
     expect(container).toMatchSnapshot();
   });
 
