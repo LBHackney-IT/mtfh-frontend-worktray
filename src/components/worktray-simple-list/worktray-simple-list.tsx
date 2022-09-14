@@ -23,7 +23,7 @@ const NoProcesses = () => {
   return <p>No processes</p>;
 };
 
-const processRecordComponents: Record<string, any> = {
+const processRecordComponents = {
   tenure: TenureProcessRecord,
 };
 

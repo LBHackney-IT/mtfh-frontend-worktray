@@ -208,7 +208,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               currentState: {
                 ...mockProcess.currentState,
-                state: "TenureUpdated",
+                state: "ProcessCompleted",
                 createdAt: "2022-01-01T00:00:00Z",
               },
             }}
@@ -219,7 +219,33 @@ describe("process-record-component", () => {
     );
     await expect(screen.findByText("-")).resolves.toBeInTheDocument();
     await expect(screen.findByText("Completed")).resolves.toBeInTheDocument();
-    const status = await screen.findByText(states.tenureUpdated.status);
+    const status = await screen.findByText(states.processCompleted.status);
     expect(status.className).toContain("green");
+  });
+
+  test("it renders TenureProcessRecord correctly if processConfig not provided", async () => {
+    server.use(getTenureV1(mockActiveTenureV1, 200));
+    render(
+      <Table>
+        <Tbody>
+          <TenureProcessRecord
+            process={{
+              ...mockProcess,
+              currentState: {
+                ...mockProcess.currentState,
+                state: "ProcessCompleted",
+                createdAt: "2022-01-01T00:00:00Z",
+              },
+            }}
+            processConfig={undefined}
+          />
+        </Tbody>
+      </Table>,
+    );
+    await expect(screen.findByText("-")).resolves.toBeInTheDocument();
+    await expect(screen.findByText("Completed")).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(mockProcessV1.processName),
+    ).resolves.toBeInTheDocument();
   });
 });

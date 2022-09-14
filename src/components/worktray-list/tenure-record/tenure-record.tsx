@@ -8,7 +8,7 @@ import { ProcessRecord } from "../process-record";
 
 interface TenureProcessRecordProps {
   process: Process;
-  processConfig: IProcess;
+  processConfig: IProcess | undefined;
   simple?: boolean;
 }
 
