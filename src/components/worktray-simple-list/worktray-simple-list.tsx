@@ -14,6 +14,7 @@ import { processes as processesConfig } from "@mtfh/processes";
 
 import { locale } from "../../services";
 import { TenureProcessRecord } from "../worktray-list";
+import { PersonProcessRecord } from "../worktray-list/person-record";
 
 export interface WorktraySimpleListProps {
   targetId: string;
@@ -25,6 +26,7 @@ const NoProcesses = () => {
 
 const processRecordComponents = {
   tenure: TenureProcessRecord,
+  person: PersonProcessRecord,
 };
 
 export const WorktraySimpleList = ({

@@ -12,11 +12,14 @@ import { screen } from "@testing-library/react";
 import { subDays } from "date-fns";
 
 import { AxiosSWRResponse } from "@mtfh/common";
+import { Person } from "@mtfh/common/lib/api/person/v1";
+import * as personV1 from "@mtfh/common/lib/api/person/v1/service";
 import { Tenure } from "@mtfh/common/lib/api/tenure/v1";
 import * as tenureV1 from "@mtfh/common/lib/api/tenure/v1/service";
 import { Table, Tbody } from "@mtfh/common/lib/components";
 import { processes } from "@mtfh/processes";
 
+import { PersonProcessRecord } from "./person-record";
 import { TenureProcessRecord } from "./tenure-record";
 
 const { states } = processes.soletojoint;
@@ -247,5 +250,37 @@ describe("process-record-component", () => {
     await expect(
       screen.findByText(mockProcessV1.processName),
     ).resolves.toBeInTheDocument();
+  });
+
+  test("it renders PersonProcessRecord correctly", async () => {
+    jest.useFakeTimers("modern").setSystemTime(new Date("2022-08-20"));
+    jest.spyOn(personV1, "usePerson").mockReturnValue({
+      data: mockPersonV1,
+    } as AxiosSWRResponse<Person>);
+    const { container } = render(
+      <Table>
+        <Tbody>
+          <PersonProcessRecord
+            process={{
+              ...mockProcess,
+              currentState: {
+                ...mockProcess.currentState,
+                state: "NameSubmitted",
+                createdAt: new Date("2022-08-20").toISOString(),
+              },
+            }}
+            processConfig={processes.changeofname}
+          />
+        </Tbody>
+      </Table>,
+    );
+    await expect(
+      screen.findByText(`${mockPersonV1.firstName} ${mockPersonV1.surname}`),
+    ).resolves.toBeInTheDocument();
+    const status = await screen.findByText(
+      processes.changeofname.states.nameSubmitted.status,
+    );
+    expect(status.className).toContain("aqua");
+    expect(container).toMatchSnapshot();
   });
 });

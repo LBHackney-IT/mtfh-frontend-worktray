@@ -17,6 +17,7 @@ import { WorktrayContext } from "../../context/worktray-context";
 import { locale } from "../../services";
 import { OrderByOptions, ProcessSortOptions } from "../../types";
 import { WorktrayPagination } from "../worktray-pagination";
+import { PersonProcessRecord } from "./person-record";
 import { TenureProcessRecord } from "./tenure-record";
 
 export const WorktrayList = (): JSX.Element => {
@@ -41,6 +42,7 @@ export const WorktrayList = (): JSX.Element => {
 
   const processRecordComponents = {
     tenure: TenureProcessRecord,
+    person: PersonProcessRecord,
   };
 
   if (error) {

@@ -12,10 +12,10 @@ import "./styles.scss";
 
 export interface ProcessRecordProps {
   person: {
-    id: string;
-    fullName: string;
+    id?: string;
+    fullName?: string;
   };
-  property: {
+  property?: {
     id?: string;
     address?: string;
   };
@@ -128,7 +128,7 @@ export const ProcessRecord = ({
         >
           {person.fullName}
         </Link>
-        {property.id && property.address && (
+        {property && property.id && property.address && (
           <Link
             className="--address"
             as={RouterLink}
