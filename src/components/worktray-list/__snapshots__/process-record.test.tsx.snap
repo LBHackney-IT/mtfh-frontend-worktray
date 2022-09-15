@@ -1,5 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`process-record-component it renders PersonProcessRecord correctly 1`] = `
+<div>
+  <table
+    class="govuk-table lbh-table"
+  >
+    <tbody
+      class="govuk-table__body"
+    >
+      <tr
+        class="govuk-table__row govuk-table__row process-record"
+      >
+        <td
+          class="govuk-table__cell process-record__item"
+        >
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+            href="/person/6fbe024f-2316-4265-a6e8-d65a837e308a"
+            target="_blank"
+          >
+            Haylee Macejkovic
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item --processName"
+        >
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+            href="/processes/ab/6fbe024f-2316-4265-a6e8-d65a837e308a"
+            target="_blank"
+          >
+            Change of Name
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item"
+        >
+          <a
+            class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+            href="/"
+            target="_blank"
+          >
+            CP*
+          </a>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item"
+        >
+          <p
+            class="lbh-body-m title"
+          >
+            Initiated
+          </p>
+          <p
+            class="lbh-body-m createdAt"
+          >
+            20/08/2022
+          </p>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item"
+        >
+          <p
+            class="lbh-body-m"
+          >
+            -
+          </p>
+        </td>
+        <td
+          class="govuk-table__cell process-record__item --status"
+        >
+          <span
+            class="govuk-tag lbh-tag box aqua"
+          >
+            Awaiting supporting documents through DES
+          </span>
+          <p
+            class="lbh-body-s"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
 exports[`process-record-component it renders TenureProcessRecord correctly 1`] = `
 <div>
   <table
