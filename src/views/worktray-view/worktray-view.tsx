@@ -25,7 +25,9 @@ const getCookieValue = (name) =>
 
 export const WorktrayView = (): JSX.Element => {
   const token = getCookieValue("hackneyToken");
-  const { email: emailAddress } = jwt_decode(token) as { email: string };
+  const { email: emailAddress } = token
+    ? (jwt_decode(token) as { email: string })
+    : { email: "" };
 
   const { data, error } = useAxiosSWR<StaffResults>(
     `${config.searchApiUrl}/search/staff/?${stringify({
@@ -42,7 +44,7 @@ export const WorktrayView = (): JSX.Element => {
   }
 
   const patchId =
-    data?.results.staff[0].emailAddress === emailAddress
+    emailAddress && data?.results.staff[0].emailAddress === emailAddress
       ? data.results.staff[0].patchId
       : null;
 
