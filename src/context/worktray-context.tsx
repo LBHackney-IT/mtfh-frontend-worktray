@@ -258,16 +258,16 @@ export const PersistWorktrayContextURL = ({
   return null;
 };
 
-export const WorktrayURLProvider: FC<{ sessionKey?: string }> = ({
-  children,
-  sessionKey,
-}): JSX.Element => {
+export const WorktrayURLProvider: FC<{
+  sessionKey?: string;
+  patchId?: string | null;
+}> = ({ children, sessionKey, patchId }): JSX.Element => {
   const { search } = useLocation();
   const query = new URLSearchParams(search);
   const page = Number(query.get("p") || 1);
   const pageSize = Number(query.get("l") || 10);
   const timePeriod = (query.get("t") || "") as TimePeriodOptions;
-  const patch = query.get("patch") || "";
+  const patch = query.get("patch") || patchId || "";
   const process = query.get("process") || "";
   const status = query.get("status") || "";
   const sortBy = query.get("sort");
