@@ -1,8 +1,8 @@
 import React, { useCallback, useContext, useState } from "react";
 
-import "./styles.scss";
 import { Button, Details } from "@mtfh/common/lib/components";
 import { useAxiosSWR } from "@mtfh/common/lib/http";
+import { Process, Status, processes } from "@mtfh/processes";
 
 import { WorktrayContext } from "../../context/worktray-context";
 import { config } from "../../services";
@@ -10,6 +10,8 @@ import locale from "../../services/locale";
 import { WorktrayFilterOptions } from "../../types";
 import { Patch } from "../../types/patch";
 import { FilterBox, Option } from "./filter-box";
+
+import "./styles.scss";
 
 const { components } = locale;
 
@@ -27,16 +29,17 @@ export const WorktrayFilters = (): JSX.Element => {
     `${config.patchesAndAreasApiUrl}/patch?parentId=${patchData?.parentId}`,
   );
 
-  // TODO: replace with real data
   const filters: { type: string; title: string; options: Option[] }[] = [
     {
       type: "process",
       title: "Processes",
-      options: [
-        { key: "process-1", value: "Process 1" },
-        { key: "process-2", value: "Process 2" },
-        { key: "process-3", value: "Process 3" },
-      ],
+      options: (Object.values(Process) as string[]).map((processName) => {
+        const value = processes[processName].name;
+        return {
+          key: value.toLowerCase().replace(/\s/g, "-"),
+          value,
+        };
+      }),
     },
   ];
 
@@ -47,6 +50,17 @@ export const WorktrayFilters = (): JSX.Element => {
       options: patches?.map((item) => ({ key: item.id, value: item.name })),
     });
   }
+
+  filters.push({
+    type: "status",
+    title: "Process Status",
+    options: (Object.values(Status) as string[]).map((value) => {
+      return {
+        key: value.toLowerCase().replace(/\s/g, "-"),
+        value,
+      };
+    }),
+  });
 
   const [selectedFilters, setSelectedFilters] = useState<
     Record<WorktrayFilterOptions, string[]>
