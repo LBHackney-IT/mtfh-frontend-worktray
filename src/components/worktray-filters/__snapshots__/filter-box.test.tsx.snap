@@ -28,7 +28,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
         <input
           class="govuk-checkboxes__input"
           id="process-1"
-          name="Process 1"
+          name="process-1"
           type="checkbox"
         />
         <label
@@ -44,7 +44,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
         <input
           class="govuk-checkboxes__input"
           id="process-2"
-          name="Process 2"
+          name="process-2"
           type="checkbox"
         />
         <label
@@ -60,7 +60,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
         <input
           class="govuk-checkboxes__input"
           id="process-3"
-          name="Process 3"
+          name="process-3"
           type="checkbox"
         />
         <label

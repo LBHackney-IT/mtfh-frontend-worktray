@@ -1,34 +1,52 @@
 import React, { useCallback, useContext, useState } from "react";
 
-import { Button, Details } from "@mtfh/common/lib/components";
-
 import "./styles.scss";
+import { Button, Details } from "@mtfh/common/lib/components";
+import { useAxiosSWR } from "@mtfh/common/lib/http";
+
 import { WorktrayContext } from "../../context/worktray-context";
+import { config } from "../../services";
 import locale from "../../services/locale";
 import { WorktrayFilterOptions } from "../../types";
-import { FilterBox } from "./filter-box";
+import { Patch } from "../../types/patch";
+import { FilterBox, Option } from "./filter-box";
 
 const { components } = locale;
 
 export const WorktrayFilters = (): JSX.Element => {
   const {
     dispatch,
-    state: { patch, process, status },
+    state: { patch, patchId, process, status },
   } = useContext(WorktrayContext);
 
+  const { data: patchData } = useAxiosSWR<Patch>(
+    `${config.patchesAndAreasApiUrl}/patch/${patchId}`,
+  );
+
+  const { data: patches } = useAxiosSWR<Patch[]>(
+    `${config.patchesAndAreasApiUrl}/patch?parentId=${patchData?.parentId}`,
+  );
+
   // TODO: replace with real data
-  const filters: { type: string; title: string; options: string[] }[] = [
+  const filters: { type: string; title: string; options: Option[] }[] = [
     {
       type: "process",
       title: "Processes",
-      options: ["Process 1", "Process 2", "Process 3"],
-    },
-    {
-      type: "patch",
-      title: "Patches",
-      options: ["CP1", "CP2", "CP3"],
+      options: [
+        { key: "process-1", value: "Process 1" },
+        { key: "process-2", value: "Process 2" },
+        { key: "process-3", value: "Process 3" },
+      ],
     },
   ];
+
+  if (patches) {
+    filters.push({
+      type: "patch",
+      title: "Patches",
+      options: patches?.map((item) => ({ key: item.id, value: item.name })),
+    });
+  }
 
   const [selectedFilters, setSelectedFilters] = useState<
     Record<WorktrayFilterOptions, string[]>
@@ -57,7 +75,10 @@ export const WorktrayFilters = (): JSX.Element => {
   const handleSelectAll = (filterType: string) => {
     setSelectedFilters({
       ...selectedFilters,
-      [filterType]: filters.find((filter) => filter.type === filterType)?.options || [],
+      [filterType]:
+        filters
+          .find((filter) => filter.type === filterType)
+          ?.options.map((option) => option.key) || [],
     });
   };
 

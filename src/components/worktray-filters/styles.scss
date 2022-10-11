@@ -1,4 +1,3 @@
-
 @import "~lbh-frontend/lbh/base";
 
 .worktray-filters {
@@ -51,8 +50,9 @@
   padding: 0.25em 0.5em;
   background: lbh-colour("lbh-grey-2");
 
-  p, * {
-    margin: 0
+  p,
+  * {
+    margin: 0;
   }
 
   .select-all {
