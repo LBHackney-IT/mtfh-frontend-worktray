@@ -8,6 +8,11 @@ import "./styles.scss";
 
 const { components } = locale;
 
+export type Option = {
+  key: string;
+  value: string;
+};
+
 export const FilterBox = ({
   filterType,
   title,
@@ -18,7 +23,7 @@ export const FilterBox = ({
 }: {
   filterType: string;
   title: string;
-  options: string[];
+  options: Option[];
   handleSelectAll: (value: string) => void;
   handleCheckboxFilters: (
     value: React.ChangeEvent<HTMLInputElement>,
@@ -42,13 +47,13 @@ export const FilterBox = ({
         {options.map((option) => {
           return (
             <Checkbox
-              key={option.toLowerCase().replace(/\s/g, "-")}
-              id={option.toLowerCase().replace(/\s/g, "-")}
-              name={option}
-              checked={selectedFilters[filterType].includes(option)}
+              key={option.key}
+              id={option.key}
+              name={option.key}
+              checked={selectedFilters[filterType].includes(option.key)}
               onChange={(event) => handleCheckboxFilters(event, filterType)}
             >
-              {option}
+              {option.value}
             </Checkbox>
           );
         })}

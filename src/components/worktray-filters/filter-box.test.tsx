@@ -20,7 +20,11 @@ describe("filter-box-component", () => {
     const filter = {
       type: "processes",
       title: "Processes",
-      options: ["Process 1", "Process 2", "Process 3"],
+      options: [
+        { key: "process-1", value: "Process 1" },
+        { key: "process-2", value: "Process 2" },
+        { key: "process-3", value: "Process 3" },
+      ],
     };
     const { container } = render(
       <FilterBox
@@ -39,10 +43,10 @@ describe("filter-box-component", () => {
     ).resolves.toBeInTheDocument();
     fireEvent.click(screen.getByText(components.filters.selectAll));
     expect(handleSelectAll.mock.calls.length).toBe(1);
-    await expect(screen.findByText(filter.options[0])).resolves.toBeInTheDocument();
-    await expect(screen.findByText(filter.options[1])).resolves.toBeInTheDocument();
-    await expect(screen.findByText(filter.options[2])).resolves.toBeInTheDocument();
-    fireEvent.click(screen.getByText(filter.options[0]));
+    await expect(screen.findByText(filter.options[0].value)).resolves.toBeInTheDocument();
+    await expect(screen.findByText(filter.options[1].value)).resolves.toBeInTheDocument();
+    await expect(screen.findByText(filter.options[2].value)).resolves.toBeInTheDocument();
+    fireEvent.click(screen.getByText(filter.options[0].value));
     expect(handleCheckboxFilters.mock.calls.length).toBe(1);
     expect(container).toMatchSnapshot();
   });

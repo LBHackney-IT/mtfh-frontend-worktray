@@ -36,6 +36,7 @@ export type WorktrayState = {
   sort: ProcessSortOptions;
   order: OrderByOptions;
   patch?: string;
+  patchId?: string | null;
   process?: string;
   status?: string;
   results?: WorktrayResult[];
@@ -87,6 +88,7 @@ const getInitialState = (
     order: options.order || OrderByOptions.ASC,
     process: options.process || undefined,
     patch: options.patch || undefined,
+    patchId: options.patchId || undefined,
     status: options.status || undefined,
   };
 };
@@ -296,6 +298,7 @@ export const WorktrayURLProvider: FC<{
         pageSize,
         timePeriod,
         patch,
+        patchId,
         process,
         status,
       }}
