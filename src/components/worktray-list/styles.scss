@@ -41,7 +41,7 @@ $red: #be3a34;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 60px;
+        min-height: 60px;
         &.grey,
         &.amber {
           color: initial;
@@ -74,6 +74,8 @@ $red: #be3a34;
 }
 
 .worktray-list {
+  position: relative;
+
   th,
   th > button {
     font-size: initial;
@@ -81,5 +83,84 @@ $red: #be3a34;
     line-height: 22px;
     text-align: left;
     vertical-align: middle;
+  }
+
+  th:last-child {
+    white-space: nowrap;
+  }
+
+  #process-status-info-icon {
+    height: 30px;
+    width: 30px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    font-size: 19px;
+    margin-left: 11px;
+
+    &:before {
+      content: "i";
+      position: absolute;
+      top: 4px;
+      left: 12px;
+    }
+
+    &:hover + #process-status-info {
+      position: absolute;
+      padding: 28px;
+      right: 0;
+      background: #fff;
+      border: 2px solid #0b0c0c;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      white-space: break-spaces;
+
+      p {
+        vertical-align: middle;
+        position: relative;
+        margin-left: 62px;
+        margin-top: 15px;
+        &:first-child {
+          margin-top: 0;
+        }
+        &:before {
+          background: #000;
+          content: " ";
+          display: inline-block;
+          width: 49px;
+          height: 30px;
+          border-radius: 4px;
+          vertical-align: middle;
+          position: absolute;
+          left: -62px;
+        }
+        &.grey:before {
+          background: $grey;
+        }
+        &.aqua:before {
+          background: $aqua;
+        }
+        &.green:before {
+          background: $green;
+        }
+        &.amber:before {
+          background: $amber;
+        }
+        &.orange:before {
+          background: $orange;
+        }
+        &.red:before {
+          background: $red;
+        }
+      }
+    }
+  }
+
+  #process-status-info {
+    display: none;
   }
 }
