@@ -115,7 +115,20 @@ export const WorktrayList = (): JSX.Element => {
                   Full process
                 </button>
               </Th>
-              <Th>Process status</Th>
+              <Th>
+                Process status
+                <span id="process-status-info-icon" />
+                <div id="process-status-info">
+                  <Text className="red">Red represents overdue</Text>
+                  <Text className="orange">Orange represents closed case</Text>
+                  <Text className="amber">
+                    Yellow represents 48 hours warning until overdue
+                  </Text>
+                  <Text className="green">Green represents completed case</Text>
+                  <Text className="aqua">Aqua represents in progress</Text>
+                  <Text className="grey">Grey represents new case</Text>
+                </div>
+              </Th>
             </Tr>
           </Thead>
           <Tbody>

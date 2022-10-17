@@ -66,6 +66,43 @@ exports[`worktray-list-component it renders correctly 1`] = `
               class="govuk-table__cell govuk-table__header"
             >
               Process status
+              <span
+                id="process-status-info-icon"
+              />
+              <div
+                id="process-status-info"
+              >
+                <p
+                  class="lbh-body-m red"
+                >
+                  Red represents overdue
+                </p>
+                <p
+                  class="lbh-body-m orange"
+                >
+                  Orange represents closed case
+                </p>
+                <p
+                  class="lbh-body-m amber"
+                >
+                  Yellow represents 48 hours warning until overdue
+                </p>
+                <p
+                  class="lbh-body-m green"
+                >
+                  Green represents completed case
+                </p>
+                <p
+                  class="lbh-body-m aqua"
+                >
+                  Aqua represents in progress
+                </p>
+                <p
+                  class="lbh-body-m grey"
+                >
+                  Grey represents new case
+                </p>
+              </div>
             </th>
           </tr>
         </thead>
