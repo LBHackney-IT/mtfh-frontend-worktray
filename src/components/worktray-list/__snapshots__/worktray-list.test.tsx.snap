@@ -117,6 +117,7 @@ exports[`worktray-list-component it renders correctly 1`] = `
             >
               <a
                 class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
+                data-testid="person-link"
                 href="/person/6fbe024f-2316-4265-a6e8-d65a837e308a"
                 target="_blank"
               >

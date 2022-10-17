@@ -96,6 +96,13 @@ export const WorktrayFilters = (): JSX.Element => {
     });
   };
 
+  const handleRemoveAll = (filterType: string) => {
+    setSelectedFilters({
+      ...selectedFilters,
+      [filterType]: [],
+    });
+  };
+
   const applyFilters = useCallback(
     (data) => {
       (Object.keys(data) as WorktrayFilterOptions[]).forEach((filterType) => {
@@ -130,6 +137,7 @@ export const WorktrayFilters = (): JSX.Element => {
                 title={title}
                 options={options}
                 handleSelectAll={handleSelectAll}
+                handleRemoveAll={handleRemoveAll}
                 handleCheckboxFilters={handleCheckboxFilters}
                 selectedFilters={selectedFilters}
               />

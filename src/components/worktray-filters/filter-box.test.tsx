@@ -7,6 +7,7 @@ import { locale } from "../../services";
 import { FilterBox } from "./filter-box";
 
 const handleSelectAll = jest.fn();
+const handleRemoveAll = jest.fn();
 const handleCheckboxFilters = jest.fn();
 
 const { components } = locale;
@@ -32,6 +33,7 @@ describe("filter-box-component", () => {
         title={filter.title}
         options={filter.options}
         handleSelectAll={handleSelectAll}
+        handleRemoveAll={handleRemoveAll}
         handleCheckboxFilters={handleCheckboxFilters}
         selectedFilters={{ [filter.type]: [] }}
       />,
@@ -49,5 +51,31 @@ describe("filter-box-component", () => {
     fireEvent.click(screen.getByText(filter.options[0].value));
     expect(handleCheckboxFilters.mock.calls.length).toBe(1);
     expect(container).toMatchSnapshot();
+  });
+
+  test("it renders FilterBox with remove all correctly", async () => {
+    const filter = {
+      type: "processes",
+      title: "Processes",
+      options: [{ key: "process-1", value: "Process 1" }],
+    };
+    render(
+      <FilterBox
+        filterType={filter.type}
+        title={filter.title}
+        options={filter.options}
+        handleSelectAll={handleSelectAll}
+        handleRemoveAll={handleRemoveAll}
+        handleCheckboxFilters={handleCheckboxFilters}
+        selectedFilters={{ [filter.type]: ["process-1"] }}
+      />,
+    );
+
+    await expect(screen.findByText(filter.title)).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(components.filters.removeAll),
+    ).resolves.toBeInTheDocument();
+    fireEvent.click(screen.getByText(components.filters.removeAll));
+    expect(handleRemoveAll.mock.calls.length).toBe(1);
   });
 });

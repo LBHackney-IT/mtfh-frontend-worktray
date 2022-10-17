@@ -125,6 +125,7 @@ export const ProcessRecord = ({
           variant="link"
           target="_blank"
           className="lbh-heading-h4"
+          data-testid="person-link"
         >
           {person.fullName}
         </Link>
@@ -135,6 +136,7 @@ export const ProcessRecord = ({
             to={`/property/${property.id}`}
             variant="link"
             target="_blank"
+            data-testid="property-link"
           >
             {property.address}
           </Link>
