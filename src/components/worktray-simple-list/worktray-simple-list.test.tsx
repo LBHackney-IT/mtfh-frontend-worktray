@@ -43,6 +43,12 @@ const mockProcessesResponse = {
         createdAt: "2022-06-24T07:49:07.7892599Z",
         updatedAt: "2022-06-24T07:49:07.78926Z",
       },
+      patchAssignment: {
+        patchId: "19400185-a8d2-4f3f-b217-dc5d485a1210",
+        patchName: "CP7",
+        responsibleEntityId: "5f93ea0f-0986-4e49-9093-b033559ed8f0",
+        responsibleName: null,
+      },
     },
     {
       ...mockProcessV1,
@@ -62,6 +68,12 @@ const mockProcessesResponse = {
         state: "AutomatedChecksPassed",
         createdAt: "2022-05-10T07:49:07.7892599Z",
         updatedAt: "2022-07-24T07:49:07.78926Z",
+      },
+      patchAssignment: {
+        patchId: "19400185-a8d2-4f3f-b217-dc5d485a1210",
+        patchName: "CP7",
+        responsibleEntityId: "5f93ea0f-0986-4e49-9093-b033559ed8f0",
+        responsibleName: null,
       },
     },
   ],

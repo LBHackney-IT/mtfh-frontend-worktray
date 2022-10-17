@@ -77,7 +77,12 @@ export const WorktraySimpleList = ({
             return (
               <Result
                 key={process.id}
-                process={process}
+                process={{
+                  ...process,
+                  state: process.currentState.state,
+                  processCreatedAt: process.previousStates[0]?.createdAt || "",
+                  stateStartedAt: process.currentState.createdAt,
+                }}
                 processConfig={processConfig}
                 simple
               />

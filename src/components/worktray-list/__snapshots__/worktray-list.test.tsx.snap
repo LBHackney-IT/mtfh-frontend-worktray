@@ -138,13 +138,11 @@ exports[`worktray-list-component it renders correctly 1`] = `
             <td
               class="govuk-table__cell process-record__item"
             >
-              <a
-                class="govuk-link lbh-link lbh-link--no-visited-state lbh-heading-h4"
-                href="/"
-                target="_blank"
+              <p
+                class="lbh-body-m"
               >
-                CP*
-              </a>
+                CP7
+              </p>
             </td>
             <td
               class="govuk-table__cell process-record__item"

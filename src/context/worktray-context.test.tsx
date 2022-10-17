@@ -181,11 +181,11 @@ test("WorktrayProvider dispatches filter", () => {
 
 test("WorktrayProvider will reset page to the maximum when over extended", async () => {
   server.use(
-    rest.get("/api/worktray", (req, res, ctx) => {
+    rest.get("/api/v1/search/processes", (req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.json({
-          results: [],
+          results: { processes: [] },
           total: 40,
         }),
       );

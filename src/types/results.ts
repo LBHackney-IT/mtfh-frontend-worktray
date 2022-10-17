@@ -1,13 +1,20 @@
-import { ProcessState } from "@mtfh/common/lib/api/process/v1";
+import { RelatedEntity } from "@mtfh/common/lib/api/process/v1";
 
-export interface WorktrayResult {
+export interface Process {
   id: string;
-  processName: string;
+  processName: string | number;
   targetType: string;
   targetId: string;
-  currentState: ProcessState;
-  previousStates: ProcessState[];
-  relatedEntities: Record<string, string>[];
+  relatedEntities: RelatedEntity[];
+  state: string;
+  stateStartedAt: string;
+  processCreatedAt: string;
+  patchAssignment: {
+    patchId: string;
+    patchName: string;
+    responsibleEntityId: string;
+    responsibleName: string | null;
+  };
 }
 
 export enum ProcessSortOptions {

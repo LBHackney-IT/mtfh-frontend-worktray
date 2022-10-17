@@ -9,17 +9,16 @@ import { WorktrayProvider, WorktrayURLProvider } from "../../context/worktray-co
 import { locale } from "../../services";
 import { WorktrayList } from "./worktray-list";
 
-mockProcessV1.previousStates[0].createdAt = "2022-08-20T07:49:07.7892599Z";
+const apiUrl = "/api/v1/search/processes";
+
 const mockWorktrayResults = [
   {
     ...mockProcessV1,
     processName: "soletojoint",
     targetType: "tenure",
-    currentState: {
-      ...mockProcessV1.currentState,
-      state: "BreachChecksPassed",
-      createdAt: subDays(new Date(), 2).toISOString(),
-    },
+    state: "BreachChecksPassed",
+    stateStartedAt: subDays(new Date(), 2).toISOString(),
+    processCreatedAt: "2022-08-20T07:49:07.7892599Z",
     relatedEntities: [
       {
         id: mockPersonV1.id,
@@ -28,6 +27,12 @@ const mockWorktrayResults = [
         subType: "",
       },
     ],
+    patchAssignment: {
+      patchId: "19400185-a8d2-4f3f-b217-dc5d485a1210",
+      patchName: "CP7",
+      responsibleEntityId: "5f93ea0f-0986-4e49-9093-b033559ed8f0",
+      responsibleName: null,
+    },
   },
 ];
 
@@ -38,11 +43,11 @@ describe("worktray-list-component", () => {
 
   test("it renders correctly", async () => {
     server.use(
-      rest.get("/api/worktray", (req, res, ctx) => {
+      rest.get(apiUrl, (req, res, ctx) => {
         return res(
           ctx.status(200),
           ctx.json({
-            results: mockWorktrayResults,
+            results: { processes: mockWorktrayResults },
           }),
         );
       }),
@@ -58,8 +63,8 @@ describe("worktray-list-component", () => {
 
   test("it renders correctly when no results", async () => {
     server.use(
-      rest.get("/api/worktray", (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json({ results: [] }));
+      rest.get(apiUrl, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json({ results: { processes: [] } }));
       }),
     );
     const { container } = render(
@@ -73,7 +78,7 @@ describe("worktray-list-component", () => {
 
   test("it renders error", async () => {
     server.use(
-      rest.get("/api/worktray", (req, res, ctx) => {
+      rest.get(apiUrl, (req, res, ctx) => {
         return res(ctx.status(500), ctx.json({}));
       }),
     );
@@ -97,8 +102,11 @@ describe("worktray-list-component", () => {
   ].forEach((entry) => {
     test(`Table headers dispatch actions for ${entry[0]}`, async () => {
       server.use(
-        rest.get("/api/worktray", (req, res, ctx) => {
-          return res(ctx.status(200), ctx.json({ results: mockWorktrayResults }));
+        rest.get(apiUrl, (req, res, ctx) => {
+          return res(
+            ctx.status(200),
+            ctx.json({ results: { processes: mockWorktrayResults } }),
+          );
         }),
       );
       render(

@@ -1,9 +1,10 @@
 import React from "react";
 
-import { Process, RelatedEntity } from "@mtfh/common/lib/api/process/v1";
+import { RelatedEntity } from "@mtfh/common/lib/api/process/v1";
 import { useTenure } from "@mtfh/common/lib/api/tenure/v1";
 import { IProcess } from "@mtfh/processes";
 
+import { Process } from "../../../types";
 import { ProcessRecord } from "../process-record";
 
 interface TenureProcessRecordProps {

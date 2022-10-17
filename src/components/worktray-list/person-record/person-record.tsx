@@ -1,9 +1,9 @@
 import React from "react";
 
 import { usePerson } from "@mtfh/common/lib/api/person/v1";
-import { Process } from "@mtfh/common/lib/api/process/v1";
 import { IProcess } from "@mtfh/processes";
 
+import { Process } from "../../../types";
 import { ProcessRecord } from "../process-record";
 
 interface PersonProcessRecordProps {

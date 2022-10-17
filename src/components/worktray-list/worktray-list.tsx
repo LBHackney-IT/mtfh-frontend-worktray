@@ -20,6 +20,11 @@ import { WorktrayPagination } from "../worktray-pagination";
 import { PersonProcessRecord } from "./person-record";
 import { TenureProcessRecord } from "./tenure-record";
 
+enum ProcessName {
+  "soletojoint",
+  "changeofname",
+}
+
 export const WorktrayList = (): JSX.Element => {
   const {
     state: { results, error, order, sort },
@@ -133,7 +138,12 @@ export const WorktrayList = (): JSX.Element => {
           </Thead>
           <Tbody>
             {results.map((process) => {
-              const processConfig = processes[process.processName];
+              const processConfig =
+                processes[
+                  Number.isInteger(process.processName)
+                    ? ProcessName[process.processName]
+                    : process.processName
+                ];
               const Result = processRecordComponents[process.targetType];
               return (
                 <Result
