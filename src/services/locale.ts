@@ -19,6 +19,7 @@ const locale = {
       applyFilters: "Apply filters",
       clearFilters: "Clear filters",
       selectAll: "Select All",
+      removeAll: "Remove All",
     },
     pagination: {
       previous: "Previous",

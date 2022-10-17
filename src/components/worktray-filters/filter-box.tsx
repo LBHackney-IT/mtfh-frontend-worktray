@@ -18,6 +18,7 @@ export const FilterBox = ({
   title,
   options,
   handleSelectAll,
+  handleRemoveAll,
   handleCheckboxFilters,
   selectedFilters,
 }: {
@@ -25,6 +26,7 @@ export const FilterBox = ({
   title: string;
   options: Option[];
   handleSelectAll: (value: string) => void;
+  handleRemoveAll: (value: string) => void;
   handleCheckboxFilters: (
     value: React.ChangeEvent<HTMLInputElement>,
     filterType: string,
@@ -37,9 +39,15 @@ export const FilterBox = ({
         <Text>{title}</Text>
         <button
           className="select-all lbh-link lbh-link--no-visited-state"
-          onClick={() => handleSelectAll(filterType)}
+          onClick={
+            options.length === selectedFilters[filterType].length
+              ? () => handleRemoveAll(filterType)
+              : () => handleSelectAll(filterType)
+          }
         >
-          {components.filters.selectAll}
+          {options.length === selectedFilters[filterType].length
+            ? components.filters.removeAll
+            : components.filters.selectAll}
         </button>
       </div>
 
