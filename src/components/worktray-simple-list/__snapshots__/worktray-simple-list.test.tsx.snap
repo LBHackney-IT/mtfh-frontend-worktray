@@ -113,9 +113,7 @@ exports[`WorktraySimpleList WorktraySimpleList renders correctly 1`] = `
             </p>
             <p
               class="lbh-body-m createdAt"
-            >
-              20/08/2022
-            </p>
+            />
           </td>
           <td
             class="govuk-table__cell process-record__item --status"

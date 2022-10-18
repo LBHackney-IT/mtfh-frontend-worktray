@@ -42,12 +42,13 @@ describe("worktray-list-component", () => {
   });
 
   test("it renders correctly", async () => {
+    const worktrayResult = { ...mockWorktrayResults[0], processName: 0 };
     server.use(
       rest.get(apiUrl, (req, res, ctx) => {
         return res(
           ctx.status(200),
           ctx.json({
-            results: { processes: mockWorktrayResults },
+            results: { processes: [...mockWorktrayResults, worktrayResult] },
           }),
         );
       }),

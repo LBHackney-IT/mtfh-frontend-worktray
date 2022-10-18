@@ -52,6 +52,7 @@ const mockProcessesResponse = {
     },
     {
       ...mockProcessV1,
+      previousStates: [],
       id: "39273cf3-6a78-45e1-32d4-b9637e310527",
       targetId: "39273cf3-6a78-45e1-32d4-b9637e310527",
       targetType: "tenure",
