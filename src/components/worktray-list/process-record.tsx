@@ -3,10 +3,11 @@ import { Link as RouterLink } from "react-router-dom";
 
 import { addDays, differenceInDays, differenceInHours, parseISO } from "date-fns";
 
-import { Process } from "@mtfh/common/lib/api/process/v1";
 import { Link, Td, Text, Tr } from "@mtfh/common/lib/components";
 import { formatDate } from "@mtfh/common/lib/utils";
 import { IProcess, ProcessStateInfo } from "@mtfh/processes";
+
+import { Process } from "../../types";
 
 import "./styles.scss";
 
@@ -39,26 +40,20 @@ export const ProcessRecord = ({
 }: ProcessRecordProps): JSX.Element => {
   const processName = processConfig?.name || process.processName;
   const timeConstraint =
-    processConfig?.states[
-      process.currentState.state.charAt(0).toLowerCase() +
-        process.currentState.state.slice(1)
-    ]?.timeConstraint;
+    processConfig?.states[process.state.charAt(0).toLowerCase() + process.state.slice(1)]
+      ?.timeConstraint;
   let status;
   if (processConfig) {
     const statesInfo: ProcessStateInfo[] = Object.values(processConfig?.states);
-    status = statesInfo.find((item) => item.state === process.currentState.state)?.status;
+    status = statesInfo.find((item) => item.state === process.state)?.status;
   }
 
   let daysDiff = 0;
   let hoursLeft = 48;
   if (timeConstraint) {
     daysDiff =
-      timeConstraint -
-      differenceInDays(new Date(), parseISO(process.currentState.createdAt));
-    const completionDate = addDays(
-      parseISO(process.currentState.createdAt),
-      timeConstraint,
-    );
+      timeConstraint - differenceInDays(new Date(), parseISO(process.stateStartedAt));
+    const completionDate = addDays(parseISO(process.stateStartedAt), timeConstraint);
     hoursLeft = differenceInHours(completionDate, new Date());
   }
 
@@ -71,22 +66,18 @@ export const ProcessRecord = ({
     ].includes(status);
 
   const getState = () => {
-    if (process.currentState.state === ProcessStates.PROCESS_CANCELLED) {
-      return { title: "Cancelled", date: formatDate(process.currentState.createdAt) };
+    if (process.state === ProcessStates.PROCESS_CANCELLED) {
+      return { title: "Cancelled", date: formatDate(process.stateStartedAt) };
     }
-    if (process.currentState.state === ProcessStates.PROCESS_CLOSED) {
-      return { title: "Closed", date: formatDate(process.currentState.createdAt) };
+    if (process.state === ProcessStates.PROCESS_CLOSED) {
+      return { title: "Closed", date: formatDate(process.stateStartedAt) };
     }
-    if (process.currentState.state === ProcessStates.PROCESS_COMPLETED) {
-      return { title: "Completed", date: formatDate(process.currentState.createdAt) };
+    if (process.state === ProcessStates.PROCESS_COMPLETED) {
+      return { title: "Completed", date: formatDate(process.stateStartedAt) };
     }
     return {
       title: "Initiated",
-      date: formatDate(
-        process.previousStates[0]
-          ? process.previousStates[0].createdAt
-          : process.currentState.createdAt,
-      ),
+      date: formatDate(process.processCreatedAt),
     };
   };
 
@@ -97,11 +88,11 @@ export const ProcessRecord = ({
       status &&
       (
         [ProcessStates.PROCESS_CLOSED, ProcessStates.PROCESS_CANCELLED] as string[]
-      ).includes(process.currentState.state)
+      ).includes(process.state)
     ) {
       return "orange";
     }
-    if (status && process.currentState.state === ProcessStates.PROCESS_COMPLETED) {
+    if (status && process.state === ProcessStates.PROCESS_COMPLETED) {
       return "green";
     }
     if (daysDiff === timeConstraint) {
@@ -155,16 +146,7 @@ export const ProcessRecord = ({
       </Td>
       {!simple && (
         <Td className="process-record__item">
-          {/*TODO*/}
-          <Link
-            as={RouterLink}
-            to=""
-            variant="link"
-            target="_blank"
-            className="lbh-heading-h4"
-          >
-            CP*
-          </Link>
+          <Text>{process.patchAssignment.patchName}</Text>
         </Td>
       )}
       <Td className="process-record__item">

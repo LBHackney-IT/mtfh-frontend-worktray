@@ -35,6 +35,12 @@ const mockProcess = {
       subType: "",
     },
   ],
+  patchAssignment: {
+    patchId: "19400185-a8d2-4f3f-b217-dc5d485a1210",
+    patchName: "CP7",
+    responsibleEntityId: "5f93ea0f-0986-4e49-9093-b033559ed8f0",
+    responsibleName: null,
+  },
 };
 
 describe("process-record-component", () => {
@@ -53,11 +59,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "BreachChecksPassed",
-                createdAt: new Date("2022-08-20").toISOString(),
-              },
+              state: "BreachChecksPassed",
+              stateStartedAt: new Date("2022-08-20").toISOString(),
+              processCreatedAt: "2022-08-20T07:49:07.7892599Z",
             }}
             processConfig={processes.soletojoint}
           />
@@ -80,12 +84,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "BreachChecksPassed",
-                createdAt: subDays(new Date(), 9).toISOString(),
-              },
-              previousStates: [],
+              state: "BreachChecksPassed",
+              stateStartedAt: subDays(new Date(), 9).toISOString(),
+              processCreatedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -107,11 +108,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "BreachChecksPassed",
-                createdAt: subDays(new Date(), 5).toISOString(),
-              },
+              state: "BreachChecksPassed",
+              stateStartedAt: subDays(new Date(), 5).toISOString(),
+              processCreatedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -133,11 +132,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "BreachChecksPassed",
-                createdAt: subDays(new Date(), 12).toISOString(),
-              },
+              state: "BreachChecksPassed",
+              stateStartedAt: subDays(new Date(), 12).toISOString(),
+              processCreatedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -159,11 +156,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "ProcessClosed",
-                createdAt: "2022-01-01T00:00:00Z",
-              },
+              state: "ProcessClosed",
+              stateStartedAt: "2022-01-01T00:00:00Z",
+              processCreatedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -184,11 +179,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "ProcessCancelled",
-                createdAt: "2022-01-01T00:00:00Z",
-              },
+              state: "ProcessCancelled",
+              stateStartedAt: "2022-01-01T00:00:00Z",
+              processCreatedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -209,11 +202,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "ProcessCompleted",
-                createdAt: "2022-01-01T00:00:00Z",
-              },
+              state: "ProcessCompleted",
+              stateStartedAt: "2022-01-01T00:00:00Z",
+              processCreatedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -234,11 +225,9 @@ describe("process-record-component", () => {
           <TenureProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "ProcessCompleted",
-                createdAt: "2022-01-01T00:00:00Z",
-              },
+              state: "ProcessCompleted",
+              stateStartedAt: "2022-01-01T00:00:00Z",
+              processCreatedAt: "",
             }}
             processConfig={undefined}
           />
@@ -263,11 +252,9 @@ describe("process-record-component", () => {
           <PersonProcessRecord
             process={{
               ...mockProcess,
-              currentState: {
-                ...mockProcess.currentState,
-                state: "NameSubmitted",
-                createdAt: new Date("2022-08-20").toISOString(),
-              },
+              state: "NameSubmitted",
+              stateStartedAt: new Date("2022-08-20").toISOString(),
+              processCreatedAt: "2022-08-20T07:49:07.7892599Z",
             }}
             processConfig={processes.changeofname}
           />

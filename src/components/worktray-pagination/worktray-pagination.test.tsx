@@ -9,11 +9,11 @@ import { locale } from "../../services";
 import { WorktrayPagination } from "./worktray-pagination";
 
 const getMockWorktrayResults = (data = {}) =>
-  rest.get("/api/worktray", (req, res, ctx) => {
+  rest.get("/api/v1/search/processes", (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
-        results: [],
+        results: { processes: [] },
         total: 40,
         ...data,
       }),

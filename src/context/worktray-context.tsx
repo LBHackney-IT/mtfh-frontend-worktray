@@ -18,14 +18,16 @@ import { config } from "../services";
 import {
   LimitOptions,
   OrderByOptions,
+  Process,
   ProcessSortOptions,
   TimePeriodOptions,
   WorktrayFilterOptions,
-  WorktrayResult,
 } from "../types";
 
 interface WorktrayResults {
-  results: WorktrayResult[];
+  results: {
+    processes: Process[];
+  };
   total: number;
 }
 
@@ -39,7 +41,7 @@ export type WorktrayState = {
   patchId?: string | null;
   process?: string;
   status?: string;
-  results?: WorktrayResult[];
+  results?: Process[];
   total?: number;
   error?: AxiosSWRError;
 };
@@ -163,12 +165,12 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
   const { ...query } = state;
 
   const { data, error } = useAxiosSWR<WorktrayResults>(
-    `${config.worktrayApiUrl}?${stringify(
+    `${config.searchApiUrl}/search/processes?${stringify(
       {
+        searchText: query.patch,
         page: query.page,
         pageSize: query.pageSize,
         timePeriod: query.timePeriod,
-        patch: query.patch,
         process: query.process,
         status: query.status,
         sortBy: query.sort,
@@ -197,7 +199,7 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
     () => ({
       state: {
         ...state,
-        results: data?.results,
+        results: data?.results.processes,
         total: data?.total,
         error,
       },
