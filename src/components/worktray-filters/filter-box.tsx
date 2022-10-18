@@ -44,6 +44,11 @@ export const FilterBox = ({
               ? () => handleRemoveAll(filterType)
               : () => handleSelectAll(filterType)
           }
+          data-testid={`filter-box-${
+            options.length === selectedFilters[filterType].length
+              ? "remove-all"
+              : "select-all"
+          }`}
         >
           {options.length === selectedFilters[filterType].length
             ? components.filters.removeAll
@@ -60,6 +65,7 @@ export const FilterBox = ({
               name={option.key}
               checked={selectedFilters[filterType].includes(option.key)}
               onChange={(event) => handleCheckboxFilters(event, filterType)}
+              data-testid={`filter-option-${option.key}`}
             >
               {option.value}
             </Checkbox>
