@@ -15,6 +15,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
       </p>
       <button
         class="select-all lbh-link lbh-link--no-visited-state"
+        data-testid="filter-box-select-all"
       >
         Select All
       </button>
@@ -27,6 +28,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
       >
         <input
           class="govuk-checkboxes__input"
+          data-testid="filter-option-process-1"
           id="process-1"
           name="process-1"
           type="checkbox"
@@ -43,6 +45,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
       >
         <input
           class="govuk-checkboxes__input"
+          data-testid="filter-option-process-2"
           id="process-2"
           name="process-2"
           type="checkbox"
@@ -59,6 +62,7 @@ exports[`filter-box-component it renders FilterBox correctly 1`] = `
       >
         <input
           class="govuk-checkboxes__input"
+          data-testid="filter-option-process-3"
           id="process-3"
           name="process-3"
           type="checkbox"
