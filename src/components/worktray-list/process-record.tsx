@@ -7,7 +7,7 @@ import { Link, Td, Text, Tr } from "@mtfh/common/lib/components";
 import { formatDate } from "@mtfh/common/lib/utils";
 import { IProcess, ProcessStateInfo } from "@mtfh/processes";
 
-import { Process } from "../../types";
+import { Process, ProcessName } from "../../types";
 
 import "./styles.scss";
 
@@ -136,7 +136,11 @@ export const ProcessRecord = ({
       <Td className="process-record__item --processName">
         <Link
           as={RouterLink}
-          to={`/processes/${process.processName}/${process.id}`}
+          to={`/processes/${
+            Number.isInteger(process.processName)
+              ? ProcessName[process.processName]
+              : process.processName
+          }/${process.id}`}
           variant="link"
           target="_blank"
           className="lbh-heading-h4"

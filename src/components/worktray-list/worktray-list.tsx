@@ -15,15 +15,10 @@ import { processes } from "@mtfh/processes";
 
 import { WorktrayContext } from "../../context/worktray-context";
 import { locale } from "../../services";
-import { OrderByOptions, ProcessSortOptions } from "../../types";
+import { OrderByOptions, ProcessName, ProcessSortOptions } from "../../types";
 import { WorktrayPagination } from "../worktray-pagination";
 import { PersonProcessRecord } from "./person-record";
 import { TenureProcessRecord } from "./tenure-record";
-
-enum ProcessName {
-  "soletojoint",
-  "changeofname",
-}
 
 export const WorktrayList = (): JSX.Element => {
   const {
