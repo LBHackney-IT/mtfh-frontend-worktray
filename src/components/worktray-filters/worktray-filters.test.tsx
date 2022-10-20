@@ -22,9 +22,6 @@ describe("worktray-filters", () => {
     await expect(
       screen.findByText(processes.soletojoint.name),
     ).resolves.toBeInTheDocument();
-    await expect(
-      screen.findByText("Awaiting Housing Officer review"),
-    ).resolves.toBeInTheDocument();
   });
 
   test("it renders WorktrayFilters correctly with patches", async () => {
