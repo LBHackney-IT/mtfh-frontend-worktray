@@ -150,7 +150,7 @@ export const ProcessRecord = ({
       </Td>
       {!simple && (
         <Td className="process-record__item">
-          <Text>{process.patchAssignment.patchName}</Text>
+          <Text>{process.patchAssignment?.patchName}</Text>
         </Td>
       )}
       <Td className="process-record__item">

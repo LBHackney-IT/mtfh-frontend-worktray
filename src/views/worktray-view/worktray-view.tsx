@@ -9,6 +9,7 @@ import {
   Heading,
   Layout,
   Spinner,
+  Text,
 } from "@mtfh/common/lib/components";
 import { useAxiosSWR } from "@mtfh/common/lib/http";
 
@@ -53,18 +54,25 @@ export const WorktrayView = (): JSX.Element => {
       <hr className="divider" />
       <Layout>
         <Heading as="h1">{locale.title}</Heading>
-        {error ? (
+        {error && (
           <ErrorSummary
             id="worktray-error"
             title={locale.errors.unableToFetchRecord}
             description={locale.errors.unableToFetchRecordDescription}
           />
-        ) : (
+        )}
+
+        {patchId ? (
           <WorktrayURLProvider sessionKey="worktray" patchId={patchId} areaId={areaId}>
             <WorktrayFilters />
             <WorktrayControls />
             <WorktrayList />
           </WorktrayURLProvider>
+        ) : (
+          <Text>
+            You are not assigned to any patches. Please speak to your manager to be
+            assigned a patch.
+          </Text>
         )}
       </Layout>
     </>
