@@ -3,6 +3,7 @@ export interface StaffResult {
   lastName: string;
   emailAddress: string;
   patchId: string | null;
+  areaId: string | null;
 }
 
 export interface StaffResults {

@@ -43,10 +43,10 @@ export const WorktrayView = (): JSX.Element => {
     );
   }
 
-  const patchId =
+  const { patchId, areaId } =
     emailAddress && data?.results.staff[0].emailAddress === emailAddress
-      ? data.results.staff[0].patchId
-      : null;
+      ? data.results.staff[0]
+      : { patchId: "", areaId: "" };
 
   return (
     <>
@@ -60,7 +60,7 @@ export const WorktrayView = (): JSX.Element => {
             description={locale.errors.unableToFetchRecordDescription}
           />
         ) : (
-          <WorktrayURLProvider sessionKey="worktray" patchId={patchId}>
+          <WorktrayURLProvider sessionKey="worktray" patchId={patchId} areaId={areaId}>
             <WorktrayFilters />
             <WorktrayControls />
             <WorktrayList />
