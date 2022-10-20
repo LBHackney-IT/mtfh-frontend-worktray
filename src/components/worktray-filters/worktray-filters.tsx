@@ -25,25 +25,28 @@ export const WorktrayFilters = (): JSX.Element => {
     `${config.patchesAndAreasApiUrl}/patch?parentId=${areaId}`,
   );
 
-  const filters: { type: string; title: string; options: Option[] }[] = [
-    {
-      type: "process",
-      title: "Processes",
-      options: (Object.values(Process) as string[]).map((processName) => {
-        const value = processes[processName].name;
-        return {
-          key: value.toLowerCase().replace(/\s/g, "-"),
-          value,
-        };
-      }),
-    },
-  ];
+  const filters: { type: string; title: string; options: Option[]; isRadio?: boolean }[] =
+    [
+      {
+        type: "process",
+        title: "Processes",
+        options: (Object.values(Process) as string[]).map((processName) => {
+          const value = processes[processName].name;
+          return {
+            key: value.toLowerCase().replace(/\s/g, "-"),
+            value,
+          };
+        }),
+        isRadio: false,
+      },
+    ];
 
   if (patches) {
     filters.push({
       type: "patch",
       title: "Patches",
       options: patches?.map((item) => ({ key: item.id, value: item.name })),
+      isRadio: true,
     });
   }
 
@@ -59,9 +62,17 @@ export const WorktrayFilters = (): JSX.Element => {
     event: React.ChangeEvent<HTMLInputElement>,
     filterType: string,
   ) => {
-    const updatedFilters: string[] = [...selectedFilters[filterType]];
+    let updatedFilters: string[] = [...selectedFilters[filterType]];
     if (event.target.checked) {
-      updatedFilters.push(event.target.name);
+      const { options, isRadio } =
+        filters.find((filter) => filter.type === filterType) || {};
+      if (event.target.value === "show-all") {
+        updatedFilters = options?.map((option) => option.key) || [];
+      } else if (isRadio) {
+        updatedFilters = [event.target.value];
+      } else {
+        updatedFilters.push(event.target.name);
+      }
     } else {
       updatedFilters.splice(selectedFilters[filterType].indexOf(event.target.name), 1);
     }
@@ -114,7 +125,7 @@ export const WorktrayFilters = (): JSX.Element => {
     <Details className="worktray-filters" title="Filter by" open>
       <>
         <div className="worktray-filters__boxes">
-          {filters.map(({ title, options, type }) => {
+          {filters.map(({ title, options, type, isRadio }) => {
             return (
               <FilterBox
                 key={title}
@@ -125,6 +136,7 @@ export const WorktrayFilters = (): JSX.Element => {
                 handleRemoveAll={handleRemoveAll}
                 handleCheckboxFilters={handleCheckboxFilters}
                 selectedFilters={selectedFilters}
+                isRadio={isRadio}
               />
             );
           })}

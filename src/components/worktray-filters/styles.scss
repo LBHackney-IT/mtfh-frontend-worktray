@@ -41,6 +41,13 @@
   flex: 1 0 280px;
   max-width: 380px;
   height: 100%;
+
+  .govuk-radios__item {
+    margin: 28.5px 0;
+    label {
+      margin: 0;
+    }
+  }
 }
 
 .filter-header {

@@ -25,8 +25,8 @@ export const TenureProcessRecord = (props: TenureProcessRecordProps): JSX.Elemen
         fullName: relatedEntity?.description,
       }}
       property={{
-        id: tenure?.tenuredAsset.id,
-        address: tenure?.tenuredAsset.fullAddress,
+        id: tenure?.tenuredAsset?.id,
+        address: tenure?.tenuredAsset?.fullAddress,
       }}
       {...props}
     />
