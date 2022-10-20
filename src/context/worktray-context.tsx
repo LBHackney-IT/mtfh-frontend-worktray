@@ -38,7 +38,7 @@ export type WorktrayState = {
   sort: ProcessSortOptions;
   order: OrderByOptions;
   patch?: string;
-  patchId?: string | null;
+  areaId?: string | null;
   process?: string;
   status?: string;
   results?: Process[];
@@ -90,7 +90,7 @@ const getInitialState = (
     order: options.order || OrderByOptions.ASC,
     process: options.process || undefined,
     patch: options.patch || undefined,
-    patchId: options.patchId || undefined,
+    areaId: options.areaId || undefined,
     status: options.status || undefined,
   };
 };
@@ -265,7 +265,8 @@ export const PersistWorktrayContextURL = ({
 export const WorktrayURLProvider: FC<{
   sessionKey?: string;
   patchId?: string | null;
-}> = ({ children, sessionKey, patchId }): JSX.Element => {
+  areaId?: string | null;
+}> = ({ children, sessionKey, patchId, areaId }): JSX.Element => {
   const { search } = useLocation();
   const query = new URLSearchParams(search);
   const page = Number(query.get("p") || 1);
@@ -300,7 +301,7 @@ export const WorktrayURLProvider: FC<{
         pageSize,
         timePeriod,
         patch,
-        patchId,
+        areaId,
         process,
         status,
       }}

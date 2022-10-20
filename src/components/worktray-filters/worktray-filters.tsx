@@ -18,15 +18,11 @@ const { components } = locale;
 export const WorktrayFilters = (): JSX.Element => {
   const {
     dispatch,
-    state: { patch, patchId, process, status },
+    state: { patch, areaId, process, status },
   } = useContext(WorktrayContext);
 
-  const { data: patchData } = useAxiosSWR<Patch>(
-    `${config.patchesAndAreasApiUrl}/patch/${patchId}`,
-  );
-
   const { data: patches } = useAxiosSWR<Patch[]>(
-    `${config.patchesAndAreasApiUrl}/patch?parentId=${patchData?.parentId}`,
+    `${config.patchesAndAreasApiUrl}/patch?parentId=${areaId}`,
   );
 
   const filters: { type: string; title: string; options: Option[] }[] = [
