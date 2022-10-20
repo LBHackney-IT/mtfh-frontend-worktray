@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from "react";
 
 import { Button, Details } from "@mtfh/common/lib/components";
 import { useAxiosSWR } from "@mtfh/common/lib/http";
-import { Process, Status, processes } from "@mtfh/processes";
+import { Process, processes } from "@mtfh/processes";
 
 import { WorktrayContext } from "../../context/worktray-context";
 import { config } from "../../services";
@@ -46,17 +46,6 @@ export const WorktrayFilters = (): JSX.Element => {
       options: patches?.map((item) => ({ key: item.id, value: item.name })),
     });
   }
-
-  filters.push({
-    type: "status",
-    title: "Process Status",
-    options: (Object.values(Status) as string[]).map((value) => {
-      return {
-        key: value.toLowerCase().replace(/\s/g, "-"),
-        value,
-      };
-    }),
-  });
 
   const [selectedFilters, setSelectedFilters] = useState<
     Record<WorktrayFilterOptions, string[]>
