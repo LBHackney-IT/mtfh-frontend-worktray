@@ -1,5 +1,10 @@
 import { RelatedEntity } from "@mtfh/common/lib/api/process/v1";
 
+export enum ProcessName {
+  "soletojoint",
+  "changeofname",
+}
+
 export interface Process {
   id: string;
   processName: string | number;
