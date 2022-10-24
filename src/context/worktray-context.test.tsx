@@ -251,12 +251,12 @@ test("WorktrayURLProvider persists to sessionStorage", () => {
       <Dispatcher action={{ type: "PAGE", payload: 3 }} param="page" />
     </WorktrayURLProvider>,
     {
-      url: "/?p=3&l=40&t=30&o=desc&sort=name&patch=x&process=y&status=z",
+      url: "/?p=3&l=40&t=30&o=desc&sort=name&patch=x&processNames=y&status=z",
       path: "/",
     },
   );
 
   expect(window.sessionStorage.getItem("test")).toBe(
-    "?p=3&l=40&t=30&o=desc&sort=name&patch=x&process=y&status=z",
+    "?p=3&l=40&t=30&o=desc&sort=name&patch=x&processNames=y&status=z",
   );
 });

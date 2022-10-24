@@ -75,9 +75,6 @@ export const FilterBox = ({
               </Radio>
             )}
             {options.map((option) => {
-              console.log(
-                options.length === 1 && selectedFilters[filterType].includes(option.key),
-              );
               return (
                 <Radio
                   id={option.key}

@@ -61,7 +61,7 @@ describe("worktray-filters", () => {
         <WorktrayFilters />
       </WorktrayURLProvider>,
       {
-        url: "/?t=30&sort=status&process=%2Cchange-of-name&patch=%2CCP1",
+        url: "/?t=30&sort=status&processNames=%2Cchange-of-name&patch=%2CCP1",
         path: "/",
       },
     );
@@ -74,7 +74,7 @@ describe("worktray-filters", () => {
     ).resolves.toBeChecked();
     fireEvent.click(screen.getByText(locale.components.filters.applyFilters));
     expect(window.sessionStorage.getItem("test")).toBe(
-      "?t=30&sort=status&patch=%2CCP1&process=%2Cchange-of-name%2Csole-to-joint",
+      "?t=30&sort=status&patch=%2CCP1&processNames=%2Cchange-of-name%2Csoletojoint",
     );
     fireEvent.click(screen.getByLabelText(processes.soletojoint.name));
     await expect(
