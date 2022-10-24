@@ -18,7 +18,7 @@ const { components } = locale;
 export const WorktrayFilters = (): JSX.Element => {
   const {
     dispatch,
-    state: { patch, areaId, process, status },
+    state: { patch, areaId, processNames, status },
   } = useContext(WorktrayContext);
 
   const { data: patches } = useAxiosSWR<Patch[]>(
@@ -28,12 +28,13 @@ export const WorktrayFilters = (): JSX.Element => {
   const filters: { type: string; title: string; options: Option[]; isRadio?: boolean }[] =
     [
       {
-        type: "process",
+        type: "processNames",
         title: "Processes",
         options: (Object.values(Process) as string[]).map((processName) => {
+          const key = processes[processName].processName;
           const value = processes[processName].name;
           return {
-            key: value.toLowerCase().replace(/\s/g, "-"),
+            key,
             value,
           };
         }),
@@ -54,7 +55,7 @@ export const WorktrayFilters = (): JSX.Element => {
     Record<WorktrayFilterOptions, string[]>
   >({
     patch: patch?.split(",") || [],
-    process: process?.split(",") || [],
+    processNames: processNames?.split(",") || [],
     status: status?.split(",") || [],
   });
 

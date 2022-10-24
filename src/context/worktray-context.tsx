@@ -39,7 +39,7 @@ export type WorktrayState = {
   order: OrderByOptions;
   patch?: string;
   areaId?: string | null;
-  process?: string;
+  processNames?: string;
   status?: string;
   results?: Process[];
   total?: number;
@@ -88,7 +88,7 @@ const getInitialState = (
     timePeriod: options.timePeriod || TimePeriodOptions.DAYS_30,
     sort: options.sort || ProcessSortOptions.STATUS,
     order: options.order || OrderByOptions.ASC,
-    process: options.process || undefined,
+    processNames: options.processNames || undefined,
     patch: options.patch || undefined,
     areaId: options.areaId || undefined,
     status: options.status || undefined,
@@ -171,7 +171,7 @@ export const WorktrayProvider: FC<WorktrayProviderProps> = ({ children, initial 
         page: query.page,
         pageSize: query.pageSize,
         timePeriod: query.timePeriod,
-        process: query.process,
+        processNames: query.processNames,
         status: query.status,
         sortBy: query.sort,
         isDesc: query.order === "asc",
@@ -217,7 +217,7 @@ export const PersistWorktrayContextURL = ({
   sessionKey?: string;
 }): null => {
   const {
-    state: { page, pageSize, order, sort, timePeriod, patch, process, status },
+    state: { page, pageSize, order, sort, timePeriod, patch, processNames, status },
   } = useContext(WorktrayContext);
   const { push } = useHistory();
 
@@ -243,8 +243,8 @@ export const PersistWorktrayContextURL = ({
       query.set("patch", patch);
     }
 
-    if (process) {
-      query.set("process", process);
+    if (processNames) {
+      query.set("processNames", processNames);
     }
 
     if (status) {
@@ -257,7 +257,18 @@ export const PersistWorktrayContextURL = ({
     if (sessionKey) {
       window.sessionStorage.setItem(sessionKey, path);
     }
-  }, [page, pageSize, order, sort, sessionKey, push, timePeriod, patch, process, status]);
+  }, [
+    page,
+    pageSize,
+    order,
+    sort,
+    sessionKey,
+    push,
+    timePeriod,
+    patch,
+    processNames,
+    status,
+  ]);
 
   return null;
 };
@@ -273,7 +284,7 @@ export const WorktrayURLProvider: FC<{
   const pageSize = Number(query.get("l") || 10);
   const timePeriod = (query.get("t") || "") as TimePeriodOptions;
   const patch = query.get("patch") || patchId || "";
-  const process = query.get("process") || "";
+  const processNames = query.get("processNames") || "";
   const status = query.get("status") || "";
   const sortBy = query.get("sort");
   const orderBy = query.get("o");
@@ -302,7 +313,7 @@ export const WorktrayURLProvider: FC<{
         timePeriod,
         patch,
         areaId,
-        process,
+        processNames,
         status,
       }}
     >

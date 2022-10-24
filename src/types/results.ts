@@ -54,7 +54,7 @@ export enum TimePeriodOptions {
 }
 
 export enum WorktrayFilterOptions {
-  PROCESS = "process",
+  PROCESSNAMES = "processNames",
   PATCH = "patch",
   STATUS = "status",
 }
