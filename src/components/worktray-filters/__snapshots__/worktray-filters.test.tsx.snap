@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`worktray-filters it renders WorktrayFilters correctly with patches 1`] = `
+<div>
+  <details
+    class="govuk-details lbh-details worktray-filters"
+    data-module="govuk-details"
+    data-testid="mtfh-details"
+    id="mtfh-details"
+  >
+    <summary
+      class="govuk-details__summary"
+    >
+      <span
+        class="govuk-details__summary-text"
+      >
+        Filter by
+      </span>
+    </summary>
+    <div
+      class="govuk-details__text"
+    >
+      <div
+        class="worktray-filters__boxes"
+      >
+        <div
+          class="filter-box"
+        >
+          <div
+            class="filter-header"
+          >
+            <p
+              class="lbh-body-m"
+            >
+              Processes
+            </p>
+            <button
+              class="select-all lbh-link lbh-link--no-visited-state"
+              data-testid="filter-box-select-all"
+            >
+              Select All
+            </button>
+          </div>
+          <div
+            class="filter-box-options"
+          >
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                data-testid="filter-option-soletojoint"
+                id="soletojoint"
+                name="soletojoint"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="soletojoint"
+              >
+                Sole to Joint
+              </label>
+            </div>
+            <div
+              class="govuk-checkboxes__item"
+            >
+              <input
+                class="govuk-checkboxes__input"
+                data-testid="filter-option-changeofname"
+                id="changeofname"
+                name="changeofname"
+                type="checkbox"
+              />
+              <label
+                class="govuk-label govuk-checkboxes__label"
+                for="changeofname"
+              >
+                Change of Name
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          class="filter-box"
+        >
+          <div
+            class="filter-header"
+          >
+            <p
+              class="lbh-body-m"
+            >
+              Patches
+            </p>
+          </div>
+          <div
+            class="filter-box-options"
+          >
+            <div
+              class="govuk-radios lbh-radios"
+            >
+              <div
+                class="govuk-radios__item"
+              >
+                <input
+                  class="govuk-radios__input"
+                  id="show-all"
+                  type="radio"
+                  value="show-all"
+                />
+                <label
+                  class="govuk-label govuk-radios__label"
+                  for="show-all"
+                >
+                  Show All
+                </label>
+              </div>
+              <div
+                class="govuk-radios__item"
+              >
+                <input
+                  class="govuk-radios__input"
+                  id="19400185-a8d2-4f3f-b217-dc5d485a1211"
+                  type="radio"
+                  value="19400185-a8d2-4f3f-b217-dc5d485a1211"
+                />
+                <label
+                  class="govuk-label govuk-radios__label"
+                  for="19400185-a8d2-4f3f-b217-dc5d485a1211"
+                >
+                  AB1
+                </label>
+              </div>
+              <div
+                class="govuk-radios__item"
+              >
+                <input
+                  class="govuk-radios__input"
+                  id="19400185-a8d2-4f3f-b217-dc5d485a1212"
+                  type="radio"
+                  value="19400185-a8d2-4f3f-b217-dc5d485a1212"
+                />
+                <label
+                  class="govuk-label govuk-radios__label"
+                  for="19400185-a8d2-4f3f-b217-dc5d485a1212"
+                >
+                  CP6
+                </label>
+              </div>
+              <div
+                class="govuk-radios__item"
+              >
+                <input
+                  class="govuk-radios__input"
+                  id="19400185-a8d2-4f3f-b217-dc5d485a1210"
+                  type="radio"
+                  value="19400185-a8d2-4f3f-b217-dc5d485a1210"
+                />
+                <label
+                  class="govuk-label govuk-radios__label"
+                  for="19400185-a8d2-4f3f-b217-dc5d485a1210"
+                >
+                  CP7
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="worktray-filters__actions"
+      >
+        <button
+          class="govuk-button lbh-button worktray-filters__apply-button"
+          type="button"
+        >
+          Apply filters
+        </button>
+        <button
+          class="worktray-filters__clear-filters select-all lbh-link lbh-link--no-visited-state"
+        >
+          Clear filters
+        </button>
+      </div>
+    </div>
+  </details>
+</div>
+`;

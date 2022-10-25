@@ -44,15 +44,24 @@ describe("worktray-filters", () => {
               id: "19400185-a8d2-4f3f-b217-dc5d485a1210",
               name: "CP7",
             },
+            {
+              id: "19400185-a8d2-4f3f-b217-dc5d485a1211",
+              name: "AB1",
+            },
+            {
+              id: "19400185-a8d2-4f3f-b217-dc5d485a1212",
+              name: "CP6",
+            },
           ]),
         );
       }),
     );
-    render(<WorktrayFilters />);
+    const { container } = render(<WorktrayFilters />);
     await expect(
       screen.findByText(processes.soletojoint.name),
     ).resolves.toBeInTheDocument();
     await expect(screen.findByText("CP7")).resolves.toBeInTheDocument();
+    expect(container).toMatchSnapshot();
   });
 
   test("it selects and unselects filter options", async () => {
