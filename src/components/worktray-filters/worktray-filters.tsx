@@ -15,6 +15,11 @@ import "./styles.scss";
 
 const { components } = locale;
 
+enum FilterType {
+  PROCESS_NAMES = "processNames",
+  PATCH = "patch",
+}
+
 export const WorktrayFilters = (): JSX.Element => {
   const {
     dispatch,
@@ -28,7 +33,7 @@ export const WorktrayFilters = (): JSX.Element => {
   const filters: { type: string; title: string; options: Option[]; isRadio?: boolean }[] =
     [
       {
-        type: "processNames",
+        type: FilterType.PROCESS_NAMES,
         title: "Processes",
         options: (Object.values(Process) as string[]).map((processName) => {
           const key = processes[processName].processName;
@@ -44,7 +49,7 @@ export const WorktrayFilters = (): JSX.Element => {
 
   if (patches) {
     filters.push({
-      type: "patch",
+      type: FilterType.PATCH,
       title: "Patches",
       options: patches?.map((item) => ({ key: item.id, value: item.name })),
       isRadio: true,
@@ -117,7 +122,14 @@ export const WorktrayFilters = (): JSX.Element => {
 
   const clearFilters = () => {
     Object.keys(selectedFilters).forEach((filterType) => {
-      selectedFilters[filterType] = [];
+      if (filterType === FilterType.PATCH) {
+        selectedFilters[filterType] =
+          filters
+            .find((filter) => filter.type === FilterType.PATCH)
+            ?.options.map((option) => option.key) || [];
+      } else {
+        selectedFilters[filterType] = [];
+      }
     });
     applyFilters(selectedFilters);
   };
