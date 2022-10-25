@@ -51,7 +51,9 @@ export const WorktrayFilters = (): JSX.Element => {
     filters.push({
       type: FilterType.PATCH,
       title: "Patches",
-      options: patches?.map((item) => ({ key: item.id, value: item.name })),
+      options: patches
+        ?.map((item) => ({ key: item.id, value: item.name }))
+        .sort((a, b) => a.value.localeCompare(b.value)),
       isRadio: true,
     });
   }
