@@ -83,10 +83,26 @@ describe("worktray-filters", () => {
   });
 
   test("it selects all options and clears filters correctly", async () => {
+    server.use(
+      rest.get(`/api/v1/patch/`, (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json([
+            {
+              id: "19400185-a8d2-4f3f-b217-dc5d485a1210",
+              name: "CP7",
+            },
+          ]),
+        );
+      }),
+    );
     render(
       <WorktrayURLProvider sessionKey="test">
         <WorktrayFilters />
       </WorktrayURLProvider>,
+      {
+        url: "/?t=30&sort=status&patch=19400185-a8d2-4f3f-b217-dc5d485a1210",
+      },
     );
 
     await expect(
@@ -95,6 +111,8 @@ describe("worktray-filters", () => {
     await expect(
       screen.findByLabelText(processes.changeofname.name),
     ).resolves.not.toBeChecked();
+
+    await expect(screen.findByLabelText("CP7")).resolves.toBeChecked();
 
     fireEvent.click(screen.getAllByText(components.filters.selectAll)[0]);
 
@@ -113,6 +131,8 @@ describe("worktray-filters", () => {
     await expect(
       screen.findByLabelText(processes.changeofname.name),
     ).resolves.not.toBeChecked();
+
+    await expect(screen.findByLabelText("CP7")).resolves.toBeChecked();
   });
 
   test("it selects all options and remove all options correctly", async () => {
