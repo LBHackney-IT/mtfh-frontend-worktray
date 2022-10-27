@@ -20,6 +20,22 @@ enum FilterType {
   PATCH = "patch",
 }
 
+const sortAlphaNum = ({ value: a }, { value: b }) => {
+  const reA = /[^a-zA-Z]/g;
+  const reN = /[^0-9]/g;
+  const aA = a.replace(reA, "");
+  const bA = b.replace(reA, "");
+  if (aA === bA) {
+    const aN = parseInt(a.replace(reN, ""), 10);
+    const bN = parseInt(b.replace(reN, ""), 10);
+    if (aN === bN) {
+      return 0;
+    }
+    return aN > bN ? 1 : -1;
+  }
+  return aA > bA ? 1 : -1;
+};
+
 export const WorktrayFilters = (): JSX.Element => {
   const {
     dispatch,
@@ -53,7 +69,7 @@ export const WorktrayFilters = (): JSX.Element => {
       title: "Patches",
       options: patches
         ?.map((item) => ({ key: item.id, value: item.name }))
-        .sort((a, b) => a.value.localeCompare(b.value)),
+        .sort(sortAlphaNum),
       isRadio: true,
     });
   }
