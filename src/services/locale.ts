@@ -2,7 +2,7 @@ const locale = {
   title: "Your tasks",
   views: {
     worktray: {
-      noWorktrayResults: "No worktray results",
+      noWorktrayResults: "No tasks found",
     },
   },
   errors: {
@@ -26,10 +26,12 @@ const locale = {
       next: "Next",
       assistiveNavigation: (page: number): string => `Page ${page}`,
       searchResultsCounter: (page: number, pageSize: number, total: number): string =>
-        `Showing ${page * pageSize - pageSize + 1}—${Math.min(
-          page * pageSize,
-          total,
-        )} of ${total} results`,
+        total === 0
+          ? "Showing 0 of 0 results"
+          : `Showing ${page * pageSize - pageSize + 1}—${Math.min(
+              page * pageSize,
+              total,
+            )} of ${total} results`,
     },
     controls: {
       timePeriodOptions: {
