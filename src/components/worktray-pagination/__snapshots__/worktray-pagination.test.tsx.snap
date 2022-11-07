@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`worktray-pagination Pagination displays correctly for no results 1`] = `
+<div>
+  <nav
+    class="lbh-pagination"
+    role="navigation"
+  >
+    <div
+      class="lbh-pagination__summary"
+    >
+      Showing 0 of 0 results
+    </div>
+    <ul
+      class="lbh-pagination__list"
+    >
+      <li
+        class="lbh-pagination__item"
+      >
+        <button
+          aria-label="Page 1"
+          class="lbh-pagination__link lbh-pagination__link--current lbh-pagination__link__no-item"
+        >
+          1
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

@@ -63,10 +63,6 @@ export const WorktrayList = (): JSX.Element => {
     );
   }
 
-  if (results?.length === 0) {
-    return <Text>{locale.views.worktray.noWorktrayResults}</Text>;
-  }
-
   return (
     <div>
       <div className="worktray-list">
@@ -132,22 +128,30 @@ export const WorktrayList = (): JSX.Element => {
             </Tr>
           </Thead>
           <Tbody>
-            {results.map((process) => {
-              const processConfig =
-                processes[
-                  Number.isInteger(process.processName)
-                    ? ProcessName[process.processName]
-                    : process.processName
-                ];
-              const Result = processRecordComponents[process.targetType];
-              return (
-                <Result
-                  key={process.id}
-                  process={process}
-                  processConfig={processConfig}
-                />
-              );
-            })}
+            {results.length === 0 ? (
+              <tr className="govuk-table__row process-record">
+                <td colSpan={6} className="process-record__no-item">
+                  {locale.views.worktray.noWorktrayResults}
+                </td>
+              </tr>
+            ) : (
+              results.map((process) => {
+                const processConfig =
+                  processes[
+                    Number.isInteger(process.processName)
+                      ? ProcessName[process.processName]
+                      : process.processName
+                  ];
+                const Result = processRecordComponents[process.targetType];
+                return (
+                  <Result
+                    key={process.id}
+                    process={process}
+                    processConfig={processConfig}
+                  />
+                );
+              })
+            )}
           </Tbody>
         </Table>
         <WorktrayPagination />

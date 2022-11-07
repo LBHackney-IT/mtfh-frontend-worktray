@@ -109,4 +109,19 @@ describe("worktray-pagination", () => {
     fireEvent.click(screen.getByText("3"));
     expect(await screen.findByText("3")).toHaveAttribute("aria-current", "page");
   });
+
+  test("Pagination displays correctly for no results", async () => {
+    server.use(getMockWorktrayResults({ total: 0 }));
+    const { container } = render(
+      <WorktrayProvider initial={{ page: 1 }}>
+        <WorktrayPagination />
+      </WorktrayProvider>,
+    );
+
+    await expect(screen.findByText("1")).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText("Showing 0 of 0 results"),
+    ).resolves.toBeInTheDocument();
+    expect(container).toMatchSnapshot();
+  });
 });

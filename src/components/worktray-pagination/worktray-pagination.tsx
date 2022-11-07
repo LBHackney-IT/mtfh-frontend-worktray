@@ -9,6 +9,7 @@ import {
 
 import { WorktrayContext } from "../../context/worktray-context";
 import { locale } from "../../services";
+import "./styles.scss";
 
 const { previous, next, assistiveNavigation, searchResultsCounter } =
   locale.components.pagination;
@@ -16,6 +17,10 @@ const { previous, next, assistiveNavigation, searchResultsCounter } =
 interface WorktrayPaginationProps {
   pageRange?: number;
 }
+
+export const hasNoResult = (total: number | undefined) => {
+  return !total || total <= 0;
+};
 
 export const WorktrayPagination = ({
   pageRange = 2,
@@ -31,6 +36,9 @@ export const WorktrayPagination = ({
   }, [total, page, pageSize]);
 
   const range = useMemo(() => {
+    if (hasNoResult(total)) {
+      return [1];
+    }
     let rangeStart = activePage - pageRange;
     let rangeEnd = activePage + pageRange;
     if (rangeEnd > totalPages) {
@@ -51,9 +59,9 @@ export const WorktrayPagination = ({
     }
 
     return visiblePages;
-  }, [pageRange, activePage, totalPages]);
+  }, [total, activePage, pageRange, totalPages]);
 
-  if (total === undefined || totalPages === Infinity || range.length === 0 || total < 0) {
+  if (total === undefined || total < 0 || totalPages === Infinity || range.length === 0) {
     return null;
   }
 
@@ -75,9 +83,10 @@ export const WorktrayPagination = ({
             as="button"
             key={index}
             onClick={() => dispatch({ type: "PAGE", payload: index })}
-            active={index === activePage}
+            active={hasNoResult(total)}
             aria-label={assistiveNavigation(index)}
             aria-current={index === activePage ? "page" : undefined}
+            className={hasNoResult(total) ? "lbh-pagination__link__no-item" : undefined}
           >
             {index}
           </PaginationButton>
