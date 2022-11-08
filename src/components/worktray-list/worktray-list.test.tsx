@@ -18,7 +18,7 @@ const mockWorktrayResults = [
     targetType: "tenure",
     state: "BreachChecksPassed",
     stateStartedAt: subDays(new Date(), 2).toISOString(),
-    processCreatedAt: "2022-08-20T07:49:07.7892599Z",
+    processStartedAt: "2022-08-20T07:49:07.7892599Z",
     relatedEntities: [
       {
         id: mockPersonV1.id,

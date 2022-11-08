@@ -13,7 +13,7 @@ export interface Process {
   relatedEntities: RelatedEntity[];
   state: string;
   stateStartedAt: string;
-  processCreatedAt: string;
+  processStartedAt: string;
   patchAssignment: {
     patchId: string;
     patchName: string;

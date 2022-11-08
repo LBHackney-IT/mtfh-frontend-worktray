@@ -61,7 +61,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "BreachChecksPassed",
               stateStartedAt: new Date("2022-08-20").toISOString(),
-              processCreatedAt: "2022-08-20T07:49:07.7892599Z",
+              processStartedAt: "2022-08-20T07:49:07.7892599Z",
             }}
             processConfig={processes.soletojoint}
           />
@@ -86,7 +86,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "BreachChecksPassed",
               stateStartedAt: subDays(new Date(), 9).toISOString(),
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -110,7 +110,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "BreachChecksPassed",
               stateStartedAt: subDays(new Date(), 5).toISOString(),
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -134,7 +134,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "BreachChecksPassed",
               stateStartedAt: subDays(new Date(), 12).toISOString(),
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -158,7 +158,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "ProcessClosed",
               stateStartedAt: "2022-01-01T00:00:00Z",
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -181,7 +181,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "ProcessCancelled",
               stateStartedAt: "2022-01-01T00:00:00Z",
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -204,7 +204,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "ProcessCompleted",
               stateStartedAt: "2022-01-01T00:00:00Z",
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={processes.soletojoint}
           />
@@ -227,7 +227,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "ProcessCompleted",
               stateStartedAt: "2022-01-01T00:00:00Z",
-              processCreatedAt: "",
+              processStartedAt: "",
             }}
             processConfig={undefined}
           />
@@ -254,7 +254,7 @@ describe("process-record-component", () => {
               ...mockProcess,
               state: "NameSubmitted",
               stateStartedAt: new Date("2022-08-20").toISOString(),
-              processCreatedAt: "2022-08-20T07:49:07.7892599Z",
+              processStartedAt: "2022-08-20T07:49:07.7892599Z",
             }}
             processConfig={processes.changeofname}
           />

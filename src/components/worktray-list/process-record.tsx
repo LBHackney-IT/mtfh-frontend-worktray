@@ -77,7 +77,7 @@ export const ProcessRecord = ({
     }
     return {
       title: "Initiated",
-      date: formatDate(process.processCreatedAt),
+      date: formatDate(process.processStartedAt),
     };
   };
 
