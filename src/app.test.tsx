@@ -34,7 +34,14 @@ describe("<App />", () => {
                   firstName: "Fake_Rupert",
                   lastName: "Fake_Cruickshank",
                   emailAddress: "tests@hackney.gov.uk",
-                  patchId: "5d59f3af-a692-49ae-9483-f631772ae3ec",
+                  patches: [
+                    {
+                      id: "5d59f3af-a692-49ae-9483-f631772ae3ec",
+                      name: null,
+                      areaId: "26e9426a-59a5-4863-9077-f8cad9d3c82b",
+                      areaName: null,
+                    },
+                  ],
                 },
               ],
             },
@@ -63,7 +70,14 @@ describe("<App />", () => {
                   firstName: "Fake_Rupert",
                   lastName: "Fake_Cruickshank",
                   emailAddress: "unknown@hackney.gov.uk",
-                  patchId: "5d59f3af-a692-49ae-9483-f631772ae3ec",
+                  patches: [
+                    {
+                      id: "5d59f3af-a692-49ae-9483-f631772ae3ec",
+                      name: null,
+                      areaId: "26e9426a-59a5-4863-9077-f8cad9d3c82b",
+                      areaName: null,
+                    },
+                  ],
                 },
               ],
             },

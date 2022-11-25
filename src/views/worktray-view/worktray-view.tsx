@@ -44,10 +44,10 @@ export const WorktrayView = (): JSX.Element => {
     );
   }
 
-  const { patchId, areaId } =
+  const { id: patchId, areaId } =
     emailAddress && data?.results.staff[0].emailAddress === emailAddress
-      ? data.results.staff[0]
-      : { patchId: "", areaId: "" };
+      ? data.results.staff[0].patches[0]
+      : { id: "", areaId: "" };
 
   return (
     <>
