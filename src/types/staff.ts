@@ -2,10 +2,10 @@ export interface StaffResult {
   firstName: string;
   lastName: string;
   emailAddress: string;
-  patches: Patches[];
+  patches: PatchResult[];
 }
 
-export interface Patches {
+export interface PatchResult {
   id: string;
   name: string;
   areaId: string;
