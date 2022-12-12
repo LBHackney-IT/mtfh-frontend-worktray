@@ -125,7 +125,6 @@ jobs:
           command: |
             export APP_ENV=development
             export APP_CDN=$(aws ssm get-parameter --name /tl-housing/<<parameters.stage>>/worktray-app-url --query Parameter.Value --output text)
-            export WORKTRAY_API_URL=https://9d522ffa-5f9a-48cc-8eaf-f23add75fccc.mock.pstmn.io           
             export SEARCH_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/search-api-url --query Parameter.Value --output text)            
             export PATCHES_AND_AREAS_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/patches-and-areas-api-url --query Parameter.Value --output text)            
             yarn build
@@ -150,7 +149,6 @@ jobs:
           command: |
             export APP_ENV=staging
             export APP_CDN=$(aws ssm get-parameter --name /tl-housing/<<parameters.stage>>/worktray-app-url --query Parameter.Value --output text)
-            export WORKTRAY_API_URL=https://9d522ffa-5f9a-48cc-8eaf-f23add75fccc.mock.pstmn.io           
             export SEARCH_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/search-api-url --query Parameter.Value --output text)
             export PATCHES_AND_AREAS_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/patches-and-areas-api-url --query Parameter.Value --output text)
             yarn build
