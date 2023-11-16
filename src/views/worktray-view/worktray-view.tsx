@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import jwt_decode from "jwt-decode";
-import { stringify } from "query-string";
 
+import { Patch, getAllPatchesAndAreas } from "@mtfh/common/lib/api/patch/v1";
 import {
   Center,
   ErrorSummary,
@@ -11,13 +11,10 @@ import {
   Spinner,
   Text,
 } from "@mtfh/common/lib/components";
-import { useAxiosSWR } from "@mtfh/common/lib/http";
 
 import { WorktrayControls, WorktrayFilters, WorktrayList } from "../../components";
 import { WorktrayURLProvider } from "../../context/worktray-context";
-import { config } from "../../services";
 import locale from "../../services/locale";
-import { StaffResults } from "../../types/staff";
 
 import "./styles.scss";
 
@@ -25,54 +22,66 @@ const getCookieValue = (name) =>
   document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || "";
 
 export const WorktrayView = (): JSX.Element => {
+  const [showSpinner, setShowSpinner] = React.useState(true);
+  const [errorMessage, setErrorMessage] = React.useState("");
+  const [assignedPatch, setAssignedPatch] = React.useState<Patch>();
   const token = getCookieValue("hackneyToken");
   const { email: emailAddress } = token
     ? (jwt_decode(token) as { email: string })
     : { email: "" };
 
-  const { data, error } = useAxiosSWR<StaffResults>(
-    `${config.searchApiUrl}/search/staff/?${stringify({
-      searchText: emailAddress,
-    })}`,
-  );
+  useEffect(() => {
+    setShowSpinner(true);
+    getAllPatchesAndAreas()
+      .then((data) => {
+        const patch = data.filter(
+          (patchOrArea) =>
+            patchOrArea.responsibleEntities[0].contactDetails.emailAddress ===
+            emailAddress,
+        )[0];
+        setAssignedPatch(patch);
+      })
+      .catch((e) => {
+        setErrorMessage(e.message);
+      })
+      .finally(() => {
+        setShowSpinner(false);
+      });
+  }, [emailAddress]);
 
-  if (!data && !error) {
+  if (showSpinner) {
     return (
-      <Center className="mtfh-worktray__loading">
+      <Center>
         <Spinner />
       </Center>
     );
   }
-
-  const { id: patchId, areaId } =
-    emailAddress && data?.results.staff[0].emailAddress === emailAddress
-      ? data.results.staff[0].patches[0]
-      : { id: "", areaId: "" };
 
   return (
     <>
       <hr className="divider" />
       <Layout>
         <Heading as="h1">{locale.title}</Heading>
-        {error && (
+        {errorMessage && (
           <ErrorSummary
             id="worktray-error"
             title={locale.errors.unableToFetchRecord}
-            description={locale.errors.unableToFetchRecordDescription}
+            description={`${locale.errors.unableToFetchRecordDescription} - ${errorMessage}`}
           />
         )}
 
-        {patchId ? (
-          <WorktrayURLProvider sessionKey="worktray" patchId={patchId} areaId={areaId}>
+        {assignedPatch ? (
+          <WorktrayURLProvider
+            sessionKey="worktray"
+            patchId={assignedPatch.id}
+            areaId={assignedPatch.parentId}
+          >
             <WorktrayFilters />
             <WorktrayControls />
             <WorktrayList />
           </WorktrayURLProvider>
         ) : (
-          <Text>
-            You are not assigned to any patches. Please speak to your manager to be
-            assigned a patch.
-          </Text>
+          <Text>{locale.noPatchAssigned}</Text>
         )}
       </Layout>
     </>
