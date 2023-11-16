@@ -5,8 +5,6 @@ const locale = {
       noWorktrayResults: "No tasks found",
     },
   },
-  noPatchAssigned:
-    "You are not assigned to any patches. Please speak to your manager to be assigned a patch.",
   errors: {
     unableToFetchRecord: "There was a problem retrieving the record",
     unableToFetchRecordDescription:
