@@ -1405,7 +1405,7 @@
 
 "@mtfh/common@https://github.com/LBHackney-IT/mtfh-common.git":
   version "0.0.1"
-  resolved "https://github.com/LBHackney-IT/mtfh-common.git#5e84e5ccac0242978190de4713d64f1ffeacc576"
+  resolved "https://github.com/LBHackney-IT/mtfh-common.git#fa51eacfe2105a590b594edefaf37b2cfdac18e2"
   dependencies:
     "@babel/preset-react" "^7.13.13"
     "@radix-ui/react-polymorphic" "^0.0.12"
@@ -1471,7 +1471,7 @@
 
 "@mtfh/personal-details@https://github.com/LBHackney-IT/mtfh-frontend-personal-details.git":
   version "1.0.0"
-  resolved "https://github.com/LBHackney-IT/mtfh-frontend-personal-details.git#8c9738dfe09102b997fd6bce9d6f57243c64eb32"
+  resolved "https://github.com/LBHackney-IT/mtfh-frontend-personal-details.git#48d2efc299fb6deff02d4b09257936629c75b8a4"
   dependencies:
     "@mtfh/common" "https://github.com/LBHackney-IT/mtfh-frontend-common.git"
     "@mtfh/worktray" "https://github.com/LBHackney-IT/mtfh-frontend-worktray.git"
