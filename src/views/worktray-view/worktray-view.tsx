@@ -36,7 +36,7 @@ export const WorktrayView = (): JSX.Element => {
       .then((data) => {
         const patch = data.filter(
           (patchOrArea) =>
-            patchOrArea.responsibleEntities[0].contactDetails.emailAddress ===
+            patchOrArea.responsibleEntities[0]?.contactDetails?.emailAddress ===
             emailAddress,
         )[0];
         setAssignedPatch(patch);
