@@ -18,7 +18,7 @@ interface WorktrayPaginationProps {
   pageRange?: number;
 }
 
-export const hasNoResult = (total: number | undefined) => {
+export const hasNoResult = (total: number | undefined): boolean => {
   return !total || total <= 0;
 };
 

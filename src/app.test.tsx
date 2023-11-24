@@ -33,6 +33,12 @@ const examplePatch: Patch = {
 
 describe("<App />", () => {
   test("it renders correctly without cookie", async () => {
+    server.use(
+      rest.get("/api/v1/patch/all", (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json([examplePatch]));
+      }),
+    );
+
     render(<App />, { url: "/" });
     await waitFor(() => expect(screen.queryByText("Loading...")).not.toBeInTheDocument());
     expect(screen.getAllByText(locale.title));
