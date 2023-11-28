@@ -75,8 +75,8 @@
     "webpack-merge": "5.7.3"
   },
   "dependencies": {
-    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-common.git",
-    "@mtfh/processes": "https://github.com/LBHackney-IT/mtfh-frontend-processes.git",
+    "@mtfh/common": "https://github.com/LBHackney-IT/mtfh-common.git#e796c4a55d233678fb82136cee4f29489e28e154",
+    "@mtfh/processes": "https://github.com/LBHackney-IT/mtfh-frontend-processes.git#6edf705f207908b43287ea748eceabad2b09dcd4",
     "date-fns": "^2.29.1",
     "jwt-decode": "^3.1.2",
     "lbh-frontend": "^3.6.1",
