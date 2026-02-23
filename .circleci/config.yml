@@ -33,7 +33,7 @@ references:
 executors:
   node-executor:
     docker:
-      - image: circleci/node:14.17.0-browsers
+      - image: cimg/node:24.12.0-browsers
   docker-terraform:
     docker:
       - image: "hashicorp/terraform:light"
@@ -125,8 +125,8 @@ jobs:
           command: |
             export APP_ENV=development
             export APP_CDN=$(aws ssm get-parameter --name /tl-housing/<<parameters.stage>>/worktray-app-url --query Parameter.Value --output text)
-            export SEARCH_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/search-api-url --query Parameter.Value --output text)            
-            export PATCHES_AND_AREAS_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/patches-and-areas-api-url --query Parameter.Value --output text)            
+            export SEARCH_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/search-api-url --query Parameter.Value --output text)
+            export PATCHES_AND_AREAS_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/patches-and-areas-api-url --query Parameter.Value --output text)
             yarn build
       - run:
           name: Deploy to S3
@@ -173,8 +173,8 @@ jobs:
           command: |
             export APP_ENV=production
             export APP_CDN=$(aws ssm get-parameter --name /tl-housing/<<parameters.stage>>/worktray-app-url --query Parameter.Value --output text)
-            export SEARCH_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/search-api-url --query Parameter.Value --output text)            
-            export PATCHES_AND_AREAS_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/patches-and-areas-api-url --query Parameter.Value --output text)            
+            export SEARCH_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/search-api-url --query Parameter.Value --output text)
+            export PATCHES_AND_AREAS_API_URL=$(aws ssm get-parameter --name /housing-tl/<<parameters.stage>>/patches-and-areas-api-url --query Parameter.Value --output text)
             yarn build
       - run:
           name: Deploy to S3
