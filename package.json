@@ -93,6 +93,10 @@
     "single-spa-react": "4.4.0"
   },
   "resolutions": {
-    "webpack": "5.104.1"
+    "webpack": "5.104.1",
+    "@xmldom/xmldom": ">=0.7.7",
+    "loader-utils": ">=2.0.4",
+    "@babel/traverse": ">=7.23.2",
+    "form-data": ">=3.0.4"
   }
 }
