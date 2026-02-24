@@ -52,7 +52,7 @@ exports[`worktray-controls-component WorktrayControls renders correctly 1`] = `
           <option
             value=""
           >
-            All of 2023
+            All of 2026
           </option>
         </select>
       </div>
