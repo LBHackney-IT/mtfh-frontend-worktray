@@ -24,28 +24,28 @@ resource "aws_s3_bucket" "frontend-bucket-staging" {
     allowed_headers = ["*"]
     allowed_methods = ["GET"]
     allowed_origins = ["https://manage-my-home-staging.hackney.gov.uk"]
-    expose_headers  = ["x-amz-server-side-encryption","x-amz-request-id","x-amz-id-2"]
+    expose_headers  = ["x-amz-server-side-encryption", "x-amz-request-id", "x-amz-id-2"]
     max_age_seconds = 3000
   }
 }
 module "cloudfront-staging" {
-  source = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
-  s3_domain_name = aws_s3_bucket.frontend-bucket-staging.bucket_regional_domain_name
-  origin_id = "mtfh-tl-housing-worktray-frontend"
-  s3_bucket_arn = aws_s3_bucket.frontend-bucket-staging.arn
-  s3_bucket_id = aws_s3_bucket.frontend-bucket-staging.id
-  orginin_access_identity_desc = "tl-housing worktray frontend cloudfront identity"
-  cname_aliases = []
-  environment_name = "staging"
-  cost_code = "B0811"
-  project_name = "mtfh tl-housing"
-  use_cloudfront_cert = true
-  compress = true
+  source                      = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
+  s3_domain_name              = aws_s3_bucket.frontend-bucket-staging.bucket_regional_domain_name
+  origin_id                   = "mtfh-tl-housing-worktray-frontend"
+  s3_bucket_arn               = aws_s3_bucket.frontend-bucket-staging.arn
+  s3_bucket_id                = aws_s3_bucket.frontend-bucket-staging.id
+  origin_access_identity_desc = "tl-housing worktray frontend cloudfront identity"
+  cname_aliases               = []
+  environment_name            = "staging"
+  cost_code                   = "B0811"
+  project_name                = "mtfh tl-housing"
+  use_cloudfront_cert         = true
+  compress                    = true
 }
 
 resource "aws_ssm_parameter" "cdn" {
-  name  = "/tl-housing/staging/worktray-app-url"
-  type  = "String"
-  value = "https://${module.cloudfront-staging.cloudfront_domain_name}"
+  name      = "/tl-housing/staging/worktray-app-url"
+  type      = "String"
+  value     = "https://${module.cloudfront-staging.cloudfront_domain_name}"
   overwrite = true
 }
