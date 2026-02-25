@@ -74,6 +74,11 @@ commands:
       - *attach_workspace
       - checkout
       - run:
+          name: Force Git to use SSH
+          command:
+            git config --global url."ssh://git@github.com/".insteadOf
+            "https://github.com/"
+      - run:
           name: get and init
           command: |
             cd ./terraform/<<parameters.environment>>/
