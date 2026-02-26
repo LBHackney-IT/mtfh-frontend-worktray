@@ -69,7 +69,7 @@ commands:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
+            # - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
             - "SHA256:6e+2EYkhc69j0HDH9cwakEorbzU4SbrnSPpmFEyVaaM"
       - *attach_workspace
       - checkout
