@@ -1,6 +1,6 @@
 provider "aws" {
-  region  = "eu-west-2"
-  version = "~> 2.0"
+  region = "eu-west-2"
+  # version = "~> 2.0"
 }
 terraform {
   backend "s3" {
@@ -12,21 +12,21 @@ terraform {
 }
 resource "aws_s3_bucket" "frontend-bucket-development" {
   bucket = "lbh-tl-housing-worktray-frontend-development.hackney.gov.uk"
-  acl    = "private"
-  versioning {
-    enabled = true
-  }
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-  }
-  cors_rule {
-    allowed_headers = ["*"]
-    allowed_methods = ["GET"]
-    allowed_origins = ["https://manage-my-home-development.hackney.gov.uk"]
-    expose_headers  = ["x-amz-server-side-encryption", "x-amz-request-id", "x-amz-id-2"]
-    max_age_seconds = 3000
-  }
+  # acl    = "private"
+  # versioning {
+  #   enabled = true
+  # }
+  # website {
+  #   index_document = "index.html"
+  #   error_document = "error.html"
+  # }
+  # cors_rule {
+  #   allowed_headers = ["*"]
+  #   allowed_methods = ["GET"]
+  #   allowed_origins = ["https://manage-my-home-development.hackney.gov.uk"]
+  #   expose_headers  = ["x-amz-server-side-encryption", "x-amz-request-id", "x-amz-id-2"]
+  #   max_age_seconds = 3000
+  # }
 }
 module "cloudfront-development" {
   source                      = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
