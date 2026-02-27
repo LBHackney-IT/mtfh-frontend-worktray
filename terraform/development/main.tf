@@ -29,18 +29,18 @@ resource "aws_s3_bucket" "frontend-bucket-development" {
   }
 }
 module "cloudfront-development" {
-  source                      = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
-  s3_domain_name              = aws_s3_bucket.frontend-bucket-development.bucket_regional_domain_name
-  origin_id                   = "mtfh-tl-housing-worktray-frontend"
-  s3_bucket_arn               = aws_s3_bucket.frontend-bucket-development.arn
-  s3_bucket_id                = aws_s3_bucket.frontend-bucket-development.id
-  origin_access_identity_desc = "tl-housing worktray frontend cloudfront identity"
-  cname_aliases               = []
-  environment_name            = "development"
-  cost_code                   = "B0811"
-  project_name                = "mtfh tl-housing"
-  use_cloudfront_cert         = true
-  compress                    = true
+  source                       = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
+  s3_domain_name               = aws_s3_bucket.frontend-bucket-development.bucket_regional_domain_name
+  origin_id                    = "mtfh-tl-housing-worktray-frontend"
+  s3_bucket_arn                = aws_s3_bucket.frontend-bucket-development.arn
+  s3_bucket_id                 = aws_s3_bucket.frontend-bucket-development.id
+  orginin_access_identity_desc = "tl-housing worktray frontend cloudfront identity"
+  cname_aliases                = []
+  environment_name             = "development"
+  cost_code                    = "B0811"
+  project_name                 = "mtfh tl-housing"
+  use_cloudfront_cert          = true
+  compress                     = true
 }
 
 resource "aws_ssm_parameter" "cdn" {
