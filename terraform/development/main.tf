@@ -29,7 +29,7 @@ resource "aws_s3_bucket" "frontend-bucket-development" {
   }
 }
 module "cloudfront-development" {
-  source                      = "git::https://github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
+  source                      = "github.com/LBHackney-IT/aws-hackney-common-terraform.git//modules/cloudfront/s3_distribution"
   s3_domain_name              = aws_s3_bucket.frontend-bucket-development.bucket_regional_domain_name
   origin_id                   = "mtfh-tl-housing-worktray-frontend"
   s3_bucket_arn               = aws_s3_bucket.frontend-bucket-development.arn
