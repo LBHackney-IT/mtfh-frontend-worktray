@@ -67,6 +67,7 @@ commands:
       environment:
         type: string
     steps:
+      - checkout
       - run:
           name: Clear All SSH keys
           command: |
@@ -75,7 +76,6 @@ commands:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
       - *attach_workspace
-      - checkout
       - run:
           name: get and init
           command: |
@@ -91,6 +91,7 @@ jobs:
   install-dependencies:
     executor: node-executor
     steps:
+      - checkout
       - run:
           name: Clear All SSH keys
           command: |
@@ -99,7 +100,6 @@ jobs:
           fingerprints:
             - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o"
       - *attach_workspace
-      - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
