@@ -68,7 +68,7 @@ commands:
         type: string
     steps:
       - run:
-          name: Configure SSH keys
+          name: Clear All SSH keys
           command: |
             ssh-add -D
       - add_ssh_keys:
@@ -92,7 +92,7 @@ jobs:
     executor: node-executor
     steps:
       - run:
-          name: Configure SSH keys
+          name: Clear All SSH keys
           command: |
             ssh-add -D
       - add_ssh_keys:
