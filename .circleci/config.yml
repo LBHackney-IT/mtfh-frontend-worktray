@@ -36,10 +36,7 @@ executors:
       - image: cimg/node:24.12.0-browsers
   docker-terraform:
     docker:
-      #- image: "hashicorp/terraform:light"
-      #- image: cimg/base:2021.05
-      #- image: cimg/terraform:1.8
-      - image: cimg/base:stable
+      - image: "hashicorp/terraform:light"
 
   docker-python:
     docker:
@@ -71,27 +68,21 @@ commands:
       environment:
         type: string
     steps:
-      - run:
-          name: Install Terraform
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y wget unzip
-
-            TERRAFORM_VERSION="1.9.0"
-
-            wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-            unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-            sudo mv terraform /usr/local/bin/
-            terraform version
-
+      # checkout here?
       - add_ssh_keys:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c" #common
+            - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o" #processes
 
-      # - run:
-      #     name: List injected SSH keys
-      #     command: |
-      #       ls -l ~/.ssh
+      - run:
+          name: List injected SSH keys
+          command: |
+            ls -l ~/.ssh
+            for f in ~/.ssh/id_rsa_*; do
+              echo "File: $f"
+              ssh-keygen -lf "$f"
+            done
+
 
       # Force SSH to use only the keys we specify
       # id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175 - common
@@ -102,8 +93,14 @@ commands:
             mkdir -p $HOME/.ssh
             chmod 700 $HOME/.ssh
 
-            cat \<<EOF > $HOME/.ssh/config
-            Host github.com
+            cat \<<EOF > "$HOME/.ssh/config"
+            Host github-processes
+              HostName github.com
+              User git
+              IdentitiesOnly yes
+              IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
+
+            Host github-terraform
               HostName github.com
               User git
               IdentitiesOnly yes
@@ -118,20 +115,17 @@ commands:
           name: Start SSH agent and load keys (Terraform requires this)
           command: |
             eval "$(ssh-agent -s)"
-            ssh-add $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
+            ssh-add "$HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305"
+            ssh-add "$HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"
 
-            # Make SSH_AUTH_SOCK available to later steps
             echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
-
-            # Force Terraform to use real SSH instead of libgit2
             echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
+
       
       # Force Terraform to use real SSH instead of libgit2
       - run:
           name: get and init
           command: |
-            ssh -F ~/.ssh/config -T git@github.com
-
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
