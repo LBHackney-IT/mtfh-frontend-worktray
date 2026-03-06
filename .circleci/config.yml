@@ -77,7 +77,7 @@ commands:
             mkdir -p ~/.ssh
             chmod 700 ~/.ssh
 
-            cat <<EOF > ~/.ssh/config
+            cat \<<EOF > ~/.ssh/config
             Host github.com
               HostName github.com
               User git
