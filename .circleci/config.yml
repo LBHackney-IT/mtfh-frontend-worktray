@@ -36,7 +36,8 @@ executors:
       - image: cimg/node:24.12.0-browsers
   docker-terraform:
     docker:
-      - image: "hashicorp/terraform:light"
+      #- image: "hashicorp/terraform:light"
+      - image: cimg/base:2021.05
   docker-python:
     docker:
       - image: circleci/python:3.7
@@ -67,15 +68,25 @@ commands:
       environment:
         type: string
     steps:
+      - run:
+          name: Install Terraform
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gnupg software-properties-common curl
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+            sudo apt-add-repository "deb https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            sudo apt-get update
+            sudo apt-get install -y terraform
+
       - add_ssh_keys:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c" #common
             - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o" #processes
 
-      - run:
-          name: List injected SSH keys
-          command: |
-            ls -l ~/.ssh
+      # - run:
+      #     name: List injected SSH keys
+      #     command: |
+      #       ls -l ~/.ssh
 
       # Force SSH to use only the keys we specify
       # id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175 - common
@@ -100,15 +111,20 @@ commands:
       - *attach_workspace
       - checkout
       - run:
-          name: Start SSH agent and load keys to force Terraform to authenticate with SSH agent
+          name: Start SSH agent and load keys (Terraform requires this)
           command: |
             eval "$(ssh-agent -s)"
             ssh-add $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
             ssh-add $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
 
+            # Make SSH_AUTH_SOCK available to later steps
+            echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
+      
+      # Force Terraform to use real SSH instead of libgit2
       - run:
           name: get and init
           command: |
+            export GIT_SSH_COMMAND="ssh -F $HOME/.ssh/config"
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
