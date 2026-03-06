@@ -100,6 +100,13 @@ commands:
       - *attach_workspace
       - checkout
       - run:
+          name: Start SSH agent and load keys to force Terraform to authenticate with SSH agent
+          command: |
+            eval "$(ssh-agent -s)"
+            ssh-add $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
+            ssh-add $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
+
+      - run:
           name: get and init
           command: |
             cd ./terraform/<<parameters.environment>>/
