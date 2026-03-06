@@ -93,7 +93,6 @@ commands:
             chmod 700 $HOME/.ssh
 
             cat \<<EOF > "$HOME/.ssh/config"
-
             Host github-terraform
               HostName github.com
               User git
