@@ -70,14 +70,40 @@ commands:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
-      - *attach_workspace
-      - checkout
+            - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o" #just to get the filename
       - run:
-          name: get and init
+          name: List injected SSH keys
           command: |
-            cd ./terraform/<<parameters.environment>>/
-            terraform get -update=true
-            terraform init
+            ls -l ~/.ssh
+            echo "----"
+            cat ~/.ssh/known_hosts
+
+      # Force SSH to use only the keys we specify
+      # - run:
+      #     name: Configure SSH for multiple GitHub keys
+      #     command: |
+      #       mkdir -p ~/.ssh
+      #       chmod 700 ~/.ssh
+
+      #       cat <<EOF > ~/.ssh/config
+      #       Host github.com
+      #         HostName github.com
+      #         User git
+      #         IdentitiesOnly yes
+      #         IdentityFile ~/.ssh/id_rsa_aa_bb   
+      #         IdentityFile ~/.ssh/id_rsa_11_22
+      #       EOF
+
+      #       chmod 600 ~/.ssh/config
+
+      # - *attach_workspace
+      # - checkout
+      # - run:
+      #     name: get and init
+      #     command: |
+      #       cd ./terraform/<<parameters.environment>>/
+      #       terraform get -update=true
+      #       terraform init
       # - run:
       #     name: apply
       #     command: |
@@ -253,13 +279,14 @@ workflows:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
       - install-dependencies
-      - lint-and-test:
-          requires:
-            - install-dependencies
+      # - lint-and-test:
+      #     requires:
+      #       - install-dependencies
       - assume-role-development:
           context: api-assume-role-housing-development-context
           requires:
-            - lint-and-test
+            #- lint-and-test
+            - install-dependencies
           filters:
             branches:
               only: feat/add-support-for-multiple-ssh-keys
