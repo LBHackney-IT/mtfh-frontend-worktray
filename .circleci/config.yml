@@ -83,19 +83,19 @@ commands:
       - run:
           name: Configure SSH for multiple GitHub keys
           command: |
-            mkdir -p ~/.ssh
-            chmod 700 ~/.ssh
+            mkdir -p $HOME/.ssh
+            chmod 700 $HOME/.ssh
 
-            cat \<<EOF > ~/.ssh/config
+            cat \<<EOF > $HOME/.ssh/config
             Host github.com
               HostName github.com
               User git
               IdentitiesOnly yes
-              IdentityFile ~/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
-              IdentityFile ~/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
+              IdentityFile $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
+              IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
             EOF
 
-            chmod 600 ~/.ssh/config
+            chmod 600 $HOME/.ssh/config
 
       - *attach_workspace
       - checkout
