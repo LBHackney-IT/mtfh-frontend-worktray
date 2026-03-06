@@ -133,6 +133,8 @@ commands:
       - run:
           name: get and init
           command: |
+            ssh -T git@github.com
+
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
