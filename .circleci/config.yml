@@ -116,6 +116,8 @@ commands:
       - run:
           name: get and init
           command: |
+            echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
+            echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
