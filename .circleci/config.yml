@@ -114,8 +114,6 @@ commands:
             echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
             echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
 
-      
-      # Force Terraform to use real SSH instead of libgit2
       - run:
           name: get and init
           command: |
@@ -142,12 +140,14 @@ jobs:
             chmod 700 $HOME/.ssh
 
             cat \<<EOF > "$HOME/.ssh/config"
+
             Host github-processes
               HostName github.com
               User git
               IdentitiesOnly yes
               IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
-
+            EOF
+            
             chmod 600 $HOME/.ssh/config
       
       - *attach_workspace
