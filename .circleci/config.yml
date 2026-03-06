@@ -83,6 +83,7 @@ commands:
       #       done
 
 
+
       # Force SSH to use only the keys we specify
       # id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175 - common
       # id_rsa_562da4eb3b2e1676ee5bed999144d305 - processes
@@ -101,6 +102,13 @@ commands:
             EOF
 
             chmod 600 $HOME/.ssh/config
+
+      - run:
+          name: Debug HOME
+          command: |
+            echo "HOME is: $HOME"
+            ls -la $HOME/.ssh
+
 
       - *attach_workspace
       - checkout
