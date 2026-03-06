@@ -37,7 +37,9 @@ executors:
   docker-terraform:
     docker:
       #- image: "hashicorp/terraform:light"
-      - image: cimg/base:2021.05
+      #- image: cimg/base:2021.05
+      - image: cimg/terraform:1.8
+
   docker-python:
     docker:
       - image: circleci/python:3.7
@@ -68,15 +70,15 @@ commands:
       environment:
         type: string
     steps:
-      - run:
-          name: Install Terraform
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y gnupg software-properties-common curl
-            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-            sudo apt-add-repository "deb https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-            sudo apt-get update
-            sudo apt-get install -y terraform
+      # - run:
+      #     name: Install Terraform
+      #     command: |
+      #       sudo apt-get update
+      #       sudo apt-get install -y gnupg software-properties-common curl
+      #       curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+      #       sudo apt-add-repository "deb https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+      #       sudo apt-get update
+      #       sudo apt-get install -y terraform
 
       - add_ssh_keys:
           fingerprints:
