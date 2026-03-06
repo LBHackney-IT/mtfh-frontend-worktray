@@ -152,15 +152,15 @@ jobs:
       
       - *attach_workspace
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: yarn install
-      - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - ./node_modules
+      # - restore_cache:
+      #     key: dependency-cache-{{ checksum "yarn.lock" }}
+      # - run:
+      #     name: Install dependencies
+      #     command: yarn install
+      # - save_cache:
+      #     key: dependency-cache-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - ./node_modules
       - persist_to_workspace:
           root: *workspace_root
           paths: .
@@ -312,15 +312,15 @@ workflows:
   continuous-delivery-development:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
-      #- install-dependencies
+      - install-dependencies
       # - lint-and-test:
       #     requires:
       #       - install-dependencies
       - assume-role-development:
           context: api-assume-role-housing-development-context
-          #requires:
+          requires:
             #- lint-and-test
-            #- install-dependencies
+            - install-dependencies
           filters:
             branches:
               only: feat/add-support-for-multiple-ssh-keys
