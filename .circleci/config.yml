@@ -109,9 +109,6 @@ commands:
             echo "HOME is: $HOME"
             ls -la $HOME/.ssh
 
-
-      - *attach_workspace
-      - checkout
       - run:
           name: Start SSH agent and load keys (Terraform requires this)
           command: |
@@ -124,6 +121,9 @@ commands:
       - run:
           name: Test SSH alias
           command: ssh -F $HOME/.ssh/config -T git@github-terraform || true
+
+      - *attach_workspace
+      - checkout
 
       - run:
           name: get and init
