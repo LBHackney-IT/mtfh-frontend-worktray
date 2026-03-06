@@ -121,16 +121,16 @@ commands:
       - *attach_workspace
       - checkout
 
-      - run:
-          name: Debug environment
-          command: |
-            echo "GIT_SSH_COMMAND is: $GIT_SSH_COMMAND"
-            echo "SSH_AUTH_SOCK is: $SSH_AUTH_SOCK"
-
+      # - run:
+      #     name: Debug environment
+      #     command: |
+      #       echo "GIT_SSH_COMMAND is: $GIT_SSH_COMMAND"
+      #       echo "SSH_AUTH_SOCK is: $SSH_AUTH_SOCK"
 
       - run:
           name: get and init
           command: |
+            source $BASH_ENV
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
