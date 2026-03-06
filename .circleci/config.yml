@@ -125,12 +125,14 @@ commands:
 
             # Make SSH_AUTH_SOCK available to later steps
             echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
+
+            # Force Terraform to use real SSH instead of libgit2
+            echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
       
       # Force Terraform to use real SSH instead of libgit2
       - run:
           name: get and init
           command: |
-            export GIT_SSH_COMMAND="ssh -F $HOME/.ssh/config"
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
