@@ -72,6 +72,11 @@ commands:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
       # Force SSH to use only the keys we specify
       - run:
+          name: List injected SSH keys
+          command: |
+            ls -l ~/.ssh
+
+      - run:
           name: Configure SSH for multiple GitHub keys
           command: |
             mkdir -p ~/.ssh
