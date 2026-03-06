@@ -87,7 +87,6 @@ commands:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c" #common
-            - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o" #processes
 
       # - run:
       #     name: List injected SSH keys
@@ -109,7 +108,6 @@ commands:
               User git
               IdentitiesOnly yes
               IdentityFile $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
-              IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
             EOF
 
             chmod 600 $HOME/.ssh/config
@@ -120,7 +118,6 @@ commands:
           name: Start SSH agent and load keys (Terraform requires this)
           command: |
             eval "$(ssh-agent -s)"
-            ssh-add $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
             ssh-add $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
 
             # Make SSH_AUTH_SOCK available to later steps
