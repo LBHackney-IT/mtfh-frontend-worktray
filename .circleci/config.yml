@@ -70,7 +70,6 @@ commands:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
-
       # Force SSH to use only the keys we specify
       - run:
           name: Configure SSH for multiple GitHub keys
@@ -83,7 +82,7 @@ commands:
               HostName github.com
               User git
               IdentitiesOnly yes
-              IdentityFile ~/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305   
+              IdentityFile ~/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
             EOF
 
             chmod 600 ~/.ssh/config
