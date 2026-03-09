@@ -82,6 +82,14 @@ commands:
               ssh-keygen -lf "$f"
             done
 
+      - run:
+          name: Copy SSH keys for Terraform
+          command: |
+            mkdir -p /home/circleci/.ssh
+            cp /root/.ssh/* /home/circleci/.ssh/
+            chown -R circleci:circleci /home/circleci/.ssh
+            chmod 600 /home/circleci/.ssh/id_rsa
+
 
 
       # # Force SSH to use only the keys we specify
