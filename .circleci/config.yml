@@ -82,12 +82,12 @@ commands:
               ssh-keygen -lf "$f"
             done
 
-      - run:
-          name: Copy SSH keys for Terraform
-          command: |
-            mkdir -p /home/circleci/.ssh
-            cp /root/.ssh/* /home/circleci/.ssh/
-            chmod 600 /home/circleci/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
+      # - run:
+      #     name: Copy SSH keys for Terraform
+      #     command: |
+      #       mkdir -p /home/circleci/.ssh
+      #       cp /root/.ssh/* /home/circleci/.ssh/
+      #       chmod 600 /home/circleci/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
 
 
 
@@ -137,6 +137,8 @@ commands:
       - run:
           name: get and init
           command: |
+            export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"
+      
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
