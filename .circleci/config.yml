@@ -73,50 +73,50 @@ commands:
           fingerprints:
             - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c" #common
 
+      - run:
+          name: List injected SSH keys
+          command: |
+            ls -l ~/.ssh
+            for f in ~/.ssh/id_rsa_*; do
+              echo "File: $f"
+              ssh-keygen -lf "$f"
+            done
+
+
+
+      # # Force SSH to use only the keys we specify
+      # # id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175 - common
+      # # id_rsa_562da4eb3b2e1676ee5bed999144d305 - processes
       # - run:
-      #     name: List injected SSH keys
+      #     name: Configure SSH for multiple GitHub keys
       #     command: |
-      #       ls -l ~/.ssh
-      #       for f in ~/.ssh/id_rsa_*; do
-      #         echo "File: $f"
-      #         ssh-keygen -lf "$f"
-      #       done
+      #       mkdir -p $HOME/.ssh
+      #       chmod 700 $HOME/.ssh
 
+      #       cat \<<EOF > "$HOME/.ssh/config"
+      #       Host github-terraform
+      #         HostName github.com
+      #         User git
+      #         IdentitiesOnly yes
+      #         IdentityFile $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
+      #       EOF
 
+      #       chmod 600 $HOME/.ssh/config
 
-      # Force SSH to use only the keys we specify
-      # id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175 - common
-      # id_rsa_562da4eb3b2e1676ee5bed999144d305 - processes
-      - run:
-          name: Configure SSH for multiple GitHub keys
-          command: |
-            mkdir -p $HOME/.ssh
-            chmod 700 $HOME/.ssh
+      # - run:
+      #     name: Debug HOME
+      #     command: |
+      #       echo "HOME is: $HOME"
+      #       ls -la $HOME/.ssh
 
-            cat \<<EOF > "$HOME/.ssh/config"
-            Host github-terraform
-              HostName github.com
-              User git
-              IdentitiesOnly yes
-              IdentityFile $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
-            EOF
+      # - run:
+      #     name: Start SSH agent and load keys (Terraform requires this)
+      #     command: |
+      #       eval "$(ssh-agent -s)"
+      #       ssh-add "$HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"
 
-            chmod 600 $HOME/.ssh/config
-
-      - run:
-          name: Debug HOME
-          command: |
-            echo "HOME is: $HOME"
-            ls -la $HOME/.ssh
-
-      - run:
-          name: Start SSH agent and load keys (Terraform requires this)
-          command: |
-            eval "$(ssh-agent -s)"
-            ssh-add "$HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"
-
-            echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
-            echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
+      #       echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
+      #       echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
 
       - *attach_workspace
       - checkout
@@ -130,7 +130,6 @@ commands:
       - run:
           name: get and init
           command: |
-            source $BASH_ENV
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
@@ -147,34 +146,34 @@ jobs:
           fingerprints:
             - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o"
       
-      - run:
-          name: Configure SSH for multiple GitHub keys
-          command: |
-            mkdir -p $HOME/.ssh
-            chmod 700 $HOME/.ssh
+      # - run:
+      #     name: Configure SSH for multiple GitHub keys
+      #     command: |
+      #       mkdir -p $HOME/.ssh
+      #       chmod 700 $HOME/.ssh
 
-            cat \<<EOF > "$HOME/.ssh/config"
+      #       cat \<<EOF > "$HOME/.ssh/config"
 
-            Host github-processes
-              HostName github.com
-              User git
-              IdentitiesOnly yes
-              IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
-            EOF
+      #       Host github-processes
+      #         HostName github.com
+      #         User git
+      #         IdentitiesOnly yes
+      #         IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
+      #       EOF
             
-            chmod 600 $HOME/.ssh/config
+      #       chmod 600 $HOME/.ssh/config
       
       - *attach_workspace
       - checkout
-      # - restore_cache:
-      #     key: dependency-cache-{{ checksum "yarn.lock" }}
-      # - run:
-      #     name: Install dependencies
-      #     command: yarn install
-      # - save_cache:
-      #     key: dependency-cache-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - ./node_modules
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
       - persist_to_workspace:
           root: *workspace_root
           paths: .
