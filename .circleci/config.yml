@@ -68,77 +68,19 @@ commands:
       environment:
         type: string
     steps:
-      # checkout here?
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c" #common
-
-      - run:
-          name: List injected SSH keys
-          command: |
-            ls -l ~/.ssh
-            for f in ~/.ssh/id_rsa_*; do
-              echo "File: $f"
-              ssh-keygen -lf "$f"
-            done
-
-      # - run:
-      #     name: Copy SSH keys for Terraform
-      #     command: |
-      #       mkdir -p /home/circleci/.ssh
-      #       cp /root/.ssh/* /home/circleci/.ssh/
-      #       chmod 600 /home/circleci/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
-
-
-
-      # # Force SSH to use only the keys we specify
-      # # id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175 - common
-      # # id_rsa_562da4eb3b2e1676ee5bed999144d305 - processes
-      # - run:
-      #     name: Configure SSH for multiple GitHub keys
-      #     command: |
-      #       mkdir -p $HOME/.ssh
-      #       chmod 700 $HOME/.ssh
-
-      #       cat \<<EOF > "$HOME/.ssh/config"
-      #       Host github-terraform
-      #         HostName github.com
-      #         User git
-      #         IdentitiesOnly yes
-      #         IdentityFile $HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175
-      #       EOF
-
-      #       chmod 600 $HOME/.ssh/config
-
-      # - run:
-      #     name: Debug HOME
-      #     command: |
-      #       echo "HOME is: $HOME"
-      #       ls -la $HOME/.ssh
-
-      # - run:
-      #     name: Start SSH agent and load keys (Terraform requires this)
-      #     command: |
-      #       eval "$(ssh-agent -s)"
-      #       ssh-add "$HOME/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"
-
-      #       echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $BASH_ENV
-      #       echo "export GIT_SSH_COMMAND='ssh -F $HOME/.ssh/config'" >> $BASH_ENV
+            - "SHA256:rPzp7kChj9Z72jls470HfO0YvieTbdUiB+y8hlxJN8c"
 
       - *attach_workspace
       - checkout
 
-      # - run:
-      #     name: Debug environment
-      #     command: |
-      #       echo "GIT_SSH_COMMAND is: $GIT_SSH_COMMAND"
-      #       echo "SSH_AUTH_SOCK is: $SSH_AUTH_SOCK"
-
+      # Ensure Git uses the correct key for SSH commands in this step. Otherwise the terraform init will fail when it tries to load the key from /home/circleci/.ssh while the key is added to /root/.ssh
+      # Without this the module download will fail
       - run:
           name: get and init
           command: |
-            export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"
-      
+            export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"      
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
@@ -154,24 +96,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:E7JSrbxa1w1NLeMS99IHb/t6CcqirwR9beUQpFKMA/o"
-      
-      # - run:
-      #     name: Configure SSH for multiple GitHub keys
-      #     command: |
-      #       mkdir -p $HOME/.ssh
-      #       chmod 700 $HOME/.ssh
-
-      #       cat \<<EOF > "$HOME/.ssh/config"
-
-      #       Host github-processes
-      #         HostName github.com
-      #         User git
-      #         IdentitiesOnly yes
-      #         IdentityFile $HOME/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
-      #       EOF
-            
-      #       chmod 600 $HOME/.ssh/config
-      
       - *attach_workspace
       - checkout
       - restore_cache:
@@ -335,14 +259,13 @@ workflows:
     when: << pipeline.parameters.run_development_workflow >>
     jobs:
       - install-dependencies
-      # - lint-and-test:
-      #     requires:
-      #       - install-dependencies
+      - lint-and-test:
+          requires:
+            - install-dependencies
       - assume-role-development:
           context: api-assume-role-housing-development-context
           requires:
-            #- lint-and-test
-            - install-dependencies
+            - lint-and-test
           filters:
             branches:
               only: feat/add-support-for-multiple-ssh-keys
