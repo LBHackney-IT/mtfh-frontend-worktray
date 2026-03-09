@@ -87,7 +87,7 @@ commands:
           command: |
             mkdir -p /home/circleci/.ssh
             cp /root/.ssh/* /home/circleci/.ssh/
-            chmod 600 /home/circleci/.ssh/id_rsa
+            chmod 600 /home/circleci/.ssh/id_rsa_562da4eb3b2e1676ee5bed999144d305
 
 
 
