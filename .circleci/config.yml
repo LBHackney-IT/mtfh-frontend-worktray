@@ -74,13 +74,17 @@ commands:
       - checkout
       - run:
           name: get and init
+          # Ensure Git uses the correct key for SSH commands in this step. Otherwise the terraform init will fail when it tries to load the key from /home/circleci/.ssh while the key is added to /root/.ssh
+          # Without this the module download will fail
           command: |
+            export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"   
             cd ./terraform/<<parameters.environment>>/
             terraform get -update=true
             terraform init
       - run:
           name: apply
           command: |
+            export GIT_SSH_COMMAND="ssh -i /root/.ssh/id_rsa_fd8f60bef9c59321b9e35fdf3e6a8175"   
             cd ./terraform/<<parameters.environment>>/
             terraform apply -auto-approve
 jobs:
