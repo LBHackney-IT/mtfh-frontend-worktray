@@ -34,7 +34,7 @@ module "cloudfront-production" {
   origin_id                   = "mtfh-tl-housing-worktray-frontend"
   s3_bucket_arn               = aws_s3_bucket.frontend-bucket-production.arn
   s3_bucket_id                = aws_s3_bucket.frontend-bucket-production.id
-  origin_access_identity_desc = "tl-housing worktray frontend cloudfront identity"
+  orginin_access_identity_desc = "tl-housing worktray frontend cloudfront identity"
   cname_aliases               = []
   environment_name            = "production"
   cost_code                   = "B0811"
