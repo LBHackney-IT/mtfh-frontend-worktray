@@ -23,8 +23,18 @@ import "./styles.scss";
 const getCookieValue = (name) =>
   document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || "";
 
+const getToken = () => {
+  const cognitoToken = getCookieValue("hackneyCognitoToken");
+  const legacyToken = getCookieValue("hackneyToken");
+
+  if (cognitoToken) return cognitoToken;
+  if (legacyToken) return legacyToken;
+
+  throw new Error("No token found!");
+};
+
 export const WorktrayView = (): JSX.Element => {
-  const token = getCookieValue("hackneyToken");
+  const token = getToken();
   const { email: emailAddress } = token
     ? (jwt_decode(token) as { email: string })
     : { email: "" };
