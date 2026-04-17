@@ -23,11 +23,26 @@ import "./styles.scss";
 const getCookieValue = (name) =>
   document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`)?.pop() || "";
 
+const getToken = () => {
+  const cognitoToken = getCookieValue("hackneyCognitoToken");
+  const legacyToken = getCookieValue("hackneyToken");
+
+  if (cognitoToken) {
+    return cognitoToken;
+  }
+  if (legacyToken) {
+    return legacyToken;
+  }
+
+  throw new Error("No token found!");
+};
+
 export const WorktrayView = (): JSX.Element => {
-  const token = getCookieValue("hackneyToken");
-  const { email: emailAddress } = token
-    ? (jwt_decode(token) as { email: string })
-    : { email: "" };
+  const token = getToken();
+
+  // If token does not exist, this line does not get reached due to "Not token" error.
+  // This MFE should not get rendered when no token is present.
+  const { email: emailAddress } = jwt_decode(token) as { email: string };
 
   const { data, error } = useAxiosSWR<Patch[]>(
     `${config.patchesAndAreasApiUrl}/patch/all`,
