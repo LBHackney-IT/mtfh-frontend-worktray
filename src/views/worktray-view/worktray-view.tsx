@@ -27,8 +27,12 @@ const getToken = () => {
   const cognitoToken = getCookieValue("hackneyCognitoToken");
   const legacyToken = getCookieValue("hackneyToken");
 
-  if (cognitoToken) return cognitoToken;
-  if (legacyToken) return legacyToken;
+  if (cognitoToken) {
+    return cognitoToken;
+  }
+  if (legacyToken) {
+    return legacyToken;
+  }
 
   throw new Error("No token found!");
 };
