@@ -78,10 +78,10 @@ describe("<App />", () => {
     }
   });
 
-  test("it renders correctly with cookie", async () => {
+  test.each([false, true])("it renders correctly with cookie", async (isCognitoToken: boolean) => {
     Object.defineProperty(document, "cookie", {
       writable: true,
-      value: cookieValue({tokenPayload: tokenPayloadUserWithPatches, isCognito: false}),
+      value: cookieValue({tokenPayload: tokenPayloadUserWithPatches, isCognito: isCognitoToken}),
     });
 
     server.use(
