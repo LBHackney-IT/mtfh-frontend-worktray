@@ -59,8 +59,6 @@ const examplePatch = (responsibleEmail: string): Patch => {
   };
 }
 
-const token = createJwt({ user: "exampleUser" });
-
 describe("<App />", () => {
   test("it renders correctly without cookie", async () => {
     server.use(
