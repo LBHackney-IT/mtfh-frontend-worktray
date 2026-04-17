@@ -35,9 +35,10 @@ const getToken = () => {
 
 export const WorktrayView = (): JSX.Element => {
   const token = getToken();
-  const { email: emailAddress } = token
-    ? (jwt_decode(token) as { email: string })
-    : { email: "" };
+
+  // If token does not exist, this line does not get reached due to "Not token" error.
+  // This MFE should not get rendered when no token is present.
+  const { email: emailAddress } = jwt_decode(token) as { email: string };
 
   const { data, error } = useAxiosSWR<Patch[]>(
     `${config.patchesAndAreasApiUrl}/patch/all`,

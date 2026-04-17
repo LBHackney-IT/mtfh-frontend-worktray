@@ -50,7 +50,6 @@ const examplePatch = (responsibleEmail: string): Patch => {
         id: "5d59f3af-a692-49ae-9483-f631772ae3ec",
         name: "",
         contactDetails: {
-          // Has to be a different email to that of cookie
           emailAddress: responsibleEmail,
         },
         responsibleType: "HousingOfficer",
@@ -63,6 +62,22 @@ const examplePatch = (responsibleEmail: string): Patch => {
 const token = createJwt({ user: "exampleUser" });
 
 describe("<App />", () => {
+  test("it renders correctly without cookie", async () => {
+    server.use(
+      rest.get("/api/v1/patch/all", (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json([examplePatch("tests@hackney.gov.uk")]));
+      }),
+    );
+
+    try {
+        render(<App />, { url: "/" });
+        await waitFor(() => expect(screen.queryByText("Loading...")).not.toBeInTheDocument());
+        throw new Error("The component rendered successfully, but an error was expected.");
+    } catch (error) {
+        expect(error).toHaveProperty('message', 'No token found!');
+    }
+  });
+
   test("it renders correctly with cookie", async () => {
     Object.defineProperty(document, "cookie", {
       writable: true,
